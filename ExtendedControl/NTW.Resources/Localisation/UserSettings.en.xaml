@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib"
+                    xmlns:data="clr-namespace:NTW.Data.Models;assembly=NTW.Data">
+
+    <y:String x:Key="UserSettingsLogo">User settings</y:String>
+    <y:String x:Key="UserSettingsUserName">User name</y:String>
+    <y:String x:Key="UserSettingsFullName">Full name</y:String>
+    <y:String x:Key="UserSettingsLanguage">Language</y:String>
+    <y:String x:Key="UserSettingsIsHiddenUser">Is hidden user</y:String>
+    <y:String x:Key="UserSettingsHidden">Hidden</y:String>
+    
+    <y:String x:Key="UserSettingsChangePassword">Change password</y:String>
+    <y:String x:Key="UserSettingsChange">Change</y:String>
+    <y:String x:Key="UserSettingsOldPassword">Old password</y:String>
+    <y:String x:Key="UserSettingsNewPassword">New password</y:String>
+    <y:String x:Key="UserSettingsConfirmNewPassword">Confirm new password</y:String>
+    <y:String x:Key="UserSettingsUpdatePassword">Update password</y:String>
+    <y:String x:Key="UserSettingsCancel">Cancel</y:String>
+    
+    <!--Errors-->
+    <y:String x:Key="UserSeettingsSetPassSuccessfully">The new password is set successfully</y:String>
+    <y:String x:Key="UserSeettingsNotVerified">New password not verified</y:String>
+    <y:String x:Key="UserSettingsInvalidPass">Invalid old password</y:String>
+    <y:String x:Key="UserSettingsNotFoundUser">Not found user</y:String>
+</ResourceDictionary>

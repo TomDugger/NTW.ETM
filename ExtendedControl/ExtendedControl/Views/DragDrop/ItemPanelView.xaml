@@ -1,0 +1,19 @@
+﻿<Window x:Class="ExtendedControl.Views.DragDrop.ItemPanelView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExtendedControl.Views.DragDrop"
+        mc:Ignorable="d"
+        Title="ItemPanelView" Height="50" Width="50" Topmost="True" ResizeMode="NoResize" WindowStyle="None" BorderBrush="Black" BorderThickness="1">
+    <Border >
+        <Rectangle Width="50" Height="50" >
+            <Rectangle.Fill>
+                <SolidColorBrush Color="{DynamicResource FForeColor}" />
+            </Rectangle.Fill>
+            <Rectangle.OpacityMask>
+                <ImageBrush ImageSource="{Binding Path=Content}" />
+            </Rectangle.OpacityMask>
+        </Rectangle>
+    </Border>
+</Window>

@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ExtendedControl.Resources"
+                    xmlns:m="clr-namespace:NTW.Data.Models;assembly=NTW.Data"
+                    xmlns:c="clr-namespace:NTW.Data.Context;assembly=NTW.Data.Context">
+
+    <m:AppSettings x:Key="AppSettings" />
+    <m:DBSettings x:Key="DBSettings" />
+    
+    <c:User x:Key="CurrentUser" />
+    
+</ResourceDictionary>

@@ -1,0 +1,118 @@
+﻿<Window x:Class="ExtendedControl.Views.Panels.EventsControlPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:ExtendedControl.ViewModels"
+        xmlns:b="clr-namespace:ExtendedControl.Behaviour"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:sel="clr-namespace:ExtendedControl.Selectors"
+        mc:Ignorable="d"
+        Title="EventsControl" Height="450" Width="800"
+        xmlns:bc="clr-namespace:NTW.Controls.Behaviours;assembly=NTW.Controls"
+        b:ViewModelIjection.ViewModel="{x:Type vm:EventViewModel}"
+        Style="{DynamicResource DefaultPanelWindowStyle}"
+        MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=MinSize.Width}"
+        MinHeight="{Binding RelativeSource={RelativeSource Mode=Self}, Path=MinSize.Height}"
+        bc:WindowPositionBehaviour.WindowThickness="2"
+        bc:WindowPositionBehaviour.WindowVisibleBorder="False"
+        bc:HideButtonBehaviour.UseHideButton="False"
+        bc:UntieButtonBehaviour.UseUntieButton="False"
+        bc:WindowVisibilityBehaviour.CloseByHidden="True"
+        bc:SaveParametryPanelBehaviour.IsSaveByClose="True">
+    <Border Style="{x:Null}">
+        <ItemsControl Style="{x:Null}" ItemsSource="{Binding Events}" HorizontalContentAlignment="Stretch">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Opacity="0" RenderTransformOrigin="1, 0">
+                        <Border.RenderTransform>
+                            <ScaleTransform ScaleX="0" />
+                        </Border.RenderTransform>
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Style.Triggers>
+                                    <EventTrigger RoutedEvent="Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="0" To="1" Duration="0:0:0.3" />
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.3" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Border BorderThickness="1" Background="{Binding BackBrush}" TextElement.Foreground="{Binding ForeBrush}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="20" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="1" Grid.ColumnSpan="2" Content="{Binding .}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                    <Label.ContentTemplateSelector>
+                                        <sel:EventItemSelector >
+                                            <sel:EventItemSelector.TextMessage>
+                                                <DataTemplate>
+                                                    <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Message}" Padding="10" TextWrapping="WrapWithOverflow" />
+                                                </DataTemplate>
+                                            </sel:EventItemSelector.TextMessage>
+                                            <sel:EventItemSelector.EnterTextMessage>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition Width="Auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto" />
+                                                            <RowDefinition Height="Auto" MaxHeight="70" />
+                                                        </Grid.RowDefinitions>
+                                                        <TextBlock Grid.ColumnSpan="2" Text="{Binding Message}" Padding="10" TextWrapping="WrapWithOverflow" />
+                                                        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                                            <TextBox AcceptsReturn="True" TextWrapping="Wrap" b:ViewModelIjection.ViewModel="{x:Type vm:EventViewModel}" 
+                                                                 Text="{Binding Path=CommentText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                                                                <TextBox.InputBindings>
+                                                                    <KeyBinding Gesture="Enter" Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.SendCommentCommand}"
+                                                                            CommandParameter="{Binding RelativeSource={StaticResource GridSource}, Path=DataContext}"/>
+                                                                </TextBox.InputBindings>
+                                                            </TextBox>
+                                                        </ScrollViewer>
+                                                        <Button Grid.Row="1" Grid.Column="1" Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.SendCommentCommand}"
+                                                            CommandParameter="{Binding Path=.}">
+                                                            <Button.Content>
+                                                                <Rectangle Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                                    <Rectangle.Fill>
+                                                                        <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                                    </Rectangle.Fill>
+                                                                    <Rectangle.OpacityMask>
+                                                                        <ImageBrush ImageSource="/ExtendedControl;component/Images/SendComment.png" />
+                                                                    </Rectangle.OpacityMask>
+                                                                </Rectangle>
+                                                            </Button.Content>
+                                                        </Button>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </sel:EventItemSelector.EnterTextMessage>
+                                        </sel:EventItemSelector>
+                                    </Label.ContentTemplateSelector>
+                                </Label>
+                                <Button Content="х" Grid.Column="1" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.RemoveItemCommand}"
+                                                       CommandParameter="{Binding Path=.}" />
+                            </Grid>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewMouseLeftButtonUp" >
+                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.ClickMessageCommand}"
+                                                       CommandParameter="{Binding Path=.}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Border>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Border>
+</Window>

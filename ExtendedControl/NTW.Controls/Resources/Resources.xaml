@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ExtendedControl">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/NTW.Resources;component/RelativeSource.xaml" />
+
+        <ResourceDictionary Source="/NTW.Controls;component/Resources/Selectors.xaml" />
+        <ResourceDictionary Source="/NTW.Controls;component/Resources/Converters.xaml" />
+
+        <ResourceDictionary Source="/NTW.Controls;component/Resources/Theme/DefaultTheme.xaml" />
+        <ResourceDictionary Source="/NTW.Controls;component/Resources/DefaultPanelWindowStyle.xaml" />
+        <ResourceDictionary Source="/NTW.Controls;component/Resources/MenuStyle.xaml" />
+        <ResourceDictionary Source="/NTW.Controls;component/Resources/DefaultUIStyle.xaml" />
+
+        <ResourceDictionary Source="/NTW.Controls;component/Resources/Validation.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

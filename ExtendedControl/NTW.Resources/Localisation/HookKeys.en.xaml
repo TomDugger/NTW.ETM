@@ -1,0 +1,41 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib"
+                    xmlns:data="clr-namespace:NTW.Data.Models;assembly=NTW.Data">
+
+    <!--Panel-->
+    <y:String x:Key="HookKeyExtra">Extra</y:String>
+    <y:String x:Key="HookKeyDefinitionKey">Definition key</y:String>
+
+    <!--Control-->
+    <y:String x:Key="HookKeyControlAccepted">Accepted</y:String>
+
+    <!--Command names-->
+    <y:String x:Key="HookKeyExitApplication">Exit application</y:String>
+    <y:String x:Key="HookKeyAdminPanel">Admin panel</y:String>
+    <y:String x:Key="HookKeyAppSettings">App settings</y:String>
+    <y:String x:Key="HookKeyEventsPanel">Events panel</y:String>
+    <y:String x:Key="HookKeyHookKeyPanel">Hook key panel</y:String>
+    <y:String x:Key="HookKeyNotesPanel">Notes panel</y:String>
+    <y:String x:Key="HookKeyProcessPanel">Process panel</y:String>
+    <y:String x:Key="HookKeyReports">Reports</y:String>
+    <y:String x:Key="HookKeyUserSettings">User settings</y:String>
+    <y:String x:Key="HookKeyTasksPanel">Tasks Panel</y:String>
+    <y:String x:Key="HookKeyTrackingPanel">Tracking panel</y:String>
+    <y:String x:Key="HookKeyCreateProcess">Create process</y:String>
+    <y:String x:Key="HookKeyCreateProcessOnClipboard">Create process on clipboard</y:String>
+    <y:String x:Key="HookKeyCreateTask">Create task</y:String>
+    <y:String x:Key="HookKeyCreateTaskOnClipboard">Create task on clipboard</y:String>
+    <y:String x:Key="HookKeyCopyTask">Copy task</y:String>
+    <y:String x:Key="HookKeyRemoveTask">Remove task</y:String>
+    <y:String x:Key="HookKeyEditTask">Edit task</y:String>
+    <y:String x:Key="HookKeyCreateNote">Create note</y:String>
+    <y:String x:Key="HookKeyCreateNotenClipboard">Create note on clipboard</y:String>
+
+    <!--Commands group names-->
+    <y:String x:Key="HookKeyGroupApp">Application</y:String>
+    <y:String x:Key="HookKeyGroupPanels">Panels</y:String>
+    <y:String x:Key="HookKeyGroupProcess">Process</y:String>
+    <y:String x:Key="HookKeyGroupTasks">Tasks</y:String>
+    <y:String x:Key="HookKeyGroupNotes">Notes</y:String>
+</ResourceDictionary>

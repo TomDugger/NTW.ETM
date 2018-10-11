@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="NTW.Controls.SizeChangeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:c="clr-namespace:NTW.Controls"
+             xmlns:b="clr-namespace:NTW.Controls.Behaviours"
+             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+             mc:Ignorable="d" Template="{Binding RelativeSource={RelativeSource Mode=Self}, Path=CurrentTemplate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+</UserControl>

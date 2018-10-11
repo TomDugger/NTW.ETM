@@ -1,0 +1,31 @@
+﻿<Window x:Class="ExtendedControl.Views.DragDrop.ItemTaskWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:b="clr-namespace:ExtendedControl.Behaviour"
+        xmlns:bc="clr-namespace:NTW.Controls.Behaviours;assembly=NTW.Controls"
+        xmlns:controls="clr-namespace:NTW.Controls;assembly=NTW.Controls"
+        xmlns:vm="clr-namespace:ExtendedControl.ViewModels"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        mc:Ignorable="d" Style="{DynamicResource MoveWindowStyle}"
+        Title="ItemNoteWindow" Topmost="false" ResizeMode="NoResize"
+        WindowStyle="None" BorderBrush="Black" BorderThickness="1" 
+        AllowsTransparency="True"
+        bc:WindowPositionBehaviour.WindowPosition="None"
+        bc:WindowVisibilityBehaviour.IsVisible="True"
+        bc:WindowVisibilityBehaviour.CloseByHidden="True"
+        MinWidth="200" MinHeight="150"
+        Left="{Binding Path=PosX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+        Top="{Binding Path=PosY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+        Width="{Binding Path=Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+        Height="{Binding Path=Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+    <bc:WindowDragEndDropBehaviour.HeaderTemplate>
+        <DataTemplate>
+            <Border Style="{DynamicResource TreeBorder}" />
+        </DataTemplate>
+    </bc:WindowDragEndDropBehaviour.HeaderTemplate>
+    <Border Style="{DynamicResource TreeBorder}">
+        <ContentControl Content="{Binding Path=.}" />
+    </Border>
+</Window>

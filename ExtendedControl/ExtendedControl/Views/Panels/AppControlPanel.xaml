@@ -1,0 +1,116 @@
+﻿<Window x:Class="ExtendedControl.Views.Panels.AppControlPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:b="clr-namespace:ExtendedControl.Behaviour"
+        xmlns:vm="clr-namespace:ExtendedControl.ViewModels"
+        xmlns:bc="clr-namespace:NTW.Controls.Behaviours;assembly=NTW.Controls"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        mc:Ignorable="d"
+        Title="AppControl" Height="450" Width="800" 
+        MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=MinSize.Width}"
+        MinHeight="{Binding RelativeSource={RelativeSource Mode=Self}, Path=MinSize.Height}"
+        Style="{DynamicResource DefaultPanelWindowStyle}"
+        bc:WindowPositionBehaviour.WindowThickness="2"
+        bc:HideButtonBehaviour.UseHideButton="True" 
+        bc:UntieButtonBehaviour.UseUntieButton="True"
+        bc:WindowMessageBehaviour.UseMessages="True"
+        bc:WindowVisibilityBehaviour.CloseByHidden="True"
+        bc:SaveParametryPanelBehaviour.IsSaveByClose="True">
+    <Window.Resources>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Foreground" Value="{StaticResource FForeBrush}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}" >
+                        <Grid Name="Gr" MinHeight="50" MinWidth="50" Margin="-2">
+                            <Border />
+                            <Border Name="Selected" Style="{StaticResource TreeBorder}" >
+                                <Border.RenderTransformOrigin>
+                                    <Point X="0" Y="1" />
+                                </Border.RenderTransformOrigin>
+                                <Border.RenderTransform>
+                                    <ScaleTransform ScaleY="0" />
+                                </Border.RenderTransform>
+                            </Border>
+                            <Border Name="MouseOver" Padding="0" Margin="0, 0, 0, 2" BorderThickness="0" Style="{StaticResource SecondBorder}" >
+                                <Border.RenderTransformOrigin>
+                                    <Point X="0" Y="1" />
+                                </Border.RenderTransformOrigin>
+                                <Border.RenderTransform>
+                                    <ScaleTransform ScaleY="0" />
+                                </Border.RenderTransform>
+                            </Border>
+                            <ContentPresenter Content="{TemplateBinding Header}" VerticalAlignment="Center" Margin="20" />
+
+                            <Border Style="{StaticResource SecondBorder}" VerticalAlignment="Bottom" Height="2">
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger SourceName="Gr" Property="IsMouseOver" Value="true">
+                                <Setter Property="Foreground" Value="{StaticResource SForeBrush}" />
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="MouseOver" Storyboard.TargetProperty="RenderTransform.ScaleY" To="1" Duration="0:0:0.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="MouseOver" Storyboard.TargetProperty="RenderTransform.ScaleY" To="0" Duration="0:0:0.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="{StaticResource TForeBrush}" />
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="Selected" Storyboard.TargetProperty="RenderTransform.ScaleY" To="1" Duration="0:0:0.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="Selected" Storyboard.TargetProperty="RenderTransform.ScaleY" To="0" Duration="0:0:0.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Border Style="{StaticResource WindowBorder}"
+            bc:MinMaxSizeFrameworkElementBehaviour.ProcentScreenAllSize="30">
+        <TabControl TabStripPlacement="Bottom" >
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="{DynamicResource AppSettingsCaption}" />
+                </TabItem.Header>
+                <ContentControl b:ViewModelIjection.ViewModel="{x:Type vm:AppSettingsViewModel}" Template="{DynamicResource AppSettingsTemplate}" />
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="{DynamicResource DBSettingsLogo}" />
+                </TabItem.Header>
+                <ContentControl b:ViewModelIjection.ViewModel="{x:Type vm:DBSettingsViewModel}" Template="{DynamicResource DBSettingsTemplate}" />
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="{DynamicResource SyncSettingsCaption}" />
+                </TabItem.Header>
+                <ContentControl b:ViewModelIjection.ViewModel="{x:Type vm:AppSettingsViewModel}" Template="{DynamicResource SuncSettingsTemplate}" />
+            </TabItem>
+        </TabControl>
+    </Border>
+</Window>

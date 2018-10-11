@@ -1,0 +1,177 @@
+﻿<Window x:Class="ExtendedControl.Views.Panels.Child.CalendarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExtendedControl.Views.Panels.Child"
+        mc:Ignorable="d"
+        Title="CalendarWindow" xmlns:b="clr-namespace:ExtendedControl.Behaviour"
+        xmlns:bc="clr-namespace:NTW.Controls.Behaviours;assembly=NTW.Controls"
+        xmlns:vm="clr-namespace:ExtendedControl.ViewModels"
+        xmlns:sel="clr-namespace:NTW.Controls.Selectors;assembly=NTW.Controls"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:data="clr-namespace:NTW.Data.Models;assembly=NTW.Data"
+        xmlns:con="clr-namespace:NTW.Controls.Converters;assembly=NTW.Controls"
+        xmlns:controls="clr-namespace:NTW.Controls;assembly=NTW.Controls"
+        xmlns:sell="clr-namespace:ExtendedControl.Selectors"
+        xmlns:v="clr-namespace:Virtualization.Calendar;assembly=Virtualization.Calendar"
+        Style="{DynamicResource DefaultPanelWindowStyle}"
+        b:ViewModelIjection.ViewModel="{x:Type vm:AdminViewModel}"
+        bc:GlobalPercentageFrameworkElementBehaviour.AgeType="FullSize"
+        bc:GlobalPercentageFrameworkElementBehaviour.Procentage="30"
+        bc:WindowPositionBehaviour.WindowThickness="2"
+        bc:WindowMessageBehaviour.UseMessages="True"
+        bc:HideButtonBehaviour.UseHideButton="True"
+        bc:UntieButtonBehaviour.UseUntieButton="False"
+        bc:WindowVisibilityBehaviour.CloseByHidden="True"
+        bc:WindowMessageBehaviour.VerticalPosition="Bottom"
+        bc:SaveParametryPanelBehaviour.IsSaveByClose="False">
+    <Border MinWidth="50" MinHeight="50">
+        <Border.Background>
+            <SolidColorBrush Color="{DynamicResource FBackColor}" />
+        </Border.Background>
+        <Border.Resources>
+            <Style TargetType="{x:Type ItemsControl}" />
+            <Style TargetType="{x:Type Border}" />
+            <Style TargetType="{x:Type Grid}" />
+            <Style TargetType="{x:Type ScrollViewer}" />
+
+            <ControlTemplate x:Key="WaitTemplate">
+                <Grid Background="White">
+                    <Grid.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard >
+                                <Storyboard RepeatBehavior="Forever">
+                                    <DoubleAnimation BeginTime="0:0:1" Storyboard.TargetName="RFE" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1" />
+                                    <DoubleAnimation BeginTime="0:0:1" Storyboard.TargetName="FR" Storyboard.TargetProperty="Angle" From="0" To="359" Duration="0:0:1" />
+                                    <DoubleAnimation BeginTime="0:0:1" Storyboard.TargetName="FT" Storyboard.TargetProperty="X" From="-300" To="0" Duration="0:0:1" />
+
+                                    <DoubleAnimation BeginTime="0:0:0.5" Storyboard.TargetName="SE" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1" />
+                                    <DoubleAnimation BeginTime="0:0:0.5" Storyboard.TargetName="SR" Storyboard.TargetProperty="Angle" From="0" To="359" Duration="0:0:1" />
+                                    <DoubleAnimation BeginTime="0:0:0.5" Storyboard.TargetName="ST" Storyboard.TargetProperty="X" From="-300" To="0" Duration="0:0:1" />
+
+                                    <DoubleAnimation Storyboard.TargetName="TE" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1" />
+                                    <DoubleAnimation Storyboard.TargetName="TR" Storyboard.TargetProperty="Angle" From="0" To="359" Duration="0:0:1" />
+                                    <DoubleAnimation Storyboard.TargetName="TT" Storyboard.TargetProperty="X" From="-300" To="0" Duration="0:0:1" />
+
+
+                                    <DoubleAnimation BeginTime="0:0:3" Storyboard.TargetName="RFE" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:1" />
+                                    <DoubleAnimation BeginTime="0:0:3" Storyboard.TargetName="FR" Storyboard.TargetProperty="Angle" From="0" To="359" Duration="0:0:1" />
+                                    <DoubleAnimation BeginTime="0:0:3" Storyboard.TargetName="FT" Storyboard.TargetProperty="X" From="0" To="300" Duration="0:0:1" />
+
+                                    <DoubleAnimation BeginTime="0:0:2.5" Storyboard.TargetName="SE" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:1" />
+                                    <DoubleAnimation BeginTime="0:0:2.5" Storyboard.TargetName="SR" Storyboard.TargetProperty="Angle" From="0" To="359" Duration="0:0:1" />
+                                    <DoubleAnimation BeginTime="0:0:2.5" Storyboard.TargetName="ST" Storyboard.TargetProperty="X" From="0" To="300" Duration="0:0:1" />
+
+                                    <DoubleAnimation BeginTime="0:0:2" Storyboard.TargetName="TE" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:1" />
+                                    <DoubleAnimation BeginTime="0:0:2" Storyboard.TargetName="TR" Storyboard.TargetProperty="Angle" From="0" To="359" Duration="0:0:1" />
+                                    <DoubleAnimation BeginTime="0:0:2" Storyboard.TargetName="TT" Storyboard.TargetProperty="X" From="0" To="300" Duration="0:0:1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Grid.Triggers>
+                    <Rectangle Fill="DodgerBlue" Width="20" Name="RFE" Height="20" Margin="-44, 0, 0, 0" Opacity="0" >
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform x:Name="FR" CenterX="10" CenterY="10" Angle="45" />
+                                <TranslateTransform x:Name="FT" />
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle Fill="DodgerBlue" Width="20" Name="SE" Height="20" Opacity="0" >
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform x:Name="SR" CenterX="10" CenterY="10" Angle="45" />
+                                <TranslateTransform x:Name="ST" />
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle Fill="DodgerBlue" Width="20" Name="TE" Height="20" Opacity="0" Margin="44, 0, 0, 0">
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform x:Name="TR" CenterX="10" CenterY="10" Angle="45" />
+                                <TranslateTransform x:Name="TT" />
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                </Grid>
+            </ControlTemplate>
+        </Border.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Calendar" Style="{DynamicResource H4}" Margin="20, 0, 0, 0" >
+                <TextBlock.Foreground>
+                    <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                </TextBlock.Foreground>
+            </TextBlock>
+
+            <v:CalendarPanel Grid.Row="1" Name="crC" ItemWidth="50" WaitLayerTemplate="{StaticResource WaitTemplate}">
+                <v:CalendarPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource FBackColor}" />
+                </v:CalendarPanel.Background>
+                <v:CalendarPanel.ColumnHeaderTemplateSelector>
+                    <sell:ColumnSelector >
+                        <sell:ColumnSelector.DayTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="2" BorderBrush="Black">
+                                    <Grid Background="LightGray" HorizontalAlignment="Stretch">
+                                        <TextBlock Text="{Binding ., StringFormat=\{0:dd.MM.yyyy\}}" Foreground="Black" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </sell:ColumnSelector.DayTemplate>
+                        <sell:ColumnSelector.WeekTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="2" BorderBrush="Black">
+                                    <Grid Background="Maroon" HorizontalAlignment="Stretch">
+                                        <TextBlock Foreground="White" FontWeight="Bold" TextWrapping="Wrap" Text="{Binding ., StringFormat=\{0:dd.MM.yyyy\}}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </sell:ColumnSelector.WeekTemplate>
+                        <sell:ColumnSelector.CurrentTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="2" BorderBrush="Black">
+                                    <Grid Background="DodgerBlue" HorizontalAlignment="Stretch">
+                                        <TextBlock Foreground="White" FontWeight="Bold" Text="{Binding ., StringFormat=\{0:dd.MM.yyyy\}}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </sell:ColumnSelector.CurrentTemplate>
+                        <sell:ColumnSelector.YearTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="2" BorderBrush="Black">
+                                    <Grid Background="LightGray" HorizontalAlignment="Stretch">
+                                        <TextBlock Text="{Binding .}" Foreground="Black" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </sell:ColumnSelector.YearTemplate>
+                        <sell:ColumnSelector.MontTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="2" BorderBrush="Black">
+                                    <Grid Background="LightGray" HorizontalAlignment="Stretch">
+                                        <TextBlock Text="{Binding .}" Foreground="Black" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </sell:ColumnSelector.MontTemplate>
+                    </sell:ColumnSelector>
+                </v:CalendarPanel.ColumnHeaderTemplateSelector>
+                <v:CalendarPanel.RowHeaderTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="2" BorderBrush="Black" >
+                            <Grid Background="LightGray" HorizontalAlignment="Stretch">
+                                <TextBlock Text="{Binding .}" Foreground="Black" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </v:CalendarPanel.RowHeaderTemplate>
+            </v:CalendarPanel>
+        </Grid>
+    </Border>
+</Window>

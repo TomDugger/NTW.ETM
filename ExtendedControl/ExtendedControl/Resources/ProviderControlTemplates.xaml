@@ -1,0 +1,213 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:b="clr-namespace:ExtendedControl.Behaviour"
+                    xmlns:bc="clr-namespace:NTW.Controls.Behaviours;assembly=NTW.Controls"
+                    xmlns:p="clr-namespace:NTW.Data.Context.Connections;assembly=NTW.Data.Context">
+
+    <ControlTemplate x:Key="{x:Type p:SqlConnection}">
+        <WrapPanel DataContext="{Binding Path=Connection, IsAsync=True}" Margin="10" bc:FrameworkElementPositionBehaviour.FrameworkElementPosition="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(bc:WindowPositionBehaviour.WindowPosition)}">
+
+            <Grid MinWidth="300">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.ColumnSpan="2" Text="{DynamicResource SQLServerConnectionParameters}" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="14" />
+
+                <TextBlock Grid.Row="1" Text="{DynamicResource SQLServerDataSource}" VerticalAlignment="Center" HorizontalAlignment="Right" Padding="3" />
+                <ComboBox Grid.Row="1" Grid.Column="1" Name="DS" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding Path=NamesServers, IsAsync=True}" Validation.ErrorTemplate="{DynamicResource validationFailed}">
+                    <ComboBox.Text>
+                        <Binding Path="DataSource" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.Text>
+                </ComboBox>
+            </Grid>
+
+            <Grid MinWidth="300">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock  Grid.ColumnSpan="2" Text="{DynamicResource SQLServerSecurity}" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="14" />
+
+                <TextBlock Grid.Row="1" Text="{DynamicResource SQLServerUser}" VerticalAlignment="Center" HorizontalAlignment="Right" Padding="3" />
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=Security.User, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"  />
+
+                <TextBlock Grid.Row="2" Text="{DynamicResource SQLServerPassword}" VerticalAlignment="Center" HorizontalAlignment="Right" Padding="3" />
+                <PasswordBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" b:PasswordBoxBehaviour.Password="{Binding Path=Security.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>
+
+            <Grid MinWidth="300">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.ColumnSpan="2" Text="{DynamicResource SQLServerConnectionToDataBase}" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="14" />
+
+                <TextBlock Grid.Row="1" Text="{DynamicResource SQLServerInitialCatalog}" VerticalAlignment="Center" HorizontalAlignment="Right" Padding="3" />
+                <ComboBox Grid.Row="1" Grid.Column="1" Name="IC" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding Path=NamesDB, IsAsync=True}">
+                    <ComboBox.Text>
+                        <Binding Path="InitialCatalog" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.Text>
+                </ComboBox>
+            </Grid>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="150" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.ColumnSpan="2" Text="{DynamicResource SQLServerResource}" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="14" />
+
+                <TextBlock Grid.Row="1" Text="{DynamicResource SQLServerPathToDataBase}" VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Left" Margin="0, 0, 5, 0" />
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <ScrollViewer VerticalAlignment="Center" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" Margin="5, 0, 5, 0">
+                        <TextBox VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Path=PathToResourceDB}" />
+                    </ScrollViewer>
+                    <Button Grid.Column="1" Content="..." Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContentControl}}, Path=DataContext.SelectPathToDBCommand}" Width="24" Height="24" HorizontalAlignment="Right" Margin="2, 0, 3, 0" />
+                </Grid>
+            </Grid>
+        </WrapPanel>
+        <ControlTemplate.Triggers>
+            <Trigger SourceName="DS" Property="Validation.HasError" Value="True">
+                <Setter TargetName="DS" Property="Background" Value="Red" />
+            </Trigger>
+            <Trigger SourceName="IC" Property="Validation.HasError" Value="True">
+                <Setter TargetName="IC" Property="Background" Value="Red" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="{x:Type p:SqlCompactConnection}">
+        <WrapPanel DataContext="{Binding Path=Connection, IsAsync=True}" Margin="10" bc:FrameworkElementPositionBehaviour.FrameworkElementPosition="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(bc:WindowPositionBehaviour.WindowPosition)}">
+
+            <Grid MinWidth="300">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.ColumnSpan="2" Text="{DynamicResource SQLServerConnectionParameters}" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="14" />
+
+                <TextBlock Grid.Row="1" Text="{DynamicResource SQLServerDataSource}" VerticalAlignment="Center" HorizontalAlignment="Right" Padding="3" />
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox VerticalAlignment="Center" Text="{Binding Path=DataSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button Grid.Column="1" Content="..." Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.SelectPathToDSCommand}" />
+                </Grid>
+            </Grid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="150" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.ColumnSpan="2" Text="{DynamicResource SQLServerResource}" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="14" />
+
+                <TextBlock Grid.Row="1" Text="{DynamicResource SQLServerPathToDataBase}" VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Left" Margin="0, 0, 5, 0" />
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <ScrollViewer VerticalAlignment="Center" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" Margin="5, 0, 5, 0">
+                        <TextBox VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Path=PathToResourceDB}" />
+                    </ScrollViewer>
+                    <Button Grid.Column="1" Content="..." Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContentControl}}, Path=DataContext.SelectPathToDBCommand}" Width="24" Height="24" HorizontalAlignment="Right" Margin="2, 0, 3, 0" />
+                </Grid>
+            </Grid>
+        </WrapPanel>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="{x:Type p:SqlLocalConnection}">
+        <WrapPanel DataContext="{Binding Path=Connection, IsAsync=True}" Margin="10" bc:FrameworkElementPositionBehaviour.FrameworkElementPosition="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(bc:WindowPositionBehaviour.WindowPosition)}">
+            <Grid MinWidth="300">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="100" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.ColumnSpan="3" Text="{DynamicResource SQLServerConnectionParameters}" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="14" />
+                
+                <TextBlock Grid.Row="1" Text="{DynamicResource SQLServerDataSource}" VerticalAlignment="Center" HorizontalAlignment="Right" Padding="3" />
+                <TextBox Grid.Row="1" Grid.Column="1" Name="DS" VerticalAlignment="Center" Validation.ErrorTemplate="{DynamicResource validationFailed}">
+                    <TextBox.Text>
+                        <Binding Path="PathToFile" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <Button Grid.Row="1" Grid.Column="2" Content="..." Padding="10, 0" Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.SelectPathToFileMdb}" />
+            </Grid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="150" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.ColumnSpan="2" Text="{DynamicResource SQLServerResource}" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="14" />
+
+                <TextBlock Grid.Row="1" Text="{DynamicResource SQLServerPathToDataBase}" VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Left" Margin="0, 0, 5, 0" />
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <ScrollViewer VerticalAlignment="Center" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" Margin="5, 0, 5, 0">
+                        <TextBox VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Path=PathToResourceDB}" />
+                    </ScrollViewer>
+                    <Button Grid.Column="1" Content="..." Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContentControl}}, Path=DataContext.SelectPathToDBCommand}" Width="24" Height="24" HorizontalAlignment="Right" Margin="2, 0, 3, 0" />
+                </Grid>
+            </Grid>
+        </WrapPanel>
+    </ControlTemplate>
+</ResourceDictionary>

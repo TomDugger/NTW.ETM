@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib"
+                    xmlns:data="clr-namespace:NTW.Data.Models;assembly=NTW.Data">
+
+    <y:String x:Key="UserSettingsLogo">Пользовательские настройки</y:String>
+    <y:String x:Key="UserSettingsUserName">Имя пользователя</y:String>
+    <y:String x:Key="UserSettingsFullName">Полное имя</y:String>
+    <y:String x:Key="UserSettingsLanguage">Язык</y:String>
+    <y:String x:Key="UserSettingsIsHiddenUser">Скрытый пользователь</y:String>
+    <y:String x:Key="UserSettingsHidden">Скрытый</y:String>
+
+    <y:String x:Key="UserSettingsChangePassword">Изменить пароль</y:String>
+    <y:String x:Key="UserSettingsChange">Изменить</y:String>
+    <y:String x:Key="UserSettingsOldPassword">Старый пароль</y:String>
+    <y:String x:Key="UserSettingsNewPassword">Новый пароль</y:String>
+    <y:String x:Key="UserSettingsConfirmNewPassword">Подтвердите новый пароль</y:String>
+    <y:String x:Key="UserSettingsUpdatePassword">Обновить пароль</y:String>
+    <y:String x:Key="UserSettingsCancel">Отменить</y:String>
+    
+    <!--Errors-->
+    <y:String x:Key="UserSeettingsSetPassSuccessfully">Новый пароль успешно установлен</y:String>
+    <y:String x:Key="UserSeettingsNotVerified">Новый пароль не прошел проверку</y:String>
+    <y:String x:Key="UserSettingsInvalidPass">Неверный старый пароль</y:String>
+    <y:String x:Key="UserSettingsNotFoundUser">Пользователь не найден</y:String>
+</ResourceDictionary>

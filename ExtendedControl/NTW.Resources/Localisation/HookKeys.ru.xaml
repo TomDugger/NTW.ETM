@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib"
+                    xmlns:data="clr-namespace:NTW.Data.Models;assembly=NTW.Data">
+
+    <!--Panel-->
+    <y:String x:Key="HookKeyExtra">Дополнить</y:String>
+    <y:String x:Key="HookKeyDefinitionKey">Определить клавиши</y:String>
+
+    <!--Control-->
+    <y:String x:Key="HookKeyControlAccepted">Принять</y:String>
+    
+    <!--Command names-->
+    <y:String x:Key="HookKeyExitApplication">Выйти из программы</y:String>
+    
+    <y:String x:Key="HookKeyAdminPanel">Администраторская панель</y:String>
+    <y:String x:Key="HookKeyAppSettings">Найстройки приложения</y:String>
+    <y:String x:Key="HookKeyEventsPanel">Панель событий</y:String>
+    <y:String x:Key="HookKeyHookKeyPanel">Панель горячих клавиш</y:String>
+    <y:String x:Key="HookKeyNotesPanel">Заметки</y:String>
+    <y:String x:Key="HookKeyProcessPanel">Процессы</y:String>
+    <y:String x:Key="HookKeyReports">Отчеты</y:String>
+    <y:String x:Key="HookKeyUserSettings">Пользовательские настройки</y:String>
+    <y:String x:Key="HookKeyTasksPanel">Задачи</y:String>
+    <y:String x:Key="HookKeyTrackingPanel">Панель отслеживания процессов</y:String>
+    
+    <y:String x:Key="HookKeyCreateProcess">Создать процесс</y:String>
+    <y:String x:Key="HookKeyCreateProcessOnClipboard">Создать процесс из буфера обмена</y:String>
+    
+    <y:String x:Key="HookKeyCreateTask">Создать задачу</y:String>
+    <y:String x:Key="HookKeyCreateTaskOnClipboard">Создать задачу из буфера обмена</y:String>
+    <y:String x:Key="HookKeyCopyTask">Копия задачи</y:String>
+    <y:String x:Key="HookKeyRemoveTask">Удалить задачу</y:String>
+    <y:String x:Key="HookKeyEditTask">Изменить задачу</y:String>
+    
+    <y:String x:Key="HookKeyCreateNote">Создать заметку</y:String>
+    <y:String x:Key="HookKeyCreateNotenClipboard">Создать заметку из буфера обмена</y:String>
+
+    <!--Commands group names-->
+    <y:String x:Key="HookKeyGroupApp">Приложение</y:String>
+    <y:String x:Key="HookKeyGroupPanels">Панели</y:String>
+    <y:String x:Key="HookKeyGroupProcess">Процессы</y:String>
+    <y:String x:Key="HookKeyGroupTasks">Задачи</y:String>
+    <y:String x:Key="HookKeyGroupNotes">Заметки</y:String>
+</ResourceDictionary>

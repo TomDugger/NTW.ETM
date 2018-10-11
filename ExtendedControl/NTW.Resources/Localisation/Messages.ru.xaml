@@ -1,0 +1,91 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib"
+                    xmlns:data="clr-namespace:NTW.Data.Models;assembly=NTW.Data">
+
+    <y:String x:Key="TaskEditTask" >Пользователь "{0}" изменил задачу</y:String>
+    <y:String x:Key="TaskDeleteTask" >Пользователь "{0}" удалил задачу</y:String>
+    
+    <y:String x:Key="CommentStartExecutionTask" >Пользователь "{0}" приступил к выполнению задачи</y:String>
+    <y:String x:Key="CommentComplitedExecutionTask" >Пользователь "{0}" завершил выполнение задачи</y:String>
+    <y:String x:Key="CommentCancelingExecutionTask" >Пользователь "{0}" отменил выполнение задачи для {1}</y:String>
+
+    <!--Event messages-->
+    <x:Array Type="{x:Type y:String}" x:Key="EventMessages">
+        <y:String >Не является коммандой</y:String><!--0-->
+        <!--Task-->
+        <y:String >Пользователь "{0}" создал задачу "{1}"</y:String><!--1-->
+        <y:String >Пользователь "{0}" изменил задачу "{1}"</y:String><!--2-->
+        <y:String >Пользователь "{0}" удалил задачу "{1}"</y:String><!--3-->
+        <y:String >Пользователь "{0}" востановил задачу "{1}"</y:String><!--4-->
+
+        <y:String >Пользователь "{0}" приступил к выполнению задачи "{1}"</y:String><!--5-->
+        <y:String >Пользователь "{0}" завершил выполнение задачи "{1}"</y:String><!--6-->
+        <y:String >Пользователь "{0}" отменил выполнение задачи "{1}" для "{2}"</y:String><!--7-->
+        <!--Comment-->
+        <y:String >"{0}": "{1}"</y:String><!--8--><!--передается три параметра-->
+
+        <!--User-->
+        <y:String >Пользователь "{0}" вошел в систему</y:String><!--9-->
+        <y:String >Пользователь "{0}" вышел из системы</y:String><!--10-->
+        <y:String >Пользователь "{0}" создал пользователя "{1}"</y:String><!--11-->
+        <y:String >Пользователь "{0}" изменил пользователя "{1}"</y:String><!--12-->
+        <y:String >Пользователь "{0}" удалил пользователя "{1}"</y:String><!--13-->
+        <y:String >Пользователь "{0}" востановил пользователя "{1}"</y:String><!--14-->
+
+        <!--Role-->
+        <y:String >Пользователь "{0}" создал роль "{1}"</y:String><!--15-->
+        <y:String >Пользователь "{0}" изменил роль "{1}"</y:String><!--16-->
+        <y:String >Пользователь "{0}" удалил роль "{1}"</y:String><!--17-->
+        <y:String >Пользователь "{0}" востановил роль "{1}"</y:String><!--18-->
+
+        <!--User settings-->
+        <y:String >Пользователь "{0}" создал пользовательские настройки "{1}"</y:String><!--19-->
+        <y:String >Пользователь "{0}" изменил пользовательские настройки "{1}"</y:String><!--20-->
+        <y:String >Пользователь "{0}" удалил пользовательские настройки "{1}"</y:String><!--21-->
+        <y:String >Пользователь "{0}" востановил пользовательские настройки "{1}"</y:String><!--22-->
+
+        <!--Project-->
+        <y:String >Пользователь "{0}" создал проект "{1}"</y:String><!--23-->
+        <y:String >Пользователь "{0}" изменил проект "{1}"</y:String><!--24-->
+        <y:String >Пользователь "{0}" удалил проект "{1}"</y:String><!--25-->
+        <y:String >Пользователь "{0}" востановил проект "{1}"</y:String><!--26-->
+    </x:Array>
+    <!--Task-->
+    <!--<y:String x:Key="EventTaskCreateTask">Пользователь {0} создал задачу {1}</y:String>
+    <y:String x:Key="EventTaskChangedTask">Пользователь {0} изменил задачу {1}</y:String>
+    <y:String x:Key="EventTaskDeleteTask">Пользователь {0} удалил задачу {1}</y:String>
+    <y:String x:Key="EventTaskRestoreTask">Пользователь {0} востановил задачу {1}</y:String>
+
+    <y:String x:Key="EventTaskUserStartExecution">Пользователь {0} приступил к выполнению задачи {1}</y:String>
+    <y:String x:Key="EventTaskUserComplitedExecution">Пользователь {0} завершил выполнение задачи {1}</y:String>
+    <y:String x:Key="EventTaskUserCancelingExecution">Пользователь {0} отменил выполнение задачи {1}</y:String>-->
+    <!--Comment-->
+    <!--<y:String x:Key="EventTaskSendCommentTask">!@</y:String>-->
+
+    <!--User-->
+    <!--<y:String x:Key="EventUserEntrySystem">Пользователь {0} вошел в систему</y:String>
+    <y:String x:Key="EventUserExitSystem">Пользователь {0} вышел из системы</y:String>
+    <y:String x:Key="EventUserCreatedUser">Пользователь {0} создал пользователя {1}</y:String>
+    <y:String x:Key="EventUserChangedUser">Пользователь {0} изменил пользователя {1}</y:String>
+    <y:String x:Key="EventUserDeleteUser">Пользователь {0} удалил пользователя {1}</y:String>
+    <y:String x:Key="EventUserRestoreUser">Пользователь {0} востановил пользователя {1}</y:String>-->
+
+    <!--Role-->
+    <!--<y:String x:Key="EventRoleCreateRole">Пользователь {0} создал роль {1}</y:String>
+    <y:String x:Key="EventRoleChangeRole">Пользователь {0} изменил роль {1}</y:String>
+    <y:String x:Key="EventRoleRemoveRole">Пользователь {0} удалил роль {1}</y:String>
+    <y:String x:Key="EventRoleRestoreRole">Пользователь {0} востановил роль {1}</y:String>-->
+
+    <!--User settings-->
+    <!--<y:String x:Key="EventUserSettingsCreateUserSettings">Пользователь {0} создал пользовательские настройки {1}</y:String>
+    <y:String x:Key="EventUserSettingsChangeUserSettings">Пользователь {0} изменил пользовательские настройки {1}</y:String>
+    <y:String x:Key="EventUserSettingsRemoveUserSettings">Пользователь {0} удалил пользовательские настройки {1}</y:String>
+    <y:String x:Key="EventUserSettingsRestoreUserSettings">Пользователь {0} востановил пользовательские настройки {1}</y:String>-->
+
+    <!--Project-->
+    <!--<y:String x:Key="EventProjectCreateProject">Пользователь {0} создал проект {1}</y:String>
+    <y:String x:Key="EventProjectChangeProject">Пользователь {0} изменил проект {1}</y:String>
+    <y:String x:Key="EventProjectRemoveProject">Пользователь {0} удалил проект {1}</y:String>
+    <y:String x:Key="EventProjectRestoreProject">Пользователь {0} востановил проект {1}</y:String>-->
+</ResourceDictionary>

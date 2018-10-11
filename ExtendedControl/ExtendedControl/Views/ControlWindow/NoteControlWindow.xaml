@@ -1,0 +1,19 @@
+﻿<Window x:Class="ExtendedControl.Views.ControlWindow.NoteControlWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:b="clr-namespace:ExtendedControl.Behaviour"
+        xmlns:bc="clr-namespace:NTW.Controls.Behaviours;assembly=NTW.Controls"
+        xmlns:vm="clr-namespace:ExtendedControl.ViewModels"
+        xmlns:control="clr-namespace:NTW.Controls;assembly=NTW.Controls"
+        bc:WindowVisibilityBehaviour.CloseByHidden="True"
+        bc:HideButtonBehaviour.Command="{Binding Path=CloseWindowCommand}"
+        b:ViewModelIjection.ViewModel="{x:Type vm:NotesViewModel}"
+        bc:HideButtonBehaviour.UseHideButton="True"
+        bc:WindowClosingBehaviour.UseAlterClosing="True" Style="{DynamicResource DefaultPanelWindowStyle}"
+        WindowStartupLocation="CenterScreen" ShowInTaskbar="True"
+        Title="ProcessControlWindow" Height="auto" Width="auto" SizeToContent="WidthAndHeight">
+    <Grid></Grid>
+</Window>

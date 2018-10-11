@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib">
+
+    <!--Panel-->
+    <y:String x:Key="NotesPanelCreateGroup">Create note group</y:String>
+    <y:String x:Key="NotesPanelCreateNote">Create note</y:String>
+    <y:String x:Key="NotesPanelReturnAllNote">Return all note</y:String>
+    <y:String x:Key="NotesPanelConMenuCreateNote">Create note</y:String>
+    <y:String x:Key="NotesPanelConMenuRemoveGroup">Remove</y:String>
+    <y:String x:Key="NotesPanelConMenuCopyGroup">Copy</y:String>
+    <y:String x:Key="NotesPanelConMenuClearGroup">Clear</y:String>
+    <y:String x:Key="NotesPanelConMenuReturnAll">Return all</y:String>
+    
+    <y:String x:Key="NotesPanelConMenuGroupBlue">Blue</y:String>
+    <y:String x:Key="NotesPanelConMenuGroupGreen">Green</y:String>
+    <y:String x:Key="NotesPanelConMenuGroupPink">Pink</y:String>
+    <y:String x:Key="NotesPanelConMenuGroupWhite">White</y:String>
+    <y:String x:Key="NotesPanelConMenuGroupYellow">Yellow</y:String>
+    <y:String x:Key="NotesPanelConMenuGroupGray">Gray</y:String>
+
+    <y:String x:Key="NotesPanelConMenuCreateTaskByNote">Create task by note</y:String>
+    <y:String x:Key="NotesPanelConMenuRemoveNote">Remove</y:String>
+    <y:String x:Key="NotesPanelConMenuCopyNote">Copy</y:String>
+
+    <y:String x:Key="NotesPanelConMenuNoteBlue">Blue</y:String>
+    <y:String x:Key="NotesPanelConMenuNoteGreen">Green</y:String>
+    <y:String x:Key="NotesPanelConMenuNotePink">Pink</y:String>
+    <y:String x:Key="NotesPanelConMenuNoteWhite">White</y:String>
+    <y:String x:Key="NotesPanelConMenuNoteYellow">Yellow</y:String>
+    <y:String x:Key="NotesPanelConMenuNoteGray">Gray</y:String>
+</ResourceDictionary>

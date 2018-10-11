@@ -1,0 +1,103 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib"
+                    xmlns:data="clr-namespace:NTW.Data.Models;assembly=NTW.Data">
+
+    <!--Enums-->
+    <x:Array Type="{x:Type data:DoubleStruct}" x:Key="ArrayTypeTask">
+        <data:DoubleStruct Value="1" Name="Задача" />
+        <data:DoubleStruct Value="2" Name="Предложение" />
+        <data:DoubleStruct Value="3" Name="Улучшение" />
+        <data:DoubleStruct Value="4" Name="Ошибка" />
+    </x:Array>
+
+    <x:Array Type="{x:Type data:DoubleStruct}" x:Key="ArrayPriorityTask">
+        <data:DoubleStruct Value="1" Name="Незначительный" />
+        <data:DoubleStruct Value="2" Name="Умеренный" />
+        <data:DoubleStruct Value="3" Name="Критический" />
+    </x:Array>
+
+    <x:Array Type="{x:Type data:DoubleStruct}" x:Key="TypeVisualTaskData">
+        <data:DoubleStruct Value="1" Name="Назначенные мне" />
+        <data:DoubleStruct Value="2" Name="Созданные мной" />
+        <data:DoubleStruct Value="3" Name="Персональные" />
+        <data:DoubleStruct Value="4" Name="Избранные" />
+    </x:Array>
+
+    <!--Panel-->
+    <y:String x:Key="TaskPanelCreateTask">Создать задачу</y:String>
+    <y:String x:Key="TaskPanelRemoveTask">Удалить</y:String>
+    <y:String x:Key="TaskPanelEditTask">Изменить</y:String>
+    <y:String x:Key="TaskPanelCopyTask">Создать копию</y:String>
+    <y:String x:Key="TaskPanelStateTask">Состояние задачи</y:String>
+    <y:String x:Key="TaskPanelCalendar">Динамика задач</y:String>
+
+    <y:String x:Key="TaskPanelMainInfo">Основная информация</y:String>
+
+    <y:String x:Key="TaskPanelParametry">Параметры</y:String>
+    <y:String x:Key="TaskPanelProject">Проект:</y:String>
+    <y:String x:Key="TaskPanelType">Тип:</y:String>
+    <y:String x:Key="TaskPanelPriorety">Приоритет:</y:String>
+    <y:String x:Key="TaskPanelCreateDate">Дата создания:</y:String>
+    <y:String x:Key="TaskPanelDeadline">Крайний срок:</y:String>
+
+    <y:String x:Key="TaskPanelComments">Коментарии ({0})</y:String>
+    <y:String x:Key="TaskPanelCommentsShows">Заблокирован</y:String>
+
+    <y:String x:Key="TaskPanelAttachedFiles">Файл(ы) ({0})</y:String>
+    <y:String x:Key="TaskPanelFiles">{0} файл(ы)</y:String>
+    <y:String x:Key="TaskPanelDownloadAttachedFile">Загрузить файл</y:String>
+    <y:String x:Key="TaskPanelDownloadAllFiles">Загрузить все файлы</y:String>
+
+    <y:String x:Key="TaskPanelActivePerfomers">Исполнитель(и) ({0})</y:String>
+    <y:String x:Key="TaskPanelPerfomers">{0} исполнитель(и)</y:String>
+    <y:String x:Key="TaskPanelCancellingExecution">Отменить выполнение</y:String>
+
+    <y:String x:Key="TaskPanelStartExecution">Приступить к выполнению</y:String>
+    <y:String x:Key="TaskPanelStart">Начата -></y:String>
+    <y:String x:Key="TaskPanelExecution">Выполнить</y:String>
+    <y:String x:Key="TaskPanelExecutionFine">Выполнено -></y:String>
+
+    <y:String x:Key="TaskPanelNonExecution">Невозможно завершить выполнение задачи</y:String>
+
+    <!--Control-->
+    <y:String x:Key="TaskControlCreateTasklogo">Создание задачи</y:String>
+    <y:String x:Key="TaskControlEditTaskLogo">Изменить задачу</y:String>
+    
+    <y:String x:Key="TaskControlMainInfo">Основная информация</y:String>
+    <y:String x:Key="TaskControlTaskcaption">Заголовок:</y:String>
+    <y:String x:Key="TaskControlCreater">Создатель:</y:String>
+    <y:String x:Key="TaskControlIsPersonal">Персональная задача</y:String>
+    <y:String x:Key="TaskControlContent">Содержимое</y:String>
+
+    <y:String x:Key="TaskControlProject">Проект:</y:String>
+    <y:String x:Key="TaskControlType">Тип:</y:String>
+    <y:String x:Key="TaskControlPriorety">Приоритет:</y:String>
+    <y:String x:Key="TaskControlDeadline">Крайний срок:</y:String>
+
+    <y:String x:Key="TaskControlFiles">Файл(ы) ({0})</y:String>
+    <y:String x:Key="TaskControlButtonFiles">Файлы</y:String>
+    <y:String x:Key="TaskControlClearAll">Очистить</y:String>
+    <y:String x:Key="TaskControlDragFilesHere">Перетащите файлы сюда...</y:String>
+
+    <y:String x:Key="TaskControlPerfomers">Исполнитель(и) {0:D}</y:String>
+    <y:String x:Key="TaskControlPerfomersClearAll">Очистить</y:String>
+    <y:String x:Key="TaskControlPerfomersSelectAll">Выбрать всех</y:String>
+    <y:String x:Key="TaskControlPerfomersIsPersonInCharge">Ответственное лицо</y:String>
+    <y:String x:Key="TaskControlPerfomersAdd">Добавить</y:String>
+
+    <y:String x:Key="TaskControlAccepted">Принять</y:String>
+    <y:String x:Key="TaskControlCancel">Отменить</y:String>
+
+    <y:String x:Key="TaskControlResponsiblePersonsCount">Ответственные лица:</y:String>
+    <y:String x:Key="TaskControlPerfomersCount">Исполнители:</y:String>
+
+    <!--Files-->
+    <y:String x:Key="FileControlFileSet">Управление файлами</y:String>
+    <y:String x:Key="FileControlRemoveFile">Удалить файл</y:String>
+    <y:String x:Key="FileControlAccepted">Принять</y:String>
+
+    <!--Errors-->
+    <y:String x:Key="TaskControlErrorCaptionIsEmpty">Заголовок не может быть пустым</y:String>
+    <y:String x:Key="TaskControlErrorPerfomerCount">Кол-во исполнителей равно нулю</y:String>
+</ResourceDictionary>

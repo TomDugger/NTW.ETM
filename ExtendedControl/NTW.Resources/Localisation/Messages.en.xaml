@@ -1,0 +1,93 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib"
+                    xmlns:data="clr-namespace:NTW.Data.Models;assembly=NTW.Data">
+
+    <y:String x:Key="TaskEditTask" >User "{0}" changed task</y:String>
+    <y:String x:Key="TaskDeleteTask" >User "{0}" removed task</y:String>
+    
+    <y:String x:Key="CommentStartExecutionTask" >User "{0}" start execution</y:String>
+    <y:String x:Key="CommentComplitedExecutionTask" >User "{0}" complited task</y:String>
+    <y:String x:Key="CommentCancelingExecutionTask" >User "{0}" conceling execution task by {1}</y:String>
+
+    <!--Event messages-->
+    <x:Array Type="{x:Type y:String}" x:Key="EventMessages">
+        <y:String >Non command</y:String><!--0-->
+        <!--Task-->
+        <y:String >User {0} create task {1}</y:String><!--1-->
+        <y:String >User {0} change the task {1}</y:String><!--2-->
+        <y:String >User {0} remove task {1}</y:String><!--3-->
+        <y:String >User {0} restore task {1}</y:String><!--4-->
+
+        <y:String >User {0} start execution by task {1}</y:String><!--5-->
+        <y:String >User {0} complited execution task {1}</y:String><!--6-->
+        <y:String >User {0} canceling execution task {1} by {2}</y:String><!--7-->
+        <!--Comment-->
+        <y:String >{0}: {1}</y:String><!--8-->
+
+        <!--User-->
+        <y:String >User {0} is logged in</y:String><!--9-->
+        <y:String >User {0} logged out</y:String><!--10-->
+        <y:String >User {0} created user {1}</y:String><!--11-->
+        <y:String >User {0} changed user {1}</y:String><!--12-->
+        <y:String >User {0} removed user {1}</y:String><!--13-->
+        <y:String >User {0} restored user {1}</y:String><!--14-->
+
+        <!--Role-->
+        <y:String >User {0} create role {1}</y:String><!--15-->
+        <y:String >User {0} change role {1}</y:String><!--16-->
+        <y:String >User {0} remove role {1}</y:String><!--17-->
+        <y:String >User {0} restore role {1}</y:String><!--18-->
+
+        <!--User settings-->
+        <y:String >User {0} create user settings {1}</y:String><!--19-->
+        <y:String >User {0} change user settings {1}</y:String><!--20-->
+        <y:String >User {0} remove user settings {1}</y:String><!--21-->
+        <y:String >User {0} restore user settings {1}</y:String><!--22-->
+
+        <!--Project-->
+        <y:String >User {0} create project {1}</y:String><!--23-->
+        <y:String >User {0} change project {1}</y:String><!--24-->
+        <y:String >User {0} remove project {1}</y:String><!--25-->
+        <y:String >User {0} restore project {1}</y:String><!--26-->
+    </x:Array>
+    
+    <!--Event messages-->
+    <!--Task-->
+    <!--<y:String x:Key="EventTaskCreateTask">User {0} create task {1}</y:String>
+    <y:String x:Key="EventTaskChangedTask">User {0} change the task {1}</y:String>
+    <y:String x:Key="EventTaskDeleteTask">User {0} remove task {1}</y:String>
+    <y:String x:Key="EventTaskRestoreTask">User {0} restore task {1}</y:String>
+
+    <y:String x:Key="EventTaskUserStartExecution">User {0} start execution by task {1}</y:String>
+    <y:String x:Key="EventTaskUserComplitedExecution">User {0} complited execution task {1}</y:String>
+    <y:String x:Key="EventTaskUserCancelingExecution">User {0} canceling execution task {1}</y:String>-->
+    <!--Comment-->
+    <!--<y:String x:Key="EventTaskSendCommentTask">!@</y:String>-->
+    
+    <!--User-->
+    <!--<y:String x:Key="EventUserEntrySystem">User {0} is logged in</y:String>
+    <y:String x:Key="EventUserExitSystem">User {0} logged out</y:String>
+    <y:String x:Key="EventUserCreatedUser">User {0} created user {1}</y:String>
+    <y:String x:Key="EventUserChangedUser">User {0} changed user {1}</y:String>
+    <y:String x:Key="EventUserDeleteUser">User {0} removed user {1}</y:String>
+    <y:String x:Key="EventUserRestoreUser">User {0} restored user {1}</y:String>-->
+    
+    <!--Role-->
+    <!--<y:String x:Key="EventRoleCreateRole">User {0} create role {1}</y:String>
+    <y:String x:Key="EventRoleChangeRole">User {0} change role {1}</y:String>
+    <y:String x:Key="EventRoleRemoveRole">User {0} remove role {1}</y:String>
+    <y:String x:Key="EventRoleRestoreRole">User {0} restore role {1}</y:String>-->
+
+    <!--User settings-->
+    <!--<y:String x:Key="EventUserSettingsCreateUserSettings">User {0} create user settings {1}</y:String>
+    <y:String x:Key="EventUserSettingsChangeUserSettings">User {0} change user settings {1}</y:String>
+    <y:String x:Key="EventUserSettingsRemoveUserSettings">User {0} remove user settings {1}</y:String>
+    <y:String x:Key="EventUserSettingsRestoreUserSettings">User {0} restore user settings {1}</y:String>-->
+
+    <!--Project-->
+    <!--<y:String x:Key="EventProjectCreateProject">User {0} create project {1}</y:String>
+    <y:String x:Key="EventProjectChangeProject">User {0} change project {1}</y:String>
+    <y:String x:Key="EventProjectRemoveProject">User {0} remove project {1}</y:String>
+    <y:String x:Key="EventProjectRestoreProject">User {0} restore project {1}</y:String>-->
+</ResourceDictionary>

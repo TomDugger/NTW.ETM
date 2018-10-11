@@ -1,0 +1,146 @@
+﻿<Window x:Class="ExtendedControl.Views.Panels.SettingsControlPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExtendedControl.Views.Panels"
+        mc:Ignorable="d"
+        Title="UserSettings" Height="450" Width="800"
+        xmlns:b="clr-namespace:ExtendedControl.Behaviour"
+        xmlns:vm="clr-namespace:ExtendedControl.ViewModels"
+        xmlns:bc="clr-namespace:NTW.Controls.Behaviours;assembly=NTW.Controls"
+        Style="{DynamicResource DefaultPanelWindowStyle}"
+        b:ViewModelIjection.ViewModel="{x:Type vm:UserSettingsViewModel}"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=MinSize.Width}"
+        MinHeight="{Binding RelativeSource={RelativeSource Mode=Self}, Path=MinSize.Height}"
+        bc:WindowPositionBehaviour.WindowThickness="2"
+        bc:HideButtonBehaviour.UseHideButton="True"
+        bc:UntieButtonBehaviour.UseUntieButton="True"
+        bc:WindowVisibilityBehaviour.CloseByHidden="True"
+        bc:WindowMessageBehaviour.UseMessages="True"
+        bc:SaveParametryPanelBehaviour.IsSaveByClose="True">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Path=LoadCommand}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding Path=UnloadCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Border Style="{StaticResource WindowBorder}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="{DynamicResource UserSettingsLogo}" Style="{DynamicResource H3}" VerticalAlignment="Bottom" Margin="20, 3, 3, 3" />
+
+            <StackPanel Grid.Row="1" Margin="10" bc:FrameworkElementPositionBehaviour.FrameworkElementPosition="{Binding RelativeSource={StaticResource WindowSource}, Path=(bc:WindowPositionBehaviour.WindowPosition)}">
+                <Grid MinWidth="150" Margin="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{DynamicResource UserSettingsUserName}" Margin="5, 3"/>
+                    <TextBox Grid.Row="1" Text="{Binding Path=UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
+
+                <Grid MinWidth="150" Margin="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{DynamicResource UserSettingsFullName}" Margin="5, 3"/>
+                    <TextBox Grid.Row="1" Text="{Binding Path=FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
+
+                <Grid MinWidth="150" Margin="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{DynamicResource UserSettingsLanguage}" Margin="5, 3"/>
+                    <ComboBox Grid.Row="1" ItemsSource="{Binding Path=Languages}" SelectedItem="{Binding Path=Language, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
+
+                <Grid MinWidth="150" Margin="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{DynamicResource UserSettingsIsHiddenUser}" Margin="5, 3"/>
+                    <ToggleButton Content="Hidden" Grid.Row="1" IsChecked="{Binding Path=IsHiddenUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
+
+                <Grid MinWidth="150" Margin="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{DynamicResource UserSettingsChangePassword}" Margin="5, 3"/>
+
+                    <ContentControl Grid.Row="1">
+                        <ContentControl.Style>
+                            <Style TargetType="{x:Type ContentControl}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Button Content="{DynamicResource UserSettingsChange}" Command="{Binding Path=ShowPanelByPasswordCommand}" />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsSetNewPassword, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type ContentControl}">
+                                                    <StackPanel bc:FrameworkElementPositionBehaviour.FrameworkElementPosition="{Binding RelativeSource={StaticResource WindowSource}, Path=(bc:WindowPositionBehaviour.WindowPosition)}">
+                                                        <Grid MinWidth="200">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto" />
+                                                                <RowDefinition Height="Auto" />
+                                                            </Grid.RowDefinitions>
+                                                            <TextBlock Text="{DynamicResource UserSettingsOldPassword}" />
+                                                            <PasswordBox Grid.Row="1" Margin="20, 0" 
+                                                                     b:PasswordBoxBehaviour.Password="{Binding Path=OldPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                        </Grid>
+
+                                                        <Grid MinWidth="200">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto" />
+                                                                <RowDefinition Height="Auto" />
+                                                            </Grid.RowDefinitions>
+                                                            <TextBlock Text="{DynamicResource UserSettingsNewPassword}" />
+                                                            <PasswordBox Grid.Row="1" Margin="20, 0"
+                                                                     b:PasswordBoxBehaviour.Password="{Binding Path=NewPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                        </Grid>
+
+                                                        <Grid MinWidth="200">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto" />
+                                                                <RowDefinition Height="Auto" />
+                                                            </Grid.RowDefinitions>
+                                                            <TextBlock Text="{DynamicResource UserSettingsConfirmNewPassword}" />
+                                                            <PasswordBox Grid.Row="1" Margin="20, 0"
+                                                                     b:PasswordBoxBehaviour.Password="{Binding Path=ConfirmNewPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                        </Grid>
+                                                        
+                                                        <Button MinWidth="200" Content="{DynamicResource UserSettingsUpdatePassword}" Command="{Binding Path=UpdatePasswordCommand}"
+                                                                CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}" />
+                                                        <Button MinWidth="200" Content="{DynamicResource UserSettingsCancel}" Command="{Binding Path=ShowPanelByPasswordCommand}" />
+                                                    </StackPanel>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentControl.Style>
+                    </ContentControl>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

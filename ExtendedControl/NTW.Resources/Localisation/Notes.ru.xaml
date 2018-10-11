@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib">
+
+    <!--Panel-->
+    <y:String x:Key="NotesPanelCreateGroup">Создать группу</y:String>
+    <y:String x:Key="NotesPanelCreateNote">Создать заметку</y:String>
+    <y:String x:Key="NotesPanelReturnAllNote">Вернуть все заметки</y:String>
+    
+    <y:String x:Key="NotesPanelConMenuCreateNote">Создать заметку</y:String>
+    <y:String x:Key="NotesPanelConMenuRemoveGroup">Удалить</y:String>
+    <y:String x:Key="NotesPanelConMenuCopyGroup">Создать копию</y:String>
+    <y:String x:Key="NotesPanelConMenuClearGroup">Очистить</y:String>
+    <y:String x:Key="NotesPanelConMenuReturnAll">Вернуть все заметки</y:String>
+
+    <y:String x:Key="NotesPanelConMenuGroupBlue">Синий</y:String>
+    <y:String x:Key="NotesPanelConMenuGroupGreen">Зеленый</y:String>
+    <y:String x:Key="NotesPanelConMenuGroupPink">Розовый</y:String>
+    <y:String x:Key="NotesPanelConMenuGroupWhite">Белый</y:String>
+    <y:String x:Key="NotesPanelConMenuGroupYellow">Желтый</y:String>
+    <y:String x:Key="NotesPanelConMenuGroupGray">Серый</y:String>
+
+    <y:String x:Key="NotesPanelConMenuCreateTaskByNote">Создать задачу из заметки</y:String>
+    <y:String x:Key="NotesPanelConMenuRemoveNote">Удалить</y:String>
+    <y:String x:Key="NotesPanelConMenuCopyNote">Создать копию</y:String>
+
+    <y:String x:Key="NotesPanelConMenuNoteBlue">Синий</y:String>
+    <y:String x:Key="NotesPanelConMenuNoteGreen">Зеленый</y:String>
+    <y:String x:Key="NotesPanelConMenuNotePink">Розовый</y:String>
+    <y:String x:Key="NotesPanelConMenuNoteWhite">Белый</y:String>
+    <y:String x:Key="NotesPanelConMenuNoteYellow">Желтый</y:String>
+    <y:String x:Key="NotesPanelConMenuNoteGray">Серый</y:String>
+</ResourceDictionary>

@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib">
+
+    <y:String x:Key="DBSettingsLogo">Настройки БД</y:String>
+    <y:String x:Key="DBSettingsConnectionType">Тип соединения</y:String>
+
+    <y:String x:Key="DBSettingsTest">Проверить</y:String>
+    <y:String x:Key="DBSettingsCreate">Создать</y:String>
+    <y:String x:Key="DBSettingsDelete">Удалить</y:String>
+
+    <y:String x:Key="DBSettingsAccepted">Принять</y:String>
+    <y:String x:Key="DBSettingsCancel">Отменить</y:String>
+
+    <y:String x:Key="SQLServerConnectionParameters">Параметры соединения</y:String>
+    <y:String x:Key="SQLServerDataSource">Источник данных</y:String>
+    <y:String x:Key="SQLServerConnectionToDataBase">Подключение к БД</y:String>
+    <y:String x:Key="SQLServerInitialCatalog">Начальный каталог</y:String>
+    <y:String x:Key="SQLServerSecurity">Безопасность</y:String>
+    <y:String x:Key="SQLServerUser">Пользователь</y:String>
+    <y:String x:Key="SQLServerPassword">Пароль</y:String>
+    <y:String x:Key="SQLServerResource">Ресурсы</y:String>
+    <y:String x:Key="SQLServerPathToDataBase">Путь к БД</y:String>
+
+    <!--Errors-->
+    <y:String x:Key="DBSettingsDataBaseNotExists">Ошибка! База данных не существует</y:String>
+    <y:String x:Key="DBSettingsTestComplited">Тест подключения выполнен успешно</y:String>
+    <y:String x:Key="DBSettingsCreateDBComplited">Создание базы данных выполнено успешно</y:String>
+    <y:String x:Key="DBSettingsNotCreateDatabase">Не удалось создать базу данных</y:String>
+    <y:String x:Key="DBSettingsDBExists">Ьаза данных существует</y:String>
+    <y:String x:Key="DBSettingsDeleteDBComplited">Удаление базы данных выполнено успешно</y:String>
+</ResourceDictionary>

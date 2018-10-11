@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib"
+                    xmlns:data="clr-namespace:NTW.Data.Models;assembly=NTW.Data">
+
+    <!--AppSettingsTemplate-->
+    <y:String x:Key="AppSettingsCaption">Настройки приложения</y:String>
+    <y:String x:Key="AppSettingsLanguage">Язык</y:String>
+    <y:String x:Key="AppSettingsTheme">Тема</y:String>
+    
+    <y:String x:Key="AppSettingsMainBackColor">Основной цвет фона</y:String>
+    <y:String x:Key="AppSettingsMainForeColor">Основной цвет текста</y:String>
+
+    <y:String x:Key="AppSettingsFBackColor">Первый цвет фона</y:String>
+    <y:String x:Key="AppSettingsSBackColor">Второй цвет фона</y:String>
+    <y:String x:Key="AppSettingsTBackColor">Третий цвет фона</y:String>
+    
+    <y:String x:Key="AppSettingsFForeColor">Первый цвет текста</y:String>
+    <y:String x:Key="AppSettingsSForeColor">Второй цвет текста</y:String>
+    <y:String x:Key="AppSettingsTForeColor">Третий цвет текста</y:String>
+
+    <!--SyncSettingsTemplate-->
+    <y:String x:Key="SyncSettingsCaption">Параметры синхронизации</y:String>
+    <y:String x:Key="SyncSettingsAdressSyncServer">Адресс сервеера синхронизации</y:String>
+</ResourceDictionary>

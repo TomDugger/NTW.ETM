@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib">
+
+    <!--Panel-->
+    <y:String x:Key="ProcessAddButton" >Добавить новый процесс</y:String>
+    <y:String x:Key="ProcessEditButton">Изменить</y:String>
+    <y:String x:Key="ProcessRemoveButton">Удалить</y:String>
+    
+    <!--Control-->
+    <y:String x:Key="ProcessControlProcessName">Имя процесса</y:String>
+    <y:String x:Key="ProcessControlPathToProcess">Путь к файлу процесса</y:String>
+    <y:String x:Key="ProcessControlAccepted">Принять</y:String>
+    <y:String x:Key="ProcessControlCancel">Отменить</y:String>
+    <y:String x:Key="ProcessControlFolder">Папка</y:String>
+
+    <!--Errors-->
+    <y:String x:Key="ProcessControlStringNotIsath">Строка не является путем</y:String>
+
+    <y:String x:Key="ProcessControlCaptionIsNotNull">Заголовок не может быть пустым</y:String>
+    <y:String x:Key="ProcessControlPathIsNotNull">Путь не может быть пустым</y:String>
+</ResourceDictionary>

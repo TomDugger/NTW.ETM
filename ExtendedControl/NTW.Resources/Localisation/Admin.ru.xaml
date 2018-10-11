@@ -1,0 +1,171 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib"
+                    xmlns:data="clr-namespace:NTW.Data.Models;assembly=NTW.Data">
+
+    <!--Enums-->
+    <x:Array Type="{x:Type data:DoubleStruct}" x:Key="ArrayItemsOnAdminControl">
+        <data:DoubleStruct Value="1" Name="Задачи" />
+        <data:DoubleStruct Value="2" Name="Пользователи" />
+        <data:DoubleStruct Value="3" Name="Роли" />
+        <data:DoubleStruct Value="4" Name="Пользовательские настройки" />
+        <data:DoubleStruct Value="5" Name="Проекты" />
+        <data:DoubleStruct Value="6" Name="Журнал" />
+    </x:Array>
+
+    <!--Tasks restore list-->
+    <y:String x:Key="AdminTasksRestoreLogo">Управление востановлением задач</y:String>
+    <y:String x:Key="AdminTasksRestoreCaption">Проект</y:String>
+    <y:String x:Key="AdminTasksRestoreCreater">Создатель</y:String>
+    <y:String x:Key="AdminTasksRestoreProject">Проект</y:String>
+    <y:String x:Key="AdminTasksRestoreType">Тип</y:String>
+    <y:String x:Key="AdminTasksRestorePriorety">Приоритет</y:String>
+    <y:String x:Key="AdminTasksRestoreControl">Управление</y:String>
+    <y:String x:Key="AdminTasksRestoreRestore">Востановить</y:String>
+    <y:String x:Key="AdminTasksRestoreRestoreAll">Востановить из списка</y:String>
+    <y:String x:Key="AdminTasksRestoreCancel">Вернутся</y:String>
+
+    <!--Users list-->
+    <y:String x:Key="AdminUsersLogo">Управление пользователями</y:String>
+    <y:String x:Key="AdminUsersUserName">Имя пользователя</y:String>
+    <y:String x:Key="AdminUsersFullName">Полное имя</y:String>
+    <y:String x:Key="AdminUsersRole">Роль</y:String>
+    <y:String x:Key="AdminUsersSetting">Настройки</y:String>
+    <y:String x:Key="AdminUsersHidden">Скрытый</y:String>
+    <y:String x:Key="AdminUsersControl">Управление</y:String>
+    <y:String x:Key="AdminUsersEdit">Изменить</y:String>
+    <y:String x:Key="AdminUsersRemove">Удалить</y:String>
+    <y:String x:Key="AdminUsersRestored">Востановить</y:String>
+    <y:String x:Key="AdminUsersCreateUser">Создать пользователя</y:String>
+    <y:String x:Key="AdminUsersRemoveAll">Удалить пользователей из списка</y:String>
+    <y:String x:Key="AdminUsersRestoreAll">Востановить пользователей из списка</y:String>
+    <y:String x:Key="AdminUsersCancel">Отменить</y:String>
+    <!--User control-->
+    <y:String x:Key="AdminUserControlCreateUser">Создание пользователя</y:String>
+    <y:String x:Key="AdminUserControlEditUser">Измение пользователя</y:String>
+    <y:String x:Key="AdminUserControlMainInfo">Основная информация</y:String>
+    <y:String x:Key="AdminUserControlUserName">Имя пользователя</y:String>
+    <y:String x:Key="AdminUserControlFullUserName">Полное имя пользователя</y:String>
+    <y:String x:Key="AdminUserControlParametr">Параметры</y:String>
+    <y:String x:Key="AdminUserControlRole">Роль</y:String>
+    <y:String x:Key="AdminUserControlSettings">Настройки</y:String>
+    <y:String x:Key="AdminUserControlHiddenUser">Скрыть пользователя</y:String>
+    <y:String x:Key="AdminUserControlActive">Активировать</y:String>
+    <y:String x:Key="AdminUserControlSecurity">Безопасность</y:String>
+    <y:String x:Key="AdminUserControlPassword">Пароль</y:String>
+    <y:String x:Key="AdminUserControlNewPassword">Новый пароль</y:String>
+
+    <!--Roles list-->
+    <y:String x:Key="AdminRoleLogo">Управление ролями</y:String>
+    <y:String x:Key="AdminRoleRoleName">Название роли</y:String>
+    <y:String x:Key="AdminRoleControl">Управление</y:String>
+    <y:String x:Key="AdminRoleEdit">Изменить</y:String>
+    <y:String x:Key="AdminRoleRemove">Удалить</y:String>
+    <y:String x:Key="AdminRoleRestored">Востановить</y:String>
+    <y:String x:Key="AdminRoleCreateRole">Создать роль</y:String>
+    <y:String x:Key="AdminRoleRemoveAll">Удалить роли из списка</y:String>
+    <y:String x:Key="AdminRoleRestoreAll">Востановить роли из списка</y:String>
+    <y:String x:Key="AdminRoleCancel">Отменить</y:String>
+    <!--Role control-->
+    <y:String x:Key="AdminRoleControlCreateRole">Создание роли</y:String>
+    <y:String x:Key="AdminRoleControlEditRole">Измение роли</y:String>
+    <y:String x:Key="AdminRoleControlMainInfo">Основная информация</y:String>
+    <y:String x:Key="AdminRoleControlRoleName">Название роли</y:String>
+    <y:String x:Key="AdminRoleControlTaskRole">Задачи</y:String>
+    <y:String x:Key="AdminRoleControlCreateTask">Создать роль</y:String>
+    <y:String x:Key="AdminRoleControlChangeTask">Изменить роль</y:String>
+    <y:String x:Key="AdminRoleControlExecutionTask">Выполнение задач</y:String>
+    <y:String x:Key="AdminRoleControlRemoveTask">Удаление задачи</y:String>
+    <y:String x:Key="AdminRoleControlViewAllTask">Просмотр всех задач</y:String>
+    <y:String x:Key="AdminRoleControlReportTask">Отчетность по задачам</y:String>
+    <y:String x:Key="AdminRoleControlRestoreTask">Востановление задачи</y:String>
+    <y:String x:Key="AdminRoleControlReturnExecution">Отмена выполнения задачи</y:String>
+    <y:String x:Key="AdminRoleControlUserRole">Пользователи</y:String>
+    <y:String x:Key="AdminRoleControlCreateUser">Создание пользователя</y:String>
+    <y:String x:Key="AdminRoleControlUpdateUser">Изменение пользователя</y:String>
+    <y:String x:Key="AdminRoleControlRemovedUser">Удалить пользователя</y:String>
+    <y:String x:Key="AdminRoleControlRestoreUser">Востановить пользователя</y:String>
+    <y:String x:Key="AdminRoleControlRoleRole">Роли</y:String>
+    <y:String x:Key="AdminRoleControlUpdateRole">Изменить роль</y:String>
+    <y:String x:Key="AdminRoleControlRemoveRole">Удалить роле</y:String>
+    <y:String x:Key="AdminRoleControlRestoreRole">Востановить роль</y:String>
+    <y:String x:Key="AdminRoleControlSettingRole">Настройки пользователей</y:String>
+    <y:String x:Key="AdminRoleControlCreateSettings">Создание пользовательских настроек</y:String>
+    <y:String x:Key="AdminRoleControlChangeSettings">Изменение настроек</y:String>
+    <y:String x:Key="AdminRoleControlRemoveSettings">Удаление настроек</y:String>
+    <y:String x:Key="AdminRoleControlRestoreSettings">Востановление настроек</y:String>
+    <y:String x:Key="AdminRoleControlProjectRole">Проект</y:String>
+    <y:String x:Key="AdminRoleControlCreateProject">Создание проекта</y:String>
+    <y:String x:Key="AdminRoleControlChangeProject">Измение проекта</y:String>
+    <y:String x:Key="AdminRoleControlRemoveProject">Удаление проекта</y:String>
+    <y:String x:Key="AdminRoleControlRestoreProject">Востановление проекта</y:String>
+
+    <!--Settings list-->
+    <y:String x:Key="AdminSettingsLogo">Управление настройками</y:String>
+    <y:String x:Key="AdminSettingsSettingName">Наименование настроек</y:String>
+    <y:String x:Key="AdminSettingsControl">Управление</y:String>
+    <y:String x:Key="AdminSettingsEdit">Изменить</y:String>
+    <y:String x:Key="AdminSettingsRemove">Удалить</y:String>
+    <y:String x:Key="AdminSettingsRestored">Востановить</y:String>
+    <y:String x:Key="AdminSettingsCreateRole">Создать настройки</y:String>
+    <y:String x:Key="AdminSettingsRemoveAll">Удалить настройки из списка</y:String>
+    <y:String x:Key="AdminSettingsRestoreAll">Востановить настройки из списка</y:String>
+    <y:String x:Key="AdminSettingsCancel">Отменить</y:String>
+    <!--Setting control-->
+    <y:String x:Key="AdminSettingControlCreateSettings">Создание пользовательских настроек</y:String>
+    <y:String x:Key="AdminSettingControlEditSettings">Изменение пользовательских настроек</y:String>
+    <y:String x:Key="AdminSettingControlMainInfo">Основная информация</y:String>
+    <y:String x:Key="AdminSettingControlSettingsName">Наименование настроек</y:String>
+    <y:String x:Key="AdminSettingControlApplication">Приложение</y:String>
+    <y:String x:Key="AdminSettingControlSelectDownloadPath">Выбирать путь для загрузки</y:String>
+    <y:String x:Key="AdminSettingControlStackUserAction">Отслеживать пользовательские действия</y:String>
+    <y:String x:Key="AdminSettingControlUser">Пользователь</y:String>
+    <y:String x:Key="AdminSettingControlUseAnimation">Использовать анимацию</y:String>
+    <y:String x:Key="AdminSettingControlExitChack">Подтверждение при выходе</y:String>
+    <y:String x:Key="AdminSettingControlUseGlobalHookKeys">Использовать глобальные горячие клавишы</y:String>
+
+    <!--Projects list-->
+    <y:String x:Key="AdminProjectLogo">Управление проектами</y:String>
+    <y:String x:Key="AdminProjectProjectName">Наименование проекта</y:String>
+    <y:String x:Key="AdminProjectControl">Управление</y:String>
+    <y:String x:Key="AdminProjectEdit">Изменить</y:String>
+    <y:String x:Key="AdminProjectRemove">Удалить</y:String>
+    <y:String x:Key="AdminProjectRestored">Востановить</y:String>
+    <y:String x:Key="AdminProjectCreateRole">Создать проект</y:String>
+    <y:String x:Key="AdminProjectRemoveAll">Удалить проекты из списка</y:String>
+    <y:String x:Key="AdminProjectRestoreAll">Востановить прокты из списка</y:String>
+    <y:String x:Key="AdminProjectCancel">Отменить</y:String>
+    <!--Project control-->
+    <y:String x:Key="AdminProjectControlCreateProject">Создание проекта</y:String>
+    <y:String x:Key="AdminProjectControlEditProject">Изменение проекта</y:String>
+    <y:String x:Key="AdminProjectControlMainInfo">Основная информация</y:String>
+    <y:String x:Key="AdminProjectControlProjectName">Наименование проекта</y:String>
+    
+    <!--Global control-->
+    <y:String x:Key="AdminControlAccepted">Применить</y:String>
+    <y:String x:Key="AdminControlCancel">Отменить</y:String>
+
+    <!--Messgas-->
+    <y:String x:Key="AdminTaskMessageRestore">Задача"{0}" востановлена</y:String>
+    <y:String x:Key="AdminTaskMessageAll">{0} задача(и) востановлена(ы)</y:String>
+
+    <y:String x:Key="AdminUserMessageRemove">Пользователь "{0}" удален</y:String>
+    <y:String x:Key="AdminUserMessageRestore">Пользователь "{0}" востановлен</y:String>
+    <y:String x:Key="AdminUserMessageRemoveAll">{0} пользователь(и) удален(ы)</y:String>
+    <y:String x:Key="AdminUserMessageRestoredAll">{0} пользователь(и) востановлен(ы)</y:String>
+
+    <y:String x:Key="AdminRoleMessageRemove">Роль "{0}" удалена</y:String>
+    <y:String x:Key="AdminRoleMessageRestore">Роль "{0}" востановлена</y:String>
+    <y:String x:Key="AdminRoleMessageRemoveAll">{0} роль(и) удалена(ы)</y:String>
+    <y:String x:Key="AdminRoleMessageRestoreAll">{0} роль(и) удалена(ы)</y:String>
+
+    <y:String x:Key="AdminSettingsMessageRemove">Настройки "{0}" удалены</y:String>
+    <y:String x:Key="AdminSettingsMessageRestore">Настройки "{0}" востановлены</y:String>
+    <y:String x:Key="AdminSettingsMessageRemoveAll">{0} настройки удалены</y:String>
+    <y:String x:Key="AdminSettingsMessageRestoreAll">{0} настройки востановлены</y:String>
+
+    <y:String x:Key="AdminProjectMessageRemove">Проект "{0}" удален</y:String>
+    <y:String x:Key="AdminProjectMessageRestore">Проект "{0}" востановлен</y:String>
+    <y:String x:Key="AdminProjectMessageRemoveAll">{0} проект(Ы) удален(ы)</y:String>
+    <y:String x:Key="AdminProjectMessageRestoreAll">{0} проект(ы) вастановлен(ы)</y:String>
+</ResourceDictionary>

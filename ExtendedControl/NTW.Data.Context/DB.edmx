@@ -1,0 +1,1421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Context.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ContextStoreContainer">
+          <EntitySet Name="AppStarter" EntityType="Context.Store.AppStarter" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Favorites" EntityType="Context.Store.Favorites" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GlobalHookKey" EntityType="Context.Store.GlobalHookKey" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Journal" EntityType="Context.Store.Journal" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Note" EntityType="Context.Store.Note" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="NoteGroup" EntityType="Context.Store.NoteGroup" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Perfomers" EntityType="Context.Store.Perfomers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Projects" EntityType="Context.Store.Projects" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Roles" EntityType="Context.Store.Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Settings" EntityType="Context.Store.Settings" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Stages" EntityType="Context.Store.Stages" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="StartProcess" EntityType="Context.Store.StartProcess" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TaskComments" EntityType="Context.Store.TaskComments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TaskFiles" EntityType="Context.Store.TaskFiles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tasks" EntityType="Context.Store.Tasks" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TrackingState" EntityType="Context.Store.TrackingState" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="Context.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="NoteGroup_Note" Association="Context.Store.NoteGroup_Note">
+            <End Role="NoteGroup" EntitySet="NoteGroup" />
+            <End Role="Note" EntitySet="Note" />
+          </AssociationSet>
+          <AssociationSet Name="Project_Task" Association="Context.Store.Project_Task">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="Role_User" Association="Context.Store.Role_User">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="Setting_User" Association="Context.Store.Setting_User">
+            <End Role="Settings" EntitySet="Settings" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="Task_Favorite" Association="Context.Store.Task_Favorite">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="Task_Perfomer" Association="Context.Store.Task_Perfomer">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="Perfomers" EntitySet="Perfomers" />
+          </AssociationSet>
+          <AssociationSet Name="Task_TaskComment" Association="Context.Store.Task_TaskComment">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskComments" EntitySet="TaskComments" />
+          </AssociationSet>
+          <AssociationSet Name="Task_TaskFile" Association="Context.Store.Task_TaskFile">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskFiles" EntitySet="TaskFiles" />
+          </AssociationSet>
+          <AssociationSet Name="User_Favorite" Association="Context.Store.User_Favorite">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="User_GlobalHookKey" Association="Context.Store.User_GlobalHookKey">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="GlobalHookKey" EntitySet="GlobalHookKey" />
+          </AssociationSet>
+          <AssociationSet Name="User_Note" Association="Context.Store.User_Note">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Note" EntitySet="Note" />
+          </AssociationSet>
+          <AssociationSet Name="User_NoteGroup" Association="Context.Store.User_NoteGroup">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="NoteGroup" EntitySet="NoteGroup" />
+          </AssociationSet>
+          <AssociationSet Name="User_Perfomer" Association="Context.Store.User_Perfomer">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Perfomers" EntitySet="Perfomers" />
+          </AssociationSet>
+          <AssociationSet Name="User_Task" Association="Context.Store.User_Task">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="User_TaskComment" Association="Context.Store.User_TaskComment">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TaskComments" EntitySet="TaskComments" />
+          </AssociationSet>
+          <AssociationSet Name="User_TaskFile" Association="Context.Store.User_TaskFile">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TaskFiles" EntitySet="TaskFiles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AppStarter">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Format" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Application" Type="nvarchar" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Favorites">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDUser" Type="int" Nullable="false" />
+          <Property Name="IDTask" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GlobalHookKey">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Key" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IDFucnk" Type="int" Nullable="false" />
+          <Property Name="IDUser" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Journal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TypeMessage" Type="int" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ValueMessage" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="SecondMessageValue" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Owner" Type="int" Nullable="false" />
+          <Property Name="IsShowin" Type="bit" Nullable="false" />
+          <Property Name="PosX" Type="int" Nullable="false" />
+          <Property Name="PosY" Type="int" Nullable="false" />
+          <Property Name="Width" Type="int" Nullable="false" />
+          <Property Name="Height" Type="int" Nullable="false" />
+          <Property Name="Group" Type="int" Nullable="false" />
+          <Property Name="IDColor" Type="int" Nullable="false" />
+          <Property Name="RotateA" Type="int" Nullable="false" />
+          <Property Name="ZIndex" Type="int" Nullable="false" />
+          <Property Name="IsTop" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NoteGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Caption" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="PositionInList" Type="int" Nullable="false" />
+          <Property Name="IDColor" Type="int" Nullable="false" />
+          <Property Name="IDUser" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Perfomers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDTask" Type="int" Nullable="false" />
+          <Property Name="IDUser" Type="int" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+          <Property Name="CloseDate" Type="datetime" Nullable="false" />
+          <Property Name="PersonInCharge" Type="bit" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Caption" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreateTask" Type="bit" Nullable="false" />
+          <Property Name="UpdateInfoTask" Type="bit" Nullable="false" />
+          <Property Name="ExecutionTask" Type="bit" Nullable="false" />
+          <Property Name="DeleteTask" Type="bit" Nullable="false" />
+          <Property Name="ViewAllTask" Type="bit" Nullable="false" />
+          <Property Name="ReportExecuteTask" Type="bit" Nullable="false" />
+          <Property Name="CreateUser" Type="bit" Nullable="false" />
+          <Property Name="UpdateInfoUser" Type="bit" Nullable="false" />
+          <Property Name="DeleteUser" Type="bit" Nullable="false" />
+          <Property Name="CreateRole" Type="bit" Nullable="false" />
+          <Property Name="UpdateRole" Type="bit" Nullable="false" />
+          <Property Name="DeleteRole" Type="bit" Nullable="false" />
+          <Property Name="CreateSetting" Type="bit" Nullable="false" />
+          <Property Name="UpdateSetting" Type="bit" Nullable="false" />
+          <Property Name="DeleteSetting" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="CreateProject" Type="bit" Nullable="false" />
+          <Property Name="UpdateProject" Type="bit" Nullable="false" />
+          <Property Name="DeleteProject" Type="bit" Nullable="false" />
+          <Property Name="RestoreTask" Type="bit" Nullable="false" />
+          <Property Name="VisibleJournal" Type="bit" Nullable="false" />
+          <Property Name="RestoreUser" Type="bit" Nullable="false" />
+          <Property Name="RestoreRole" Type="bit" Nullable="false" />
+          <Property Name="RestoreSetting" Type="bit" Nullable="false" />
+          <Property Name="RestoreProject" Type="bit" Nullable="false" />
+          <Property Name="AllowCancellation" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Caption" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="UseAnimation" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="AlwaysSpecifyAPlaceToDdownload" Type="bit" Nullable="false" />
+          <Property Name="ExitCheck" Type="bit" Nullable="false" />
+          <Property Name="MonitorUserActions" Type="bit" Nullable="false" />
+          <Property Name="UseGlobalHookKeys" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Caption" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IdTask" Type="int" Nullable="false" />
+          <Property Name="IdPerfomer" Type="int" Nullable="false" />
+          <Property Name="StateStage" Type="int" Nullable="false" />
+          <Property Name="DeadLine" Type="datetime" Nullable="false" />
+          <Property Name="InfinityDeadLine" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StartProcess">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Caption" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="PathToApp" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="TrackState" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskComments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDUser" Type="int" Nullable="false" />
+          <Property Name="Commentary" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="IdTask" Type="int" Nullable="false" />
+          <Property Name="TypeCommentary" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskFiles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdTask" Type="int" Nullable="false" />
+          <Property Name="OriginalName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StoreName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsComment" Type="bit" Nullable="false" />
+          <Property Name="IdCommentary" Type="int" Nullable="false" />
+          <Property Name="AddUser" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="OpenDate" Type="datetime" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="TypeTask" Type="int" Nullable="false" />
+          <Property Name="PriorityTask" Type="int" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Creater" Type="int" Nullable="false" />
+          <Property Name="Group" Type="int" />
+          <Property Name="IsPersonal" Type="bit" Nullable="false" />
+          <Property Name="IdProject" Type="int" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrackingState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdObject" Type="int" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IdRole" Type="int" Nullable="false" />
+          <Property Name="IdSetting" Type="int" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Language" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IpAdress" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsHiddenUser" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="NoteGroup_Note">
+          <End Role="NoteGroup" Type="Context.Store.NoteGroup" Multiplicity="1" />
+          <End Role="Note" Type="Context.Store.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NoteGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Project_Task">
+          <End Role="Projects" Type="Context.Store.Projects" Multiplicity="1" />
+          <End Role="Tasks" Type="Context.Store.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="IdProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Role_User">
+          <End Role="Roles" Type="Context.Store.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Context.Store.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Setting_User">
+          <End Role="Settings" Type="Context.Store.Settings" Multiplicity="1" />
+          <End Role="Users" Type="Context.Store.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Settings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="IdSetting" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Task_Favorite">
+          <End Role="Tasks" Type="Context.Store.Tasks" Multiplicity="1" />
+          <End Role="Favorites" Type="Context.Store.Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="IDTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Task_Perfomer">
+          <End Role="Tasks" Type="Context.Store.Tasks" Multiplicity="1" />
+          <End Role="Perfomers" Type="Context.Store.Perfomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Perfomers">
+              <PropertyRef Name="IDTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Task_TaskComment">
+          <End Role="Tasks" Type="Context.Store.Tasks" Multiplicity="1" />
+          <End Role="TaskComments" Type="Context.Store.TaskComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskComments">
+              <PropertyRef Name="IdTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Task_TaskFile">
+          <End Role="Tasks" Type="Context.Store.Tasks" Multiplicity="1" />
+          <End Role="TaskFiles" Type="Context.Store.TaskFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskFiles">
+              <PropertyRef Name="IdTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Favorite">
+          <End Role="Users" Type="Context.Store.Users" Multiplicity="1" />
+          <End Role="Favorites" Type="Context.Store.Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_GlobalHookKey">
+          <End Role="Users" Type="Context.Store.Users" Multiplicity="1" />
+          <End Role="GlobalHookKey" Type="Context.Store.GlobalHookKey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GlobalHookKey">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Note">
+          <End Role="Users" Type="Context.Store.Users" Multiplicity="1" />
+          <End Role="Note" Type="Context.Store.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_NoteGroup">
+          <End Role="Users" Type="Context.Store.Users" Multiplicity="1" />
+          <End Role="NoteGroup" Type="Context.Store.NoteGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NoteGroup">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Perfomer">
+          <End Role="Users" Type="Context.Store.Users" Multiplicity="1" />
+          <End Role="Perfomers" Type="Context.Store.Perfomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Perfomers">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Task">
+          <End Role="Users" Type="Context.Store.Users" Multiplicity="1" />
+          <End Role="Tasks" Type="Context.Store.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="Creater" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_TaskComment">
+          <End Role="Users" Type="Context.Store.Users" Multiplicity="1" />
+          <End Role="TaskComments" Type="Context.Store.TaskComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskComments">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_TaskFile">
+          <End Role="Users" Type="Context.Store.Users" Multiplicity="1" />
+          <End Role="TaskFiles" Type="Context.Store.TaskFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskFiles">
+              <PropertyRef Name="AddUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Context" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="DBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppStarters" EntityType="Context.AppStarter" />
+          <EntitySet Name="Favorites" EntityType="Context.Favorite" />
+          <EntitySet Name="GlobalHookKeys" EntityType="Context.GlobalHookKey" />
+          <EntitySet Name="Journals" EntityType="Context.Journal" />
+          <EntitySet Name="Notes" EntityType="Context.Note" />
+          <EntitySet Name="NoteGroups" EntityType="Context.NoteGroup" />
+          <EntitySet Name="Perfomers" EntityType="Context.Perfomer" />
+          <EntitySet Name="Projects" EntityType="Context.Project" />
+          <EntitySet Name="Roles" EntityType="Context.Role" />
+          <EntitySet Name="Settings" EntityType="Context.Setting" />
+          <EntitySet Name="Stages" EntityType="Context.Stage" />
+          <EntitySet Name="StartProcesses" EntityType="Context.StartProcess" />
+          <EntitySet Name="TaskComments" EntityType="Context.TaskComment" />
+          <EntitySet Name="TaskFiles" EntityType="Context.TaskFile" />
+          <EntitySet Name="Tasks" EntityType="Context.Task" />
+          <EntitySet Name="Users" EntityType="Context.User" />
+          <AssociationSet Name="Task_Favorite" Association="Context.Task_Favorite">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="User_Favorite" Association="Context.User_Favorite">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="User_GlobalHookKey" Association="Context.User_GlobalHookKey">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="GlobalHookKey" EntitySet="GlobalHookKeys" />
+          </AssociationSet>
+          <AssociationSet Name="NoteGroup_Note" Association="Context.NoteGroup_Note">
+            <End Role="NoteGroup" EntitySet="NoteGroups" />
+            <End Role="Note" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="User_Note" Association="Context.User_Note">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Note" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="Task_Perfomer" Association="Context.Task_Perfomer">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="Perfomers" EntitySet="Perfomers" />
+          </AssociationSet>
+          <AssociationSet Name="User_Perfomer" Association="Context.User_Perfomer">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Perfomers" EntitySet="Perfomers" />
+          </AssociationSet>
+          <AssociationSet Name="Project_Task" Association="Context.Project_Task">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="Role_User" Association="Context.Role_User">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="Setting_User" Association="Context.Setting_User">
+            <End Role="Settings" EntitySet="Settings" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="Task_TaskComment" Association="Context.Task_TaskComment">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskComments" EntitySet="TaskComments" />
+          </AssociationSet>
+          <AssociationSet Name="User_TaskComment" Association="Context.User_TaskComment">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TaskComments" EntitySet="TaskComments" />
+          </AssociationSet>
+          <AssociationSet Name="Task_TaskFile" Association="Context.Task_TaskFile">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskFiles" EntitySet="TaskFiles" />
+          </AssociationSet>
+          <AssociationSet Name="User_TaskFile" Association="Context.User_TaskFile">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TaskFiles" EntitySet="TaskFiles" />
+          </AssociationSet>
+          <AssociationSet Name="User_Task" Association="Context.User_Task">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <EntitySet Name="TrackingStates" EntityType="Context.TrackingState" />
+          <AssociationSet Name="User_NoteGroup" Association="Context.User_NoteGroup">
+            <End Role="User" EntitySet="Users" />
+            <End Role="NoteGroup" EntitySet="NoteGroups" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AppStarter">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Format" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Application" Type="String" Nullable="false" MaxLength="4000" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Favorite">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUser" Type="Int32" Nullable="false" />
+          <Property Name="IDTask" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="Context.Task_Favorite" FromRole="Favorites" ToRole="Tasks" />
+          <NavigationProperty Name="User" Relationship="Context.User_Favorite" FromRole="Favorites" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="GlobalHookKey">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IDFucnk" Type="Int32" Nullable="false" />
+          <Property Name="IDUser" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Context.User_GlobalHookKey" FromRole="GlobalHookKey" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Journal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeMessage" Type="Int32" Nullable="false" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ValueMessage" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="SecondMessageValue" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+          <Property Name="Owner" Type="Int32" Nullable="false" />
+          <Property Name="IsShowin" Type="Boolean" Nullable="false" />
+          <Property Name="PosX" Type="Int32" Nullable="false" />
+          <Property Name="PosY" Type="Int32" Nullable="false" />
+          <Property Name="Width" Type="Int32" Nullable="false" />
+          <Property Name="Height" Type="Int32" Nullable="false" />
+          <Property Name="Group" Type="Int32" Nullable="false" />
+          <Property Name="IDColor" Type="Int32" Nullable="false" />
+          <Property Name="RotateA" Type="Int32" Nullable="false" />
+          <Property Name="ZIndex" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="NoteGroup" Relationship="Context.NoteGroup_Note" FromRole="Note" ToRole="NoteGroup" />
+          <NavigationProperty Name="User" Relationship="Context.User_Note" FromRole="Note" ToRole="Users" />
+          <Property Type="Boolean" Name="IsTop" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NoteGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Caption" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="PositionInList" Type="Int32" Nullable="false" />
+          <Property Name="IDColor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Notes" Relationship="Context.NoteGroup_Note" FromRole="NoteGroup" ToRole="Note" />
+          <Property Type="Int32" Name="IDUser" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Context.User_NoteGroup" FromRole="NoteGroup" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Perfomer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDTask" Type="Int32" Nullable="false" />
+          <Property Name="IDUser" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <Property Name="CloseDate" Type="DateTime" Nullable="false" />
+          <Property Name="PersonInCharge" Type="Boolean" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="Context.Task_Perfomer" FromRole="Perfomers" ToRole="Tasks" />
+          <NavigationProperty Name="User" Relationship="Context.User_Perfomer" FromRole="Perfomers" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Caption" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Tasks" Relationship="Context.Project_Task" FromRole="Projects" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreateTask" Type="Boolean" Nullable="false" />
+          <Property Name="UpdateInfoTask" Type="Boolean" Nullable="false" />
+          <Property Name="ExecutionTask" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteTask" Type="Boolean" Nullable="false" />
+          <Property Name="ViewAllTask" Type="Boolean" Nullable="false" />
+          <Property Name="ReportExecuteTask" Type="Boolean" Nullable="false" />
+          <Property Name="CreateUser" Type="Boolean" Nullable="false" />
+          <Property Name="UpdateInfoUser" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteUser" Type="Boolean" Nullable="false" />
+          <Property Name="CreateNewRole" Type="Boolean" Nullable="false" />
+          <Property Name="UpdateRole" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteRole" Type="Boolean" Nullable="false" />
+          <Property Name="CreateSetting" Type="Boolean" Nullable="false" />
+          <Property Name="UpdateSetting" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteSetting" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CreateProject" Type="Boolean" Nullable="false" />
+          <Property Name="UpdateProject" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteProject" Type="Boolean" Nullable="false" />
+          <Property Name="RestoreTask" Type="Boolean" Nullable="false" />
+          <Property Name="VisibleJournal" Type="Boolean" Nullable="false" />
+          <Property Name="RestoreUser" Type="Boolean" Nullable="false" />
+          <Property Name="RestoreRole" Type="Boolean" Nullable="false" />
+          <Property Name="RestoreSetting" Type="Boolean" Nullable="false" />
+          <Property Name="RestoreProject" Type="Boolean" Nullable="false" />
+          <Property Name="AllowCancellation" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Context.Role_User" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Caption" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="UseAnimation" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="AlwaysSpecifyAPlaceToDdownload" Type="Boolean" Nullable="false" />
+          <Property Name="ExitCheck" Type="Boolean" Nullable="false" />
+          <Property Name="MonitorUserActions" Type="Boolean" Nullable="false" />
+          <Property Name="UseGlobalHookKeys" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Context.Setting_User" FromRole="Settings" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Stage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Caption" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IdTask" Type="Int32" Nullable="false" />
+          <Property Name="IdPerfomer" Type="Int32" Nullable="false" />
+          <Property Name="StateStage" Type="Int32" Nullable="false" />
+          <Property Name="DeadLine" Type="DateTime" Nullable="false" />
+          <Property Name="InfinityDeadLine" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StartProcess">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Caption" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="PathToApp" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="TrackState" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskComment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUser" Type="Int32" Nullable="false" />
+          <Property Name="Commentary" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="IdTask" Type="Int32" Nullable="false" />
+          <Property Name="TypeCommentary" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="Context.Task_TaskComment" FromRole="TaskComments" ToRole="Tasks" />
+          <NavigationProperty Name="User" Relationship="Context.User_TaskComment" FromRole="TaskComments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="TaskFile">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTask" Type="Int32" Nullable="false" />
+          <Property Name="OriginalName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="StoreName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IsComment" Type="Boolean" Nullable="false" />
+          <Property Name="IdCommentary" Type="Int32" Nullable="false" />
+          <Property Name="AddUser" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="Context.Task_TaskFile" FromRole="TaskFiles" ToRole="Tasks" />
+          <NavigationProperty Name="User" Relationship="Context.User_TaskFile" FromRole="TaskFiles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="OpenDate" Type="DateTime" Nullable="false" />
+          <Property Name="Caption" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="TypeTask" Type="Int32" Nullable="false" />
+          <Property Name="PriorityTask" Type="Int32" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Creater" Type="Int32" Nullable="false" />
+          <Property Name="Group" Type="Int32" />
+          <Property Name="IsPersonal" Type="Boolean" Nullable="false" />
+          <Property Name="IdProject" Type="Int32" Nullable="false" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Favorites" Relationship="Context.Task_Favorite" FromRole="Tasks" ToRole="Favorites" />
+          <NavigationProperty Name="Perfomers" Relationship="Context.Task_Perfomer" FromRole="Tasks" ToRole="Perfomers" />
+          <NavigationProperty Name="Project" Relationship="Context.Project_Task" FromRole="Tasks" ToRole="Projects" />
+          <NavigationProperty Name="TaskComments" Relationship="Context.Task_TaskComment" FromRole="Tasks" ToRole="TaskComments" />
+          <NavigationProperty Name="TaskFiles" Relationship="Context.Task_TaskFile" FromRole="Tasks" ToRole="TaskFiles" />
+          <NavigationProperty Name="User" Relationship="Context.User_Task" FromRole="Tasks" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IdRole" Type="Int32" Nullable="false" />
+          <Property Name="IdSetting" Type="Int32" Nullable="false" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IpAdress" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IsHiddenUser" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Favorites" Relationship="Context.User_Favorite" FromRole="Users" ToRole="Favorites" />
+          <NavigationProperty Name="GlobalHookKeys" Relationship="Context.User_GlobalHookKey" FromRole="Users" ToRole="GlobalHookKey" />
+          <NavigationProperty Name="Notes" Relationship="Context.User_Note" FromRole="Users" ToRole="Note" />
+          <NavigationProperty Name="Perfomers" Relationship="Context.User_Perfomer" FromRole="Users" ToRole="Perfomers" />
+          <NavigationProperty Name="Role" Relationship="Context.Role_User" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="Setting" Relationship="Context.Setting_User" FromRole="Users" ToRole="Settings" />
+          <NavigationProperty Name="TaskComments" Relationship="Context.User_TaskComment" FromRole="Users" ToRole="TaskComments" />
+          <NavigationProperty Name="TaskFiles" Relationship="Context.User_TaskFile" FromRole="Users" ToRole="TaskFiles" />
+          <NavigationProperty Name="Tasks" Relationship="Context.User_Task" FromRole="Users" ToRole="Tasks" />
+          <NavigationProperty Name="NoteGroups" Relationship="Context.User_NoteGroup" FromRole="User" ToRole="NoteGroup" />
+        </EntityType>
+        <Association Name="Task_Favorite">
+          <End Role="Tasks" Type="Context.Task" Multiplicity="1" />
+          <End Role="Favorites" Type="Context.Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="IDTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Favorite">
+          <End Role="Users" Type="Context.User" Multiplicity="1" />
+          <End Role="Favorites" Type="Context.Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_GlobalHookKey">
+          <End Role="Users" Type="Context.User" Multiplicity="1" />
+          <End Role="GlobalHookKey" Type="Context.GlobalHookKey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GlobalHookKey">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NoteGroup_Note">
+          <End Role="NoteGroup" Type="Context.NoteGroup" Multiplicity="1" />
+          <End Role="Note" Type="Context.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NoteGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Note">
+          <End Role="Users" Type="Context.User" Multiplicity="1" />
+          <End Role="Note" Type="Context.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Task_Perfomer">
+          <End Role="Tasks" Type="Context.Task" Multiplicity="1" />
+          <End Role="Perfomers" Type="Context.Perfomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Perfomers">
+              <PropertyRef Name="IDTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Perfomer">
+          <End Role="Users" Type="Context.User" Multiplicity="1" />
+          <End Role="Perfomers" Type="Context.Perfomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Perfomers">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Project_Task">
+          <End Role="Projects" Type="Context.Project" Multiplicity="1" />
+          <End Role="Tasks" Type="Context.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="IdProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Role_User">
+          <End Role="Roles" Type="Context.Role" Multiplicity="1" />
+          <End Role="Users" Type="Context.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Setting_User">
+          <End Role="Settings" Type="Context.Setting" Multiplicity="1" />
+          <End Role="Users" Type="Context.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Settings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="IdSetting" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Task_TaskComment">
+          <End Role="Tasks" Type="Context.Task" Multiplicity="1" />
+          <End Role="TaskComments" Type="Context.TaskComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskComments">
+              <PropertyRef Name="IdTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_TaskComment">
+          <End Role="Users" Type="Context.User" Multiplicity="1" />
+          <End Role="TaskComments" Type="Context.TaskComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskComments">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Task_TaskFile">
+          <End Role="Tasks" Type="Context.Task" Multiplicity="1" />
+          <End Role="TaskFiles" Type="Context.TaskFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskFiles">
+              <PropertyRef Name="IdTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_TaskFile">
+          <End Role="Users" Type="Context.User" Multiplicity="1" />
+          <End Role="TaskFiles" Type="Context.TaskFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskFiles">
+              <PropertyRef Name="AddUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Task">
+          <End Role="Users" Type="Context.User" Multiplicity="1" />
+          <End Role="Tasks" Type="Context.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="Creater" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TrackingState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IdObject" Nullable="false" />
+          <Property Type="Int32" Name="IdUser" Nullable="false" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+        </EntityType>
+        <Association Name="User_NoteGroup">
+          <End Type="Context.User" Role="User" Multiplicity="1" />
+          <End Type="Context.NoteGroup" Role="NoteGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NoteGroup">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ContextStoreContainer" CdmEntityContainer="DBContext">
+          <EntitySetMapping Name="AppStarters">
+            <EntityTypeMapping TypeName="Context.AppStarter">
+              <MappingFragment StoreEntitySet="AppStarter">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Format" ColumnName="Format" />
+                <ScalarProperty Name="Application" ColumnName="Application" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Favorites">
+            <EntityTypeMapping TypeName="Context.Favorite">
+              <MappingFragment StoreEntitySet="Favorites">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="IDTask" ColumnName="IDTask" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GlobalHookKeys">
+            <EntityTypeMapping TypeName="Context.GlobalHookKey">
+              <MappingFragment StoreEntitySet="GlobalHookKey">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="IDFucnk" ColumnName="IDFucnk" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Journals">
+            <EntityTypeMapping TypeName="Context.Journal">
+              <MappingFragment StoreEntitySet="Journal">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TypeMessage" ColumnName="TypeMessage" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ValueMessage" ColumnName="ValueMessage" />
+                <ScalarProperty Name="SecondMessageValue" ColumnName="SecondMessageValue" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notes">
+            <EntityTypeMapping TypeName="Context.Note">
+              <MappingFragment StoreEntitySet="Note">
+                <ScalarProperty Name="IsTop" ColumnName="IsTop" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="IsShowin" ColumnName="IsShowin" />
+                <ScalarProperty Name="PosX" ColumnName="PosX" />
+                <ScalarProperty Name="PosY" ColumnName="PosY" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="IDColor" ColumnName="IDColor" />
+                <ScalarProperty Name="RotateA" ColumnName="RotateA" />
+                <ScalarProperty Name="ZIndex" ColumnName="ZIndex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NoteGroups">
+            <EntityTypeMapping TypeName="Context.NoteGroup">
+              <MappingFragment StoreEntitySet="NoteGroup">
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="PositionInList" ColumnName="PositionInList" />
+                <ScalarProperty Name="IDColor" ColumnName="IDColor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Perfomers">
+            <EntityTypeMapping TypeName="Context.Perfomer">
+              <MappingFragment StoreEntitySet="Perfomers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDTask" ColumnName="IDTask" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CloseDate" ColumnName="CloseDate" />
+                <ScalarProperty Name="PersonInCharge" ColumnName="PersonInCharge" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="Context.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Context.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="CreateTask" ColumnName="CreateTask" />
+                <ScalarProperty Name="UpdateInfoTask" ColumnName="UpdateInfoTask" />
+                <ScalarProperty Name="ExecutionTask" ColumnName="ExecutionTask" />
+                <ScalarProperty Name="DeleteTask" ColumnName="DeleteTask" />
+                <ScalarProperty Name="ViewAllTask" ColumnName="ViewAllTask" />
+                <ScalarProperty Name="ReportExecuteTask" ColumnName="ReportExecuteTask" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="UpdateInfoUser" ColumnName="UpdateInfoUser" />
+                <ScalarProperty Name="DeleteUser" ColumnName="DeleteUser" />
+                <ScalarProperty Name="CreateNewRole" ColumnName="CreateRole" />
+                <ScalarProperty Name="UpdateRole" ColumnName="UpdateRole" />
+                <ScalarProperty Name="DeleteRole" ColumnName="DeleteRole" />
+                <ScalarProperty Name="CreateSetting" ColumnName="CreateSetting" />
+                <ScalarProperty Name="UpdateSetting" ColumnName="UpdateSetting" />
+                <ScalarProperty Name="DeleteSetting" ColumnName="DeleteSetting" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreateProject" ColumnName="CreateProject" />
+                <ScalarProperty Name="UpdateProject" ColumnName="UpdateProject" />
+                <ScalarProperty Name="DeleteProject" ColumnName="DeleteProject" />
+                <ScalarProperty Name="RestoreTask" ColumnName="RestoreTask" />
+                <ScalarProperty Name="VisibleJournal" ColumnName="VisibleJournal" />
+                <ScalarProperty Name="RestoreUser" ColumnName="RestoreUser" />
+                <ScalarProperty Name="RestoreRole" ColumnName="RestoreRole" />
+                <ScalarProperty Name="RestoreSetting" ColumnName="RestoreSetting" />
+                <ScalarProperty Name="RestoreProject" ColumnName="RestoreProject" />
+                <ScalarProperty Name="AllowCancellation" ColumnName="AllowCancellation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="Context.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="UseAnimation" ColumnName="UseAnimation" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="AlwaysSpecifyAPlaceToDdownload" ColumnName="AlwaysSpecifyAPlaceToDdownload" />
+                <ScalarProperty Name="ExitCheck" ColumnName="ExitCheck" />
+                <ScalarProperty Name="MonitorUserActions" ColumnName="MonitorUserActions" />
+                <ScalarProperty Name="UseGlobalHookKeys" ColumnName="UseGlobalHookKeys" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stages">
+            <EntityTypeMapping TypeName="Context.Stage">
+              <MappingFragment StoreEntitySet="Stages">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="IdTask" ColumnName="IdTask" />
+                <ScalarProperty Name="IdPerfomer" ColumnName="IdPerfomer" />
+                <ScalarProperty Name="StateStage" ColumnName="StateStage" />
+                <ScalarProperty Name="DeadLine" ColumnName="DeadLine" />
+                <ScalarProperty Name="InfinityDeadLine" ColumnName="InfinityDeadLine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StartProcesses">
+            <EntityTypeMapping TypeName="Context.StartProcess">
+              <MappingFragment StoreEntitySet="StartProcess">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="PathToApp" ColumnName="PathToApp" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="TrackState" ColumnName="TrackState" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskComments">
+            <EntityTypeMapping TypeName="Context.TaskComment">
+              <MappingFragment StoreEntitySet="TaskComments">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="Commentary" ColumnName="Commentary" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IdTask" ColumnName="IdTask" />
+                <ScalarProperty Name="TypeCommentary" ColumnName="TypeCommentary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskFiles">
+            <EntityTypeMapping TypeName="Context.TaskFile">
+              <MappingFragment StoreEntitySet="TaskFiles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdTask" ColumnName="IdTask" />
+                <ScalarProperty Name="OriginalName" ColumnName="OriginalName" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="IsComment" ColumnName="IsComment" />
+                <ScalarProperty Name="IdCommentary" ColumnName="IdCommentary" />
+                <ScalarProperty Name="AddUser" ColumnName="AddUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="Context.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="OpenDate" ColumnName="OpenDate" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="TypeTask" ColumnName="TypeTask" />
+                <ScalarProperty Name="PriorityTask" ColumnName="PriorityTask" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Creater" ColumnName="Creater" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="IsPersonal" ColumnName="IsPersonal" />
+                <ScalarProperty Name="IdProject" ColumnName="IdProject" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Context.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+                <ScalarProperty Name="IdSetting" ColumnName="IdSetting" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="IpAdress" ColumnName="IpAdress" />
+                <ScalarProperty Name="IsHiddenUser" ColumnName="IsHiddenUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrackingStates">
+            <EntityTypeMapping TypeName="Context.TrackingState">
+              <MappingFragment StoreEntitySet="TrackingState">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdObject" ColumnName="IdObject" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="DB" ZoomLevel="88">
+        <EntityTypeShape EntityType="Context.AppStarter" Width="1.5" PointX="11.5" PointY="0.5" Height="1.59568359375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.Favorite" Width="1.5" PointX="7.75" PointY="7.125" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.GlobalHookKey" Width="1.5" PointX="2.375" PointY="8" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.Journal" Width="1.5" PointX="11.25" PointY="5" Height="2.3648893229166656" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.Note" Width="1.5" PointX="5.875" PointY="7" Height="3.9033007812500014" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.NoteGroup" Width="1.5" PointX="3.875" PointY="10.25" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.Perfomer" Width="1.5" PointX="6.375" PointY="3.625" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.Project" Width="1.5" PointX="8.125" PointY="0.5" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.Role" Width="1.5" PointX="0.5" PointY="0.5" Height="6.5955208333333353" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.Setting" Width="1.5" PointX="2.5" PointY="1.5" Height="2.7494921875000049" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.Stage" Width="1.5" PointX="11.375" PointY="2.25" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.StartProcess" Width="1.5" PointX="9.5" PointY="3.75" Height="2.1725878906250031" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.TaskComment" Width="1.5" PointX="2.375" PointY="5" Height="2.749492187499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.TaskFile" Width="1.5" PointX="7.625" PointY="10" Height="2.749492187499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.Task" Width="1.5" PointX="9.5" PointY="6.25" Height="4.4802050781250031" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.User" Width="1.5" PointX="4.625" PointY="0.625" Height="4.6725065104166674" IsExpanded="true" />
+        <AssociationConnector Association="Context.Task_Favorite" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.5" PointY="8.1151432291666659" />
+          <ConnectorPoint PointX="9.25" PointY="8.1151432291666659" />
+        </AssociationConnector>
+        <AssociationConnector Association="Context.User_Favorite" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.125" PointY="3.0526432291666659" />
+          <ConnectorPoint PointX="8" PointY="3.0526432291666659" />
+          <ConnectorPoint PointX="8" PointY="7.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="Context.User_GlobalHookKey" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.6249999999999991" PointY="5.4898079427083326" />
+          <ConnectorPoint PointX="4.25" PointY="5.8648079427083317" />
+          <ConnectorPoint PointX="4.25" PointY="8.9901432291666659" />
+          <ConnectorPoint PointX="3.875" PointY="8.9901432291666659" />
+        </AssociationConnector>
+        <AssociationConnector Association="Context.NoteGroup_Note" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.375" PointY="10.672801106770834" />
+          <ConnectorPoint PointX="5.6197941666666669" PointY="10.672801106770834" />
+          <ConnectorPoint PointX="5.7864608333333329" PointY="10.672801106770834" />
+          <ConnectorPoint PointX="5.875" PointY="10.672801106770834" />
+        </AssociationConnector>
+        <AssociationConnector Association="Context.User_Note" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.53125" PointY="5.4898079427083326" />
+          <ConnectorPoint PointX="5.53125" PointY="8.59375" />
+          <ConnectorPoint PointX="5.6197941666666669" PointY="8.59375" />
+          <ConnectorPoint PointX="5.7864608333333329" PointY="8.59375" />
+          <ConnectorPoint PointX="5.875" PointY="8.59375" />
+        </AssociationConnector>
+        <AssociationConnector Association="Context.Task_Perfomer" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.5" PointY="6.65599659375" />
+          <ConnectorPoint PointX="8.8645813333333336" PointY="6.6559965937499994" />
+          <ConnectorPoint PointX="8.6979146666666658" PointY="6.65599659375" />
+          <ConnectorPoint PointX="8.0833333333333339" PointY="6.6559965937499994" />
+          <ConnectorPoint PointX="7.916666666666667" PointY="6.65599659375" />
+          <ConnectorPoint PointX="7.5625" PointY="6.65599659375" />
+          <ConnectorPoint PointX="7.5625" PointY="6.3744921875" />
+        </AssociationConnector>
+        <AssociationConnector Association="Context.User_Perfomer" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.125" PointY="4.5574039713541659" />
+          <ConnectorPoint PointX="6.375" PointY="4.5574039713541659" />
+        </AssociationConnector>
+        <AssociationConnector Association="Context.Project_Task" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.781248" PointY="2.4802864583333317" />
+          <ConnectorPoint PointX="8.781248" PointY="7.0625" />
+          <ConnectorPoint PointX="9.3125" PointY="7.0625" />
+          <ConnectorPoint PointX="9.3125" PointY="9.4539261536458277" />
+          <ConnectorPoint PointX="9.5" PointY="9.4539261536458277" />
+        </AssociationConnector>
+        <AssociationConnector Association="Context.Role_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="2" PointY="1.0312500000000007" />
+          <ConnectorPoint PointX="4.625" PointY="1.0312500000000007" />
+        </AssociationConnector>
+        <AssociationConnector Association="Context.Setting_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="4" PointY="2.8747460937500025" />
+          <ConnectorPoint PointX="4.625" PointY="2.8747460937500025" />
+        </AssociationConnector>
+        <AssociationConnector Association="Context.Task_TaskComment" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.5" PointY="6.859248296875" />
+          <ConnectorPoint PointX="8.8645813333333336" PointY="6.8592482968749993" />
+          <ConnectorPoint PointX="8.6979146666666658" PointY="6.859248296875" />
+          <ConnectorPoint PointX="8.0833333333333339" PointY="6.8592482968749993" />
+          <ConnectorPoint PointX="7.916666666666667" PointY="6.859248296875" />
+          <ConnectorPoint PointX="5.7864608333333329" PointY="6.8592482968749993" />
+          <ConnectorPoint PointX="5.6197941666666669" PointY="6.859248296875" />
+          <ConnectorPoint PointX="5.614583333333333" PointY="6.8592482968749993" />
+          <ConnectorPoint PointX="5.447916666666667" PointY="6.859248296875" />
+          <ConnectorPoint PointX="5.1145858333333321" PointY="6.8592482968749993" />
+          <ConnectorPoint PointX="4.947919166666666" PointY="6.859248296875" />
+          <ConnectorPoint PointX="4.333333333333333" PointY="6.8592482968749993" />
+          <ConnectorPoint PointX="4.166666666666667" PointY="6.859248296875" />
+          <ConnectorPoint PointX="3.875" PointY="6.859248296875" />
+        </AssociationConnector>
+        <AssociationConnector Association="Context.User_TaskComment" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.625" PointY="5.2136514713541722" />
+          <ConnectorPoint PointX="3.875" PointY="5.2136514713541722" />
+        </AssociationConnector>
+        <AssociationConnector Association="Context.Task_TaskFile" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.5" PointY="10.365102539062502" />
+          <ConnectorPoint PointX="9.125" PointY="10.365102539062502" />
+        </AssociationConnector>
+        <AssociationConnector Association="Context.User_TaskFile" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.7031275" PointY="5.4898079427083326" />
+          <ConnectorPoint PointX="5.7031275" PointY="12.713440755208332" />
+          <ConnectorPoint PointX="7.625" PointY="12.713440755208332" />
+        </AssociationConnector>
+        <AssociationConnector Association="Context.User_Task" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.73438" PointY="5.4898079427083326" />
+          <ConnectorPoint PointX="5.73438" PointY="6.5152418906250062" />
+          <ConnectorPoint PointX="7.479166666666667" PointY="6.5152418906250054" />
+          <ConnectorPoint PointX="7.645833333333333" PointY="6.5152418906250062" />
+          <ConnectorPoint PointX="7.916666666666667" PointY="6.5152418906250054" />
+          <ConnectorPoint PointX="8.0833333333333339" PointY="6.5152418906250062" />
+          <ConnectorPoint PointX="8.6979146666666658" PointY="6.5152418906250054" />
+          <ConnectorPoint PointX="8.8645813333333336" PointY="6.5152418906250062" />
+          <ConnectorPoint PointX="9.5" PointY="6.5152418906250062" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Context.TrackingState" Width="1.5" PointX="0.75" PointY="10.75" Height="1.7879850260416674" />
+        <AssociationConnector Association="Context.User_NoteGroup" >
+          <ConnectorPoint PointX="5.031252499999999" PointY="5.4898079427083326" />
+          <ConnectorPoint PointX="5.031252499999999" PointY="10.25" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

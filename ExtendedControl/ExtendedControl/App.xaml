@@ -1,0 +1,32 @@
+﻿<Application x:Class="ExtendedControl.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Settings.xaml" />
+
+                <ResourceDictionary Source="/NTW.Resources;component/Localisation/Panel.en.xaml" />
+                <ResourceDictionary Source="/NTW.Resources;component/Localisation/DBSettings.en.xaml" />
+                <ResourceDictionary Source="/NTW.Resources;component/Localisation/Authorization.en.xaml" />
+                <ResourceDictionary Source="/NTW.Resources;component/Localisation/Process.en.xaml" />
+                <ResourceDictionary Source="/NTW.Resources;component/Localisation/Tasks.en.xaml" />
+                <ResourceDictionary Source="/NTW.Resources;component/Localisation/Notes.en.xaml" />
+                <ResourceDictionary Source="/NTW.Resources;component/Localisation/Settings.en.xaml" />
+                <ResourceDictionary Source="/NTW.Resources;component/Localisation/Admin.en.xaml" />
+                <ResourceDictionary Source="/NTW.Resources;component/Localisation/UserSettings.en.xaml" />
+                <ResourceDictionary Source="/NTW.Resources;component/Localisation/Messages.en.xaml" />
+
+                <ResourceDictionary Source="/NTW.Controls;component/Resources/Resources.xaml" />
+
+                <ResourceDictionary Source="/Resources/ItemMenuStyle.xaml" />
+
+                <ResourceDictionary Source="/Resources/MainControlWindowTemplate.xaml" />
+
+                <ResourceDictionary Source="/Resources/ProviderControlTemplates.xaml" />
+
+                <ResourceDictionary Source="/Resources/AdminTemplate.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

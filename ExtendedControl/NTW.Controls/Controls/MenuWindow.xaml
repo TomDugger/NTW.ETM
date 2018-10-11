@@ -1,0 +1,45 @@
+﻿<Window x:Class="NTW.Controls.MenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:bc="clr-namespace:NTW.Controls.Behaviours"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        mc:Ignorable="d" Style="{DynamicResource MenuPanelWindowStyle}"
+        Title="MenuWindow" >
+    <Window.Resources>
+        <SolidColorBrush x:Key="BBR" Color="{DynamicResource FBackColor}" />
+    </Window.Resources>
+    <ContentControl Style="{DynamicResource MenuDADStyle}"  bc:WindowDragEndDropBehaviour.UseDrop="{Binding Path=DragDropElement}">
+        <Grid Style="{x:Null}" >
+
+            <Border Style="{x:Null}" BorderBrush="{StaticResource BBR}"
+                bc:MenuActivationBehaviour.Position="{Binding Path=(bc:WindowPositionBehaviour.WindowPosition)}"
+                bc:MenuActivationBehaviour.CommandActivation="{Binding Path=VisibleItems}" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseEnter">
+                        <i:InvokeCommandAction Command="{Binding Path=MouseMoveCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Border>
+
+            <WrapPanel Orientation="Vertical" Margin="2"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" Focusable="False"
+                       bc:FrameworkElementPositionBehaviour.FrameworkElementPosition="{Binding Path=(bc:WindowPositionBehaviour.WindowPosition)}">
+                <!--Add items-->
+                <ItemsControl Style="{DynamicResource MenuItemsStyle}" ItemsSource="{Binding Path=AddItems, IsAsync=True}" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Top" Focusable="False"
+                ItemTemplate="{DynamicResource AddItemTemplate}" />
+
+
+                <!--Entry items-->
+                <ItemsControl Style="{DynamicResource MenuItemsStyle}" ItemsSource="{Binding Path=Items, IsAsync=True}" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Top" Focusable="False"
+                ItemTemplate="{DynamicResource MenuItemTemplate}" />
+            </WrapPanel>
+        </Grid>
+    </ContentControl>
+</Window>

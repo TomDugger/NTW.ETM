@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="NTW.Controls.ColorControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:c="clr-namespace:NTW.Controls"
+             xmlns:b="clr-namespace:NTW.Controls.Behaviours"
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <RelativeSource Mode="FindAncestor" AncestorType="{x:Type UserControl}" x:Key="UserSourceControl" />
+        <ObjectDataProvider MethodName="GetType" ObjectType="{x:Type sys:Type}" x:Key="colorsTypeOdp">
+            <ObjectDataProvider.MethodParameters>
+                <sys:String>System.Windows.Media.Colors, PresentationCore, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</sys:String>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider ObjectInstance="{StaticResource colorsTypeOdp}" MethodName="GetProperties" x:Key="colorPropertiesOdp" />
+    </UserControl.Resources>
+    <ToggleButton BorderThickness="10" BorderBrush="Maroon">
+        <!--<ToggleButton.BorderBrush>
+            <SolidColorBrush Color="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=BorderColor}" />
+        </ToggleButton.BorderBrush>-->
+        <ToggleButton.Style>
+            <Style TargetType="{x:Type ToggleButton}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Grid>
+                                <ContentControl Name="Edit" />
+                                <Rectangle>
+                                    <Rectangle.Fill>
+                                        <SolidColorBrush Color="{Binding RelativeSource={StaticResource UserSourceControl}, Path=Color}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="Edit" Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <Popup Width="200" MaxHeight="200" IsOpen="True" >
+                                                    <!--Пака так, но нужно исправить-->
+                                                    <Grid Background="#01000000">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto" />
+                                                            <RowDefinition Height="*" />
+                                                            <RowDefinition Height="30" />
+                                                        </Grid.RowDefinitions>
+
+                                                        <c:SearchBox x:Name="searTextBox" IsVisibleTextBox="True" SearchText="{Binding RelativeSource={StaticResource UserSourceControl}, Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                                                        <ListBox Background="DimGray" Style="{x:Null}" b:FilterBehaviour.By="{Binding RelativeSource={StaticResource UserSourceControl}, Path=Filter, UpdateSourceTrigger=PropertyChanged}"  Name="ListColors" Grid.Row="1" ItemsSource="{Binding Source={StaticResource colorPropertiesOdp}}" SelectedValuePath="Name"
+                                                                 SelectedValue="{Binding RelativeSource={StaticResource UserSourceControl}, Path=Color, Mode=TwoWay}">
+                                                            <ListBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <TextBlock Width="20" Height="20" Margin="5" Background="{Binding Name}"/>
+                                                                        <TextBlock  Text="{Binding Name}"/>
+                                                                    </StackPanel>
+                                                                </DataTemplate>
+                                                            </ListBox.ItemTemplate>
+                                                        </ListBox>
+
+                                                        <TextBox Grid.Row="2" Text="{Binding RelativeSource={StaticResource UserSourceControl}, Path=Color, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                    </Grid>
+                                                </Popup>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ToggleButton.Style>
+    </ToggleButton>
+</UserControl>

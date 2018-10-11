@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib"
+                    xmlns:data="clr-namespace:NTW.Data.Models;assembly=NTW.Data">
+
+    <!--AppSettingsTemplate-->
+    <y:String x:Key="AppSettingsCaption">App Settings</y:String>
+    <y:String x:Key="AppSettingsLanguage">Language</y:String>
+    <y:String x:Key="AppSettingsTheme">Theme</y:String>
+    
+    <y:String x:Key="AppSettingsMainBackColor">Main back color</y:String>
+    <y:String x:Key="AppSettingsMainForeColor">Main fore color</y:String>
+
+    <y:String x:Key="AppSettingsFBackColor">First back color</y:String>
+    <y:String x:Key="AppSettingsSBackColor">Second back color</y:String>
+    <y:String x:Key="AppSettingsTBackColor">Three back color</y:String>
+    
+    <y:String x:Key="AppSettingsFForeColor">First fore color</y:String>
+    <y:String x:Key="AppSettingsSForeColor">Second fore color</y:String>
+    <y:String x:Key="AppSettingsTForeColor">Three fore color</y:String>
+
+    <!--SyncSettingsTemplate-->
+    <y:String x:Key="SyncSettingsCaption">Sync settings</y:String>
+    <y:String x:Key="SyncSettingsAdressSyncServer">Adress sync server</y:String>
+</ResourceDictionary>

@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib">
+
+    <y:String x:Key="AutorizationLogo">Авторизоваться</y:String>
+    <y:String x:Key="AutorizationLogin">Вход</y:String>
+    <y:String x:Key="AutorizationPassword">Пароль</y:String>
+    <y:String x:Key="AutorizationRememberMe">Запонить</y:String>
+    <y:String x:Key="AutorizationEnter">Принять</y:String>
+    <y:String x:Key="AutorizationExitOnApplication">Выйти из приложения</y:String>
+
+    <!--Errors-->
+    <y:String x:Key="AutorizationIncorrectPassword">Невеный пароль</y:String>
+    <y:String x:Key="AutorizationUserNotFound">Не найден пользователь с таким именем</y:String>
+</ResourceDictionary>

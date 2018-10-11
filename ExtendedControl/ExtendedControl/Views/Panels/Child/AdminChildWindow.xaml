@@ -1,0 +1,80 @@
+﻿<Window x:Class="ExtendedControl.Views.Panels.Child.AdminChildWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExtendedControl.Views.Panels.Child"
+        mc:Ignorable="d"
+        Title="AdminChildWindow" 
+        xmlns:b="clr-namespace:ExtendedControl.Behaviour"
+        xmlns:bc="clr-namespace:NTW.Controls.Behaviours;assembly=NTW.Controls"
+        xmlns:vm="clr-namespace:ExtendedControl.ViewModels"
+        xmlns:sel="clr-namespace:NTW.Controls.Selectors;assembly=NTW.Controls"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:data="clr-namespace:NTW.Data.Models;assembly=NTW.Data"
+        xmlns:con="clr-namespace:NTW.Controls.Converters;assembly=NTW.Controls"
+        xmlns:controls="clr-namespace:NTW.Controls;assembly=NTW.Controls"
+        Style="{DynamicResource DefaultPanelWindowStyle}"
+        b:ViewModelIjection.ViewModel="{x:Type vm:AdminViewModel}"
+        bc:GlobalPercentageFrameworkElementBehaviour.AgeType="FullSize"
+        bc:GlobalPercentageFrameworkElementBehaviour.Procentage="30"
+        bc:WindowPositionBehaviour.WindowThickness="2"
+        bc:WindowMessageBehaviour.UseMessages="True"
+        bc:HideButtonBehaviour.UseHideButton="True"
+        bc:UntieButtonBehaviour.UseUntieButton="False"
+        bc:WindowVisibilityBehaviour.CloseByHidden="True"
+        bc:WindowMessageBehaviour.VerticalPosition="Bottom"
+        bc:SaveParametryPanelBehaviour.IsSaveByClose="False">
+    <Window.Resources>
+        <Style TargetType="{x:Type ListViewItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                        <Border BorderBrush="Transparent"
+                                                BorderThickness="0"
+                                                Background="{TemplateBinding Background}">
+                            <GridViewRowPresenter HorizontalAlignment="Stretch" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Width="Auto" Margin="0" Content="{TemplateBinding Content}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsDelete}" Value="True">
+                                <Setter Property="Background" Value="Maroon" />
+                            </DataTrigger>
+                            <DataTrigger Value="True">
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource CheckEqualityOfValuesConverter1}">
+                                        <Binding Path="." />
+                                        <Binding RelativeSource="{StaticResource WindowSource}" Path="DataContext.EditObject" />
+                                    </MultiBinding>
+                                </DataTrigger.Binding>
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{DynamicResource TBackColor}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{DynamicResource SBackColor}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Border MinWidth="50" MinHeight="50">
+        <ContentControl Content="{Binding Path=CurrentAccess, UpdateSourceTrigger=PropertyChanged}">
+                <ContentControl.ContentTemplateSelector>
+                    <sel:TypeAdminPageSelector TasksTemplate="{StaticResource AdminTasksTemplate}" 
+                                               UsersTemplate="{StaticResource AdminUsersTemplate}" 
+                                               RuleTemplate="{StaticResource AdminRolesTemplate}" 
+                                               UsersSettingsTemplate="{StaticResource AdminSettingsTemplate}" 
+                                               ProjectsTemplate="{StaticResource AdminProjectsTemplate}" 
+                                               JournslTemplate="{StaticResource AdminJournalTemplate}" />
+                </ContentControl.ContentTemplateSelector>
+            </ContentControl>
+    </Border>
+</Window>

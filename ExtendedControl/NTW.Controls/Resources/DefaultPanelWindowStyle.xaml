@@ -1,0 +1,545 @@
+﻿<ResourceDictionary x:Class="NTW.Controls.Resources.DefaultPanelWindowStyle"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:bc="clr-namespace:NTW.Controls.Behaviours"
+                    xmlns:b="clr-namespace:NTW.Controls.Behaviours"
+                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
+
+    <Style TargetType="{x:Type Window}" x:Key="MenuPanelWindowStyle">
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="Width" Value="Auto" />
+        <Setter Property="Left" Value="0" />
+        <Setter Property="Top" Value="0" />
+        <Setter Property="AllowsTransparency" Value="True" />
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="Background" Value="{x:Null}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="ShowInTaskbar" Value="False" />
+        <Setter Property="ResizeMode" Value="NoResize" />
+        <Setter Property="Topmost" Value="True" />
+        <Setter Property="b:WindowClosingBehaviour.UseAlterClosing" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Grid Style="{x:Null}" 
+                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                          b:FrameworkElementPositionBehaviour.FrameworkElementPosition="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:WindowPositionBehaviour.WindowPosition)}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <ContentPresenter Grid.Row="1" Grid.Column="1" Name="ContentSite" />
+
+                        <Border Name="MovePanel" Grid.Column="1" Grid.Row="1" Width="0" Height="0" VerticalAlignment="Top"
+                                MouseMove="TitleBarMouseMove" 
+                                MouseLeftButtonDown="TitleBarMouseLeftButtonDown">
+                            <b:VisibilityOnNullBehaviour.OriginalSize>
+                                <Point>
+                                    <Point.X>
+                                        <sys:Double>NaN</sys:Double>
+                                    </Point.X>
+                                    <Point.Y>
+                                        <sys:Double>30</sys:Double>
+                                    </Point.Y>
+                                </Point>
+                            </b:VisibilityOnNullBehaviour.OriginalSize>
+                        </Border>
+
+                        <ItemsControl Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Style="{x:Null}"
+                                      ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:WindowMessageBehaviour.Messages)}" MaxHeight="200"
+                                      b:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:WindowMessageBehaviour.UseMessages)}">
+                            <b:VisibilityOnNullBehaviour.OriginalSize>
+                                <Point >
+                                    <Point.X>
+                                        <sys:Double>NaN</sys:Double>
+                                    </Point.X>
+                                    <Point.Y>
+                                        <sys:Double>NaN</sys:Double>
+                                    </Point.Y>
+                                </Point>
+                            </b:VisibilityOnNullBehaviour.OriginalSize>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Name="ErrorPanel" RenderTransformOrigin="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:WindowMessageBehaviour.OriginalPoint)}" >
+                                        <Grid.Background>
+                                            <SolidColorBrush Color="{Binding Path=BackColor}" />
+                                        </Grid.Background>
+                                        <Grid.RenderTransform>
+                                            <ScaleTransform ScaleY="0"  />
+                                        </Grid.RenderTransform>
+                                        <Label Padding="20, 10" Content="{Binding Path=Content}" FontSize="14" FontWeight="Bold" >
+                                            <Label.Foreground>
+                                                <SolidColorBrush Color="{Binding Path=ForeColor, IsAsync=True}" />
+                                            </Label.Foreground>
+                                        </Label>
+                                        <Grid.Triggers>
+                                            <EventTrigger RoutedEvent="Loaded">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" To="1" Duration="0:0:0.3" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Grid.Triggers>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonUp" >
+                                                <i:InvokeCommandAction Command="{Binding Path=ClickMessageCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.Template>
+                                <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                                        <ItemsPresenter />
+                                    </ScrollViewer>
+                                </ControlTemplate>
+                            </ItemsControl.Template>
+                        </ItemsControl>
+
+                        <Button Content="X" Width="0" Height="0" Grid.Row="1" 
+                                b:VisibilityOnNullBehaviour.OriginalSize="30, 30"
+                                b:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:HideButtonBehaviour.UseHideButton)}" 
+                                b:HideButtonBehaviour.HideButtonPosition="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:WindowPositionBehaviour.WindowPosition)}"
+                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:HideButtonBehaviour.Command)}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
+
+                        <Grid Grid.RowSpan="3" Grid.ColumnSpan="3" Name="EnableFalse" b:VisibilityOnNullBehaviour.NegativeVisibilityOnNull="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=IsEnabled}">
+                            <b:VisibilityOnNullBehaviour.OriginalSize>
+                                <Point >
+                                    <Point.X>
+                                        <sys:Double>NaN</sys:Double>
+                                    </Point.X>
+                                    <Point.Y>
+                                        <sys:Double>NaN</sys:Double>
+                                    </Point.Y>
+                                </Point>
+                            </b:VisibilityOnNullBehaviour.OriginalSize>
+                            <Border Opacity="0.5">
+                                <Border.Effect>
+                                    <BlurEffect />
+                                </Border.Effect>
+                            </Border>
+                        </Grid>
+
+                        <!--Что-то вроде настроек для отвязывания панели-->
+                        <Button Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                      b:VisibilityOnNullBehaviour.OriginalSize="30, 30" 
+                                      b:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:UntieButtonBehaviour.UseUntieButton)}" 
+                                      b:UntieButtonBehaviour.UntieButtonPosition="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:WindowPositionBehaviour.WindowPosition)}"
+                                      Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:UntieButtonBehaviour.Command)}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">
+                            <Button.OpacityMask>
+                                <VisualBrush>
+                                    <VisualBrush.Visual>
+                                        <Polygon Fill="White" Points="0, 0 30, 0 0, 30" />
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </Button.OpacityMask>
+                        </Button>
+
+                        <Rectangle MouseDown="OnSizeNorth"
+                                       x:Name="lnSizeNorth" 
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       Fill="Transparent"
+                                       Cursor="SizeNS"
+                                       Visibility="Hidden"
+                                       Height="3"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Top" />
+
+                        <Rectangle MouseDown="OnSizeSouth"
+                                       x:Name="lnSizeSouth"
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       Fill="Transparent"
+                                       Cursor="SizeNS"
+                                       Visibility="Hidden"
+                                       Height="3"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Bottom" />
+
+                        <Rectangle MouseDown="OnSizeWest"
+                                       x:Name="lnSizeWest"
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       Fill="Transparent"
+                                       Cursor="SizeWE"
+                                       Visibility="Hidden"
+                                       Width="3"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Stretch" />
+
+                        <Rectangle MouseDown="OnSizeEast"
+                                       x:Name="lnSizeEast"
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       Fill="Transparent"
+                                       Cursor="SizeWE"
+                                       Visibility="Hidden"
+                                       Width="3"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Stretch" />
+
+                        <Rectangle Grid.Column="1" Grid.Row="1" MouseDown="OnSizeNorthWest" x:Name="rectSizeNorthWest" Cursor="SizeNWSE" Fill="Transparent" Width="3" Height="3" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Hidden" />
+                        <Rectangle Grid.Column="1" Grid.Row="1" MouseDown="OnSizeNorthEast" x:Name="rectSizeNorthEast" Cursor="SizeNESW" Fill="Transparent" Width="3" Height="3" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Hidden" />
+                        <Rectangle Grid.Column="1" Grid.Row="1" MouseDown="OnSizeSouthWest" x:Name="rectSizeSouthWest" Cursor="SizeNESW" Fill="Transparent" Width="3" Height="3" VerticalAlignment="Bottom" HorizontalAlignment="Left" Visibility="Hidden" />
+                        <Rectangle Grid.Column="1" Grid.Row="1" MouseDown="OnSizeSouthEast" x:Name="rectSizeSouthEast" Cursor="SizeNWSE" Fill="Transparent" Width="3" Height="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Hidden" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="b:WindowPositionBehaviour.WindowPosition" Value="None">
+                            <Setter TargetName="MovePanel" Property="b:VisibilityOnNullBehaviour.VisibilityOnNull" Value="True" />
+                            <Setter TargetName="ContentSite" Property="Margin" Value="0, 30, 0, 0" />
+
+                            <Setter TargetName="lnSizeNorth" Property="Visibility" Value="Visible" />
+                            <!--Top-->
+                            <Setter TargetName="lnSizeSouth" Property="Visibility" Value="Visible" />
+                            <!--Bottom-->
+                            <Setter TargetName="lnSizeWest" Property="Visibility" Value="Visible" />
+                            <!--Left-->
+                            <Setter TargetName="lnSizeEast" Property="Visibility" Value="Visible" />
+                            <!--Right-->
+
+                            <Setter TargetName="rectSizeNorthWest" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="rectSizeNorthEast" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="rectSizeSouthWest" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="rectSizeSouthEast" Property="Visibility" Value="Visible" />
+
+                            <Setter Property="SizeToContent" Value="Manual" />
+                        </Trigger>
+                        <Trigger Property="b:WindowPositionBehaviour.WindowPosition" Value="Left">
+                            <Setter TargetName="lnSizeEast" Property="Visibility" Value="Visible" />
+                            <Setter Property="SizeToContent" Value="Height" />
+                        </Trigger>
+                        <Trigger Property="b:WindowPositionBehaviour.WindowPosition" Value="Top">
+                            <Setter TargetName="lnSizeSouth" Property="Visibility" Value="Visible" />
+                            <Setter Property="SizeToContent" Value="Width" />
+                        </Trigger>
+                        <Trigger Property="b:WindowPositionBehaviour.WindowPosition" Value="Right">
+                            <Setter TargetName="lnSizeWest" Property="Visibility" Value="Visible" />
+                            <Setter Property="SizeToContent" Value="Height" />
+                        </Trigger>
+                        <Trigger Property="b:WindowPositionBehaviour.WindowPosition" Value="Bottom">
+                            <Setter TargetName="lnSizeNorth" Property="Visibility" Value="Visible" />
+                            <Setter Property="SizeToContent" Value="Width" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Window}" x:Key="DefaultPanelWindowStyle">
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="Width" Value="Auto" />
+        <Setter Property="Left" Value="0" />
+        <Setter Property="Top" Value="0" />
+        <Setter Property="AllowsTransparency" Value="True" />
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="Background" Value="{x:Null}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="ShowInTaskbar" Value="False" />
+        <Setter Property="ResizeMode" Value="NoResize" />
+        <Setter Property="Topmost" Value="True" />
+        <Setter Property="b:WindowClosingBehaviour.UseAlterClosing" Value="True" />
+        <Setter Property="b:FrameworkElementOpacityBehaviour.IsAnimated" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Grid Style="{x:Null}" 
+                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                          b:FrameworkElementPositionBehaviour.PanelPosition="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:WindowPositionBehaviour.WindowPosition)}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Row="1" Grid.Column="1" Name="ConturBoard" Style="{x:Null}" BorderThickness="0">
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="{DynamicResource TBackColor}" />
+                            </Border.BorderBrush>
+                            <ContentPresenter Name="ContentSite" />
+                        </Border>
+                        <Border Name="MovePanel" Grid.Column="1" Grid.Row="1" Width="0" Height="0" VerticalAlignment="Top"
+                                MouseMove="TitleBarMouseMove" 
+                                MouseLeftButtonDown="TitleBarMouseLeftButtonDown">
+                            <b:VisibilityOnNullBehaviour.OriginalSize>
+                                <Point>
+                                    <Point.X>
+                                        <sys:Double>NaN</sys:Double>
+                                    </Point.X>
+                                    <Point.Y>
+                                        <sys:Double>30</sys:Double>
+                                    </Point.Y>
+                                </Point>
+                            </b:VisibilityOnNullBehaviour.OriginalSize>
+                        </Border>
+
+                        <ItemsControl Grid.Row="1" Grid.Column="1" VerticalAlignment="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(bc:WindowMessageBehaviour.VerticalPosition)}" Style="{x:Null}"
+                                      ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:WindowMessageBehaviour.Messages)}" MaxHeight="200"
+                                      b:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:WindowMessageBehaviour.UseMessages)}">
+                            <b:VisibilityOnNullBehaviour.OriginalSize>
+                                <Point >
+                                    <Point.X>
+                                        <sys:Double>NaN</sys:Double>
+                                    </Point.X>
+                                    <Point.Y>
+                                        <sys:Double>NaN</sys:Double>
+                                    </Point.Y>
+                                </Point>
+                            </b:VisibilityOnNullBehaviour.OriginalSize>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Name="ErrorPanel" RenderTransformOrigin="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:WindowMessageBehaviour.OriginalPoint)}" >
+                                        <Grid.Background>
+                                            <SolidColorBrush Color="{Binding Path=BackColor}" />
+                                        </Grid.Background>
+                                        <Grid.RenderTransform>
+                                            <ScaleTransform ScaleY="0"  />
+                                        </Grid.RenderTransform>
+                                        <Label Padding="20, 10" Content="{Binding Path=Content}" FontSize="14" FontWeight="Bold" >
+                                            <Label.Foreground>
+                                                <SolidColorBrush Color="{Binding Path=ForeColor, IsAsync=True}" />
+                                            </Label.Foreground>
+                                        </Label>
+                                        <Grid.Triggers>
+                                            <EventTrigger RoutedEvent="Loaded">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" To="1" Duration="0:0:0.3" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Grid.Triggers>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonUp" >
+                                                <i:InvokeCommandAction Command="{Binding Path=ClickMessageCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.Template>
+                                <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                                        <ItemsPresenter />
+                                    </ScrollViewer>
+                                </ControlTemplate>
+                            </ItemsControl.Template>
+                        </ItemsControl>
+
+                        <Button Content="X" Width="0" Height="0" Grid.Row="1" 
+                                b:VisibilityOnNullBehaviour.OriginalSize="30, 30"
+                                b:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:HideButtonBehaviour.UseHideButton)}" 
+                                b:HideButtonBehaviour.HideButtonPosition="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:WindowPositionBehaviour.WindowPosition)}"
+                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:HideButtonBehaviour.Command)}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
+
+                        <Grid Grid.RowSpan="3" Grid.ColumnSpan="3" Name="EnableFalse" b:VisibilityOnNullBehaviour.NegativeVisibilityOnNull="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=IsEnabled}">
+                            <b:VisibilityOnNullBehaviour.OriginalSize>
+                                <Point >
+                                    <Point.X>
+                                        <sys:Double>NaN</sys:Double>
+                                    </Point.X>
+                                    <Point.Y>
+                                        <sys:Double>NaN</sys:Double>
+                                    </Point.Y>
+                                </Point>
+                            </b:VisibilityOnNullBehaviour.OriginalSize>
+                            <Border Opacity="0.5">
+                                <Border.Effect>
+                                    <BlurEffect />
+                                </Border.Effect>
+                            </Border>
+                        </Grid>
+
+                        <!--Что-то вроде настроек для отвязывания панели-->
+                        <Button Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                      b:VisibilityOnNullBehaviour.OriginalSize="30, 30" 
+                                      b:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:UntieButtonBehaviour.UseUntieButton)}" 
+                                      b:UntieButtonBehaviour.UntieButtonPosition="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:WindowPositionBehaviour.WindowPosition)}"
+                                      Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(b:UntieButtonBehaviour.Command)}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">
+                            <Button.OpacityMask>
+                                <VisualBrush>
+                                    <VisualBrush.Visual>
+                                        <Polygon Fill="White" Points="0, 0 30, 0 0, 30" />
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </Button.OpacityMask>
+                        </Button>
+
+                        <Rectangle MouseDown="OnSizeNorth"
+                                       x:Name="lnSizeNorth" 
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       Fill="Transparent"
+                                       Cursor="SizeNS"
+                                       Visibility="Hidden"
+                                       Height="3"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Top" />
+
+                        <Rectangle MouseDown="OnSizeSouth"
+                                       x:Name="lnSizeSouth"
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       Fill="Transparent"
+                                       Cursor="SizeNS"
+                                       Visibility="Hidden"
+                                       Height="3"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Bottom" />
+
+                        <Rectangle MouseDown="OnSizeWest"
+                                       x:Name="lnSizeWest"
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       Fill="Transparent"
+                                       Cursor="SizeWE"
+                                       Visibility="Hidden"
+                                       Width="3"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Stretch" />
+
+                        <Rectangle MouseDown="OnSizeEast"
+                                       x:Name="lnSizeEast"
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       Fill="Transparent"
+                                       Cursor="SizeWE"
+                                       Visibility="Hidden"
+                                       Width="3"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Stretch" />
+
+                        <Rectangle Grid.Column="1" Grid.Row="1" MouseDown="OnSizeNorthWest" x:Name="rectSizeNorthWest" Cursor="SizeNWSE" Fill="Transparent" Width="3" Height="3" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Hidden" />
+                        <Rectangle Grid.Column="1" Grid.Row="1" MouseDown="OnSizeNorthEast" x:Name="rectSizeNorthEast" Cursor="SizeNESW" Fill="Transparent" Width="3" Height="3" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Hidden" />
+                        <Rectangle Grid.Column="1" Grid.Row="1" MouseDown="OnSizeSouthWest" x:Name="rectSizeSouthWest" Cursor="SizeNESW" Fill="Transparent" Width="3" Height="3" VerticalAlignment="Bottom" HorizontalAlignment="Left" Visibility="Hidden" />
+                        <Rectangle Grid.Column="1" Grid.Row="1" MouseDown="OnSizeSouthEast" x:Name="rectSizeSouthEast" Cursor="SizeNWSE" Fill="Transparent" Width="3" Height="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Hidden" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="b:WindowPositionBehaviour.WindowVisibleBorder" Value="True">
+                            <Setter TargetName="ConturBoard" Property="BorderThickness" Value="1" />
+                        </Trigger>
+                        <Trigger Property="b:WindowPositionBehaviour.WindowPosition" Value="None">
+                            <Setter TargetName="MovePanel" Property="b:VisibilityOnNullBehaviour.VisibilityOnNull" Value="True" />
+                            <Setter TargetName="ContentSite" Property="Margin" Value="0, 30, 0, 0" />
+
+                            <Setter TargetName="lnSizeNorth" Property="Visibility" Value="Visible" /><!--Top-->
+                            <Setter TargetName="lnSizeSouth" Property="Visibility" Value="Visible" /><!--Bottom-->
+                            <Setter TargetName="lnSizeWest" Property="Visibility" Value="Visible" /><!--Left-->
+                            <Setter TargetName="lnSizeEast" Property="Visibility" Value="Visible" /><!--Right-->
+
+                            <Setter TargetName="rectSizeNorthWest" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="rectSizeNorthEast" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="rectSizeSouthWest" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="rectSizeSouthEast" Property="Visibility" Value="Visible" />
+
+                            <Setter Property="SizeToContent" Value="Manual" />
+                        </Trigger>
+                        <Trigger Property="b:WindowPositionBehaviour.WindowPosition" Value="Left">
+                            <Setter TargetName="lnSizeEast" Property="Visibility" Value="Visible" />
+                            <Setter Property="SizeToContent" Value="Height" />
+                        </Trigger>
+                        <Trigger Property="b:WindowPositionBehaviour.WindowPosition" Value="Top">
+                            <Setter TargetName="lnSizeSouth" Property="Visibility" Value="Visible" />
+                            <Setter Property="SizeToContent" Value="Width" />
+                        </Trigger>
+                        <Trigger Property="b:WindowPositionBehaviour.WindowPosition" Value="Right">
+                            <Setter TargetName="lnSizeWest" Property="Visibility" Value="Visible" />
+                            <Setter Property="SizeToContent" Value="Height" />
+                        </Trigger>
+                        <Trigger Property="b:WindowPositionBehaviour.WindowPosition" Value="Bottom">
+                            <Setter TargetName="lnSizeNorth" Property="Visibility" Value="Visible" />
+                            <Setter Property="SizeToContent" Value="Width" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Window}" x:Key="MoveWindowStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border MouseMove="TitleBarMouseMove" Background="{TemplateBinding Background}"
+                                MouseLeftButtonDown="TitleBarMouseLeftButtonDown" >
+                            <ContentControl HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext}"
+                                            VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" 
+                                            ContentTemplate="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(bc:WindowDragEndDropBehaviour.HeaderTemplate)}" />
+                        </Border>
+                        <ContentPresenter Grid.Row="1" />
+                        <Rectangle MouseDown="OnSizeNorth"
+                                       x:Name="lnSizeNorth" 
+                                       Grid.Column="1"
+                                       Fill="Transparent"
+                                       Cursor="SizeNS"
+                                       Height="3"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Top" />
+
+                        <Rectangle MouseDown="OnSizeSouth"
+                                       x:Name="lnSizeSouth"
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       Fill="Transparent"
+                                       Cursor="SizeNS"
+                                       Height="3"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Bottom" />
+
+                        <Rectangle MouseDown="OnSizeWest"
+                                       x:Name="lnSizeWest"
+                                       Grid.Column="1"
+                                       Grid.RowSpan="2"
+                                       Fill="Transparent"
+                                       Cursor="SizeWE"
+                                       Width="3"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Stretch" />
+
+                        <Rectangle MouseDown="OnSizeEast"
+                                       x:Name="lnSizeEast"
+                                       Grid.Column="1"
+                                       Grid.RowSpan="2"
+                                       Fill="Transparent"
+                                       Cursor="SizeWE"
+                                       Width="3"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Stretch" />
+
+                        <Rectangle Grid.Column="1" MouseDown="OnSizeNorthWest" x:Name="rectSizeNorthWest" Cursor="SizeNWSE" Fill="Transparent" Width="3" Height="3" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                        <Rectangle Grid.Column="1" MouseDown="OnSizeNorthEast" x:Name="rectSizeNorthEast" Cursor="SizeNESW" Fill="Transparent" Width="3" Height="3" VerticalAlignment="Top" HorizontalAlignment="Right" />
+                        <Rectangle Grid.Column="1" Grid.Row="1" MouseDown="OnSizeSouthWest" x:Name="rectSizeSouthWest" Cursor="SizeNESW" Fill="Transparent" Width="3" Height="3" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                        <Rectangle Grid.Column="1" Grid.Row="1" MouseDown="OnSizeSouthEast" x:Name="rectSizeSouthEast" Cursor="SizeNWSE" Fill="Transparent" Width="3" Height="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

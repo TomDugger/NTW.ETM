@@ -1,0 +1,307 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:b="clr-namespace:ExtendedControl.Behaviour"
+        xmlns:bc="clr-namespace:NTW.Controls.Behaviours;assembly=NTW.Controls"
+        xmlns:vm="clr-namespace:ExtendedControl.ViewModels"
+        xmlns:dd="clr-namespace:ExtendedControl.Views.DragDrop"
+        xmlns:con="clr-namespace:NTW.Controls.Converters"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:local="clr-namespace:ExtendedControl.Views"
+        xmlns:Converters="clr-namespace:ExtendedControl.Converters" x:Class="ExtendedControl.Views.ControlPanelsWindow"
+        WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True" AllowsTransparency="True"
+        mc:Ignorable="d"
+        bc:WindowMessageBehaviour.UseMessages="True"
+        b:ViewModelIjection.ViewModel="{x:Type vm:ControlPanelViewModel}"
+        bc:WindowVisibilityBehaviour.CloseByHidden="True"
+        Title="ControlPanelsWindow" Height="400" Width="810">
+    <Window.Resources>
+        <Converters:PositionConverter x:Key="PositionConverter"/>
+        <con:TypePanelToImageUriConverter x:Key="typePanelToImageUriConverter1" />
+    </Window.Resources>
+    <Border >
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+
+                <RowDefinition Height="*" />
+
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="300" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.ColumnSpan="3" Text="{DynamicResource ControlPanelCaption}" VerticalAlignment="Center" Padding="20, 0, 0, 0" Style="{DynamicResource H1}" />
+            <Button Content="x" Width="50" Grid.ColumnSpan="3" HorizontalAlignment="Right" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}" />
+
+            <Grid Grid.Row="1" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="{DynamicResource ControlPanelPanels}" Margin="10, 0" VerticalAlignment="Center" Style="{DynamicResource H4}" />
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl Grid.Row="1" Style="{x:Null}" ItemsSource="{Binding PanelsList}" >
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Width="50" Height="50" Focusable="False" 
+                                        bc:WindowDragEndDropBehaviour.UseDrag="{x:Type dd:ItemPanelView}">
+                                    <Grid Background="#01000000"
+                                          Focusable="False"
+                                          bc:ToolTipBehaviour.Resource="{Binding ResourceToolTip}" >
+
+                                        <Border x:Name="back" Focusable="False" >
+                                            <Border.RenderTransformOrigin>
+                                                <Point X="0.5" Y="0.5" />
+                                            </Border.RenderTransformOrigin>
+                                            <Border.RenderTransform>
+                                                <ScaleTransform ScaleY="1" ScaleX="1" />
+                                            </Border.RenderTransform>
+                                        </Border>
+                                        <Border x:Name="move" Style="{StaticResource SecondBorder}" Focusable="False">
+                                            <Border.RenderTransformOrigin>
+                                                <Point X="0.5" Y="0.5" />
+                                            </Border.RenderTransformOrigin>
+                                            <Border.RenderTransform>
+                                                <ScaleTransform ScaleY="0" />
+                                            </Border.RenderTransform>
+                                        </Border>
+
+                                        <Border x:Name="IsActive" Style="{StaticResource TreeBorder}" Opacity="0.3" Focusable="False" />
+
+                                        <Rectangle x:Name="content" Width="50" Height="50" Focusable="False" >
+                                            <Rectangle.Fill>
+                                                <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                            </Rectangle.Fill>
+                                            <Rectangle.OpacityMask>
+                                                <ImageBrush ImageSource="{Binding Content}" />
+                                            </Rectangle.OpacityMask>
+                                        </Rectangle>
+                                    </Grid>
+                                </Border>
+                                <DataTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetName="back" Storyboard.TargetProperty="RenderTransform.ScaleX" To="0" Duration="0:0:0.3" />
+                                                    <DoubleAnimation Storyboard.TargetName="back" Storyboard.TargetProperty="RenderTransform.ScaleY" To="0" Duration="0:0:0.3" />
+
+                                                    <DoubleAnimation Storyboard.TargetName="move" Storyboard.TargetProperty="RenderTransform.ScaleX" To="1" Duration="0:0:0.3" />
+                                                    <DoubleAnimation Storyboard.TargetName="move" Storyboard.TargetProperty="RenderTransform.ScaleY" To="1" Duration="0:0:0.3" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetName="back" Storyboard.TargetProperty="RenderTransform.ScaleX" To="1" Duration="0:0:0.3" />
+                                                    <DoubleAnimation Storyboard.TargetName="back" Storyboard.TargetProperty="RenderTransform.ScaleY" To="1" Duration="0:0:0.3" />
+
+                                                    <DoubleAnimation Storyboard.TargetName="move" Storyboard.TargetProperty="RenderTransform.ScaleX" To="0" Duration="0:0:0.3" />
+                                                    <DoubleAnimation Storyboard.TargetName="move" Storyboard.TargetProperty="RenderTransform.ScaleY" To="0" Duration="0:0:0.3" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                        <Setter TargetName="content" Property="Fill">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="{DynamicResource SForeColor}" />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <DataTrigger Binding="{Binding Element}" Value="{x:Null}" >
+                                        <Setter TargetName="IsActive" Property="Height" Value="0" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+
+            <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" BorderThickness="2" Margin="5" >
+                <ItemsControl Style="{x:Null}" ItemsSource="{Binding Screens}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{x:Null}" BorderThickness="2" BorderBrush="Black" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DesctopSource}" >
+                                <Grid>
+                                    <ItemsControl Grid.Row="1" ItemsSource="{Binding Item2, UpdateSourceTrigger=PropertyChanged}" Style="{x:Null}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Background="{Binding Brush}" x:Name="BB" BorderBrush="Gold"
+                                                    b:RectanglePositionBehaviour.Position="{Binding Position}">
+                                                    <Border Background="#01000000" b:ViewModelIjection.ViewModel="{x:Type vm:ControlPanelViewModel}"
+                                                        bc:WindowDragEndDropBehaviour.UseDrop="{x:Type dd:ItemPanelView}" />
+                                                </Border>
+                                                <DataTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding IsPrimary}" Value="True">
+                                                        <Setter TargetName="BB" Property="BorderThickness" Value="2" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding IsPrimary}" Value="false">
+                                                        <Setter TargetName="BB" Property="BorderThickness" Value="0" />
+                                                    </DataTrigger>
+                                                </DataTemplate.Triggers>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <Grid />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+
+                                    <!--<TextBlock Text="display" />-->
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style>
+                            <Setter Property="Canvas.Left" Value="{Binding Item1.X}" />
+                            <Setter Property="Canvas.Top" Value="{Binding Item1.Y}" />
+                            <Setter Property="FrameworkElement.Width" Value="{Binding Item1.Width}" />
+                            <Setter Property="FrameworkElement.Height" Value="{Binding Item1.Height}" />
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas IsItemsHost="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="{Binding MaxWidth}" Height="{Binding MaxHeight}" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Border>
+
+            <ListBox Grid.Column="2" Grid.Row="1" ItemsSource="{Binding Panels.Panels, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" Background="{x:Null}" Style="{x:Null}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate >
+                        <Border>
+                            <Grid Height="Auto" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="50" />
+                                </Grid.ColumnDefinitions>
+                                <Rectangle Fill="{Binding Brush}" Grid.RowSpan="2" />
+                                <TextBlock Grid.RowSpan="2" Text="{Binding TextScreen}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
+                                <Border Grid.RowSpan="2" Background="#01000000" b:ViewModelIjection.ViewModel="{x:Type vm:ControlPanelViewModel}"
+                                        bc:WindowDragEndDropBehaviour.UseDrop="{x:Type dd:ItemPanelView}" />
+
+                                <TextBlock Grid.Column="1" Text="{Binding Position, Converter={StaticResource PositionConverter}}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10, 14, 10, 5" />
+
+                                <CheckBox Grid.Column="1" Content="{DynamicResource ControlPanelIsPrimary}" VerticalAlignment="Top" HorizontalAlignment="Left" IsChecked="{Binding IsPrimary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          Command="{Binding DataContext.PrimaryCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}, Mode=FindAncestor}}"
+                                          CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"/>
+
+                                <Button Grid.Column="2" Content="X" Grid.RowSpan="2"
+                                        Command="{Binding DataContext.RemovePanelCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}, Mode=FindAncestor}}" 
+                                        CommandParameter="{Binding .}"/>
+
+                                <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+                                    <ItemsControl Style="{x:Null}" ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Width="25" Height="25" >
+                                                    <Rectangle b:ViewModelIjection.ViewModel="{x:Type vm:ControlPanelViewModel}">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="{Binding DataContext.Element, Converter={StaticResource typePanelToImageUriConverter1}, RelativeSource={RelativeSource AncestorType={x:Type Border}}}" />
+                                                        </Rectangle.OpacityMask>
+                                                        <i:Interaction.Triggers>
+                                                            <i:EventTrigger EventName="MouseLeftButtonUp" >
+                                                                <i:InvokeCommandAction Command="{Binding RemoveOnPanelsCommand}" 
+                                                                                   CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type Border}, Mode=FindAncestor}}"/>
+                                                            </i:EventTrigger>
+                                                        </i:Interaction.Triggers>
+                                                    </Rectangle>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Grid Grid.Column="2" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Content="{DynamicResource ControlPanelCreate}" Command="{Binding AddNewPanelCommand}" />
+                <ComboBox Grid.Column="1" ItemsSource="{Binding AffordableAccommodation}" SelectedItem="{Binding SelectedPosition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <ComboBox Grid.Column="2" ItemsSource="{Binding ScreenName}" SelectedIndex="{Binding IndexScreen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>
+
+            <Button Content="{DynamicResource ControlPanelAccepted}" Grid.ColumnSpan="3" Grid.Row="3" Command="{Binding AcceptedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" />
+
+            <ItemsControl Grid.RowSpan="4" Grid.ColumnSpan="4" VerticalAlignment="{Binding (bc:WindowMessageBehaviour.VerticalPosition), RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" Style="{x:Null}"
+                                      ItemsSource="{Binding (bc:WindowMessageBehaviour.Messages), RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" MaxHeight="200"
+                                      bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding (bc:WindowMessageBehaviour.UseMessages), RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                          bc:VisibilityOnNullBehaviour.OriginalSize="NaN, NaN">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid x:Name="ErrorPanel" RenderTransformOrigin="{Binding (bc:WindowMessageBehaviour.OriginalPoint), RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" >
+                            <Grid.Background>
+                                <SolidColorBrush Color="{Binding BackColor}" />
+                            </Grid.Background>
+                            <Grid.RenderTransform>
+                                <ScaleTransform ScaleY="0"  />
+                            </Grid.RenderTransform>
+                            <Grid.Triggers>
+                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" To="1" Duration="0:0:0.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Grid.Triggers>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonUp" >
+                                    <i:InvokeCommandAction Command="{Binding ClickMessageCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <Label Padding="20, 10" Content="{Binding Content}" FontSize="14" FontWeight="Bold" >
+                                <Label.Foreground>
+                                    <SolidColorBrush Color="{Binding ForeColor, IsAsync=True}" />
+                                </Label.Foreground>
+                            </Label>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.Template>
+                    <ControlTemplate TargetType="{x:Type ItemsControl}">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </ItemsControl.Template>
+            </ItemsControl>
+        </Grid>
+    </Border>
+</Window>

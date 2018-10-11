@@ -1,0 +1,48 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib">
+
+    <!--Groups-->
+    <y:String x:Key="ControlGroup" >Control</y:String>
+    <y:String x:Key="UserGroup">User</y:String>
+    <y:String x:Key="EventGroup">Event</y:String>
+    <y:String x:Key="WorkGroup">Work</y:String>
+    
+    <!--AlterItemName-->
+    <y:String x:Key="PanelSettings">Panel settings</y:String>
+    <y:String x:Key="Shotdown">Exit on apllication</y:String>
+    <y:String x:Key="LogOut">Logout</y:String>
+    
+    <!--Items-->
+    <y:String x:Key="AdminControl">Sytem control</y:String>
+    <y:String x:Key="AppControl">App settings</y:String>
+    <y:String x:Key="UserSettings">User settings</y:String>
+    <y:String x:Key="EventsControl">Events</y:String>
+    <y:String x:Key="HookKeyControl">Hook key</y:String>
+    <y:String x:Key="NotesControl">Notes</y:String>
+    <y:String x:Key="ProcessControl">Process</y:String>
+    <y:String x:Key="ReportsControl">Reports</y:String>
+    <y:String x:Key="TaskControl">Tasks</y:String>
+    <y:String x:Key="TrackingControl">Tracking state</y:String>
+    
+    <!--ContextMenu-->
+    <y:String x:Key="ControlMenuRemove">Remove</y:String>
+    <y:String x:Key="ControlMenuUnsafe">Unsafe</y:String>
+    
+    <!--ControlPanelWindow-->
+    <y:String x:Key="ControlPanelCaption">Control panels</y:String>
+    <y:String x:Key="ControlPanelCreate">Create</y:String>
+    <y:String x:Key="ControlPanelAccepted">Accepted</y:String>
+    <y:String x:Key="ControlPanelPanels">Panels</y:String>
+    <y:String x:Key="ControlPanelIsPrimary">Primary</y:String>
+
+    <y:String x:Key="ConteolPanelPositionLeft">Left</y:String>
+    <y:String x:Key="ConteolPanelPositionRight">Right</y:String>
+    <y:String x:Key="ConteolPanelPositionTop">Top</y:String>
+    <y:String x:Key="ConteolPanelPositionBottom">Bottom</y:String>
+
+    <y:String x:Key="ConteolPanelPositionLeftTop">Top left corner</y:String>
+    <y:String x:Key="ConteolPanelPositionRightTop">Top right corner</y:String>
+    <y:String x:Key="ConteolPanelPositionLeftBottom">Bottom left corner</y:String>
+    <y:String x:Key="ConteolPanelPositionRightBottom">Bottom right corner</y:String>
+</ResourceDictionary>

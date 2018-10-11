@@ -1,0 +1,31 @@
+﻿<Window x:Class="ExtendedControl.Views.Panels.TaskControlPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:control="clr-namespace:NTW.Controls;assembly=NTW.Controls"
+        mc:Ignorable="d"
+        Title="TaskControl" Height="70" Width="200"
+        xmlns:b="clr-namespace:ExtendedControl.Behaviour"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:bc="clr-namespace:NTW.Controls.Behaviours;assembly=NTW.Controls"
+        xmlns:vm="clr-namespace:ExtendedControl.ViewModels"
+        xmlns:drag="clr-namespace:ExtendedControl.Views.DragDrop"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        Style="{DynamicResource DefaultPanelWindowStyle}"
+        b:ViewModelIjection.ViewModel="{x:Type vm:TasksViewModel}"
+        MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=MinSize.Width}"
+        MinHeight="{Binding RelativeSource={RelativeSource Mode=Self}, Path=MinSize.Height}"
+        bc:WindowPositionBehaviour.WindowThickness="2"
+        bc:WindowMessageBehaviour.UseMessages="True"
+        bc:HideButtonBehaviour.UseHideButton="True"
+        bc:UntieButtonBehaviour.UseUntieButton="True"
+        bc:WindowVisibilityBehaviour.CloseByHidden="True"
+        bc:SaveParametryPanelBehaviour.IsSaveByClose="True" >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding Path=UnloadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <ContentControl Style="{DynamicResource TasksPanelStyle}" />
+</Window>

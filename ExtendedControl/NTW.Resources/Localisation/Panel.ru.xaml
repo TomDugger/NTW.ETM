@@ -1,0 +1,49 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib">
+
+    <!--Groups-->
+    <y:String x:Key="ControlGroup" >Управление</y:String>
+    <y:String x:Key="UserGroup">Пользователь</y:String>
+    <y:String x:Key="EventGroup">События</y:String>
+    <y:String x:Key="WorkGroup">Действия</y:String>
+    
+    <!--AlterItemName-->
+    <y:String x:Key="PanelSettings">Панель настроек</y:String>
+    <y:String x:Key="Shotdown">Выход из приложения</y:String>
+    <y:String x:Key="LogOut">Сменить пользователя</y:String>
+    
+    <!--Items-->
+    <y:String x:Key="AdminControl">Управление системой</y:String>
+    <y:String x:Key="AppControl">Настройки приложения</y:String>
+    <y:String x:Key="UserSettings">Пользовательские настройки</y:String>
+    <y:String x:Key="EventsControl">События</y:String>
+    <y:String x:Key="HookKeyControl">Горячие клавишы</y:String>
+    <y:String x:Key="NotesControl">Заметки</y:String>
+    <y:String x:Key="ProcessControl">Процессы</y:String>
+    <y:String x:Key="ReportsControl">Отчеты</y:String>
+    <y:String x:Key="TaskControl">Задачи</y:String>
+    <y:String x:Key="TrackingControl">Отслеживание состояния</y:String>
+
+    <!--ContextMenu-->
+    <y:String x:Key="ControlMenuRemove">Удалить</y:String>
+    <y:String x:Key="ControlMenuUnsafe">Открепить</y:String>
+
+
+    <!--ControlPanelWindow-->
+    <y:String x:Key="ControlPanelCaption">Панель управления</y:String>
+    <y:String x:Key="ControlPanelCreate">Создать</y:String>
+    <y:String x:Key="ControlPanelAccepted">Принять</y:String>
+    <y:String x:Key="ControlPanelPanels">Панели</y:String>
+    <y:String x:Key="ControlPanelIsPrimary">Основная</y:String>
+
+    <y:String x:Key="ConteolPanelPositionLeft">Слева</y:String>
+    <y:String x:Key="ConteolPanelPositionRight">Справа</y:String>
+    <y:String x:Key="ConteolPanelPositionTop">Сверху</y:String>
+    <y:String x:Key="ConteolPanelPositionBottom">Снизу</y:String>
+
+    <y:String x:Key="ConteolPanelPositionLeftTop">Левый верхний угол</y:String>
+    <y:String x:Key="ConteolPanelPositionRightTop">Правый верхний угол</y:String>
+    <y:String x:Key="ConteolPanelPositionLeftBottom">Левый нижний угол</y:String>
+    <y:String x:Key="ConteolPanelPositionRightBottom">Правый нижний угол</y:String>
+</ResourceDictionary>

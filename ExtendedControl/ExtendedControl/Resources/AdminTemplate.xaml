@@ -1,0 +1,1482 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:NTW.Controls;assembly=NTW.Controls"
+                    xmlns:b="clr-namespace:ExtendedControl.Behaviour"
+                    xmlns:bc="clr-namespace:NTW.Controls.Behaviours;assembly=NTW.Controls"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:sel="clr-namespace:NTW.Controls.Selectors;assembly=NTW.Controls"
+                    xmlns:info="clr-namespace:Info.Controls;assembly=Info">
+    <Style x:Key="GridViewColumnHeaderGripper" TargetType="Thumb">
+        <Setter Property="Width" Value="18"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border Style="{x:Null}" Padding="{TemplateBinding Padding}" Background="Transparent" Width="9" Margin="0, 2">
+                        <Rectangle HorizontalAlignment="Center" Width="3" Fill="{DynamicResource SForeBrush}">
+                            <Rectangle.RenderTransform>
+                                <RotateTransform Angle="5" />
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="GridViewColumnHeaderStyle" TargetType="GridViewColumnHeader">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                    <Grid>
+                        <Border Style="{DynamicResource SecondBorder}">
+                            <ContentPresenter Margin="10, 5" TextBlock.FontWeight="Bold" />
+                        </Border>
+                        <Thumb x:Name="PART_HeaderGripper" HorizontalAlignment="Right" Margin="0, 0, -6, 0" Style="{DynamicResource GridViewColumnHeaderGripper}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="AdminTasksTemplate">
+        <Border>
+            <Grid DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext}" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="{DynamicResource AdminTasksRestoreLogo}" Style="{DynamicResource H4}" Margin="20, 0, 0, 0" />
+
+                <controls:SearchBox Grid.Row="1" SearchText="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <ListView Grid.Row="2" Margin="10" Background="{x:Null}" BorderThickness="0" Padding="0" VerticalContentAlignment="Stretch"
+                          ItemsSource="{Binding Path=ViewByTasks}">
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle}">
+                            <GridViewColumn Header="{DynamicResource AdminTasksRestoreCaption}">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=Caption, IsAsync=True, UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="{DynamicResource AdminTasksRestoreCreater}" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=CreaterName, IsAsync=True, UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="{DynamicResource AdminTasksRestoreProject}" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=ProjectString, IsAsync=True, UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="{DynamicResource AdminTasksRestoreType}" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Name="BackTask" Height="30">
+                                            <TextBlock Text="{Binding Path=TypeString, IsAsync=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5, 0" />
+                                        </Border>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding Path=TypeTask, UpdateSourceTrigger=PropertyChanged}" Value="1" >
+                                                <Setter TargetName="BackTask" Property="Background" >
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="Olive" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=TypeTask, UpdateSourceTrigger=PropertyChanged}" Value="2" >
+                                                <Setter TargetName="BackTask" Property="Background" >
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="DarkGoldenrod" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=TypeTask, UpdateSourceTrigger=PropertyChanged}" Value="3" >
+                                                <Setter TargetName="BackTask" Property="Background" >
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="DodgerBlue" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=TypeTask, UpdateSourceTrigger=PropertyChanged}" Value="4" >
+                                                <Setter TargetName="BackTask" Property="Background" >
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="Maroon" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="{DynamicResource AdminTasksRestorePriorety}" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Name="PriorityTask" Height="30">
+                                            <TextBlock Text="{Binding Path=PrioretyString, IsAsync=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5, 0" />
+                                        </Border>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding Path=PriorityTask, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                                <Setter TargetName="PriorityTask" Property="Background" >
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="Plum" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=PriorityTask, UpdateSourceTrigger=PropertyChanged}" Value="1">
+                                                <Setter TargetName="PriorityTask" Property="Background" >
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="SlateBlue" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=PriorityTask, UpdateSourceTrigger=PropertyChanged}" Value="2">
+                                                <Setter TargetName="PriorityTask" Property="Background" >
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="Purple" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=PriorityTask, UpdateSourceTrigger=PropertyChanged}" Value="3">
+                                                <Setter TargetName="PriorityTask" Property="Background" >
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="MediumVioletRed" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=PriorityTask, UpdateSourceTrigger=PropertyChanged}" Value="4">
+                                                <Setter TargetName="PriorityTask" Property="Background" >
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="Indigo" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="{DynamicResource AdminTasksRestoreControl}">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="{DynamicResource AdminTasksRestoreRestore}" Padding="5"
+                                                Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.RestoreTaskCommand}"
+                                                bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.RestoreTask}">
+                                            <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Point>
+                                                    <Point.X>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.X>
+                                                    <Point.Y>30</Point.Y>
+                                                </Point>
+                                            </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                            <Button.CommandParameter>
+                                                <MultiBinding Converter="{StaticResource MultuValueConverter1}">
+                                                    <Binding Path="." />
+                                                    <Binding RelativeSource="{StaticResource WindowSource}" />
+                                                </MultiBinding>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="{DynamicResource AdminTasksRestoreRestoreAll}" Padding="10, 0" 
+                            Command="{Binding Path=RestoreAllTaskCommand}"
+                            CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}"
+                            bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.RestoreTask}">
+                        <bc:VisibilityOnNullBehaviour.OriginalSize>
+                            <Point>
+                                <Point.X>
+                                    <sys:Double>NaN</sys:Double>
+                                </Point.X>
+                                <Point.Y>
+                                    <sys:Double>NaN</sys:Double>
+                                </Point.Y>
+                            </Point>
+                        </bc:VisibilityOnNullBehaviour.OriginalSize>
+                    </Button>
+                    <Button Content="{DynamicResource AdminTasksRestoreCancel}" Padding="10, 0" 
+                            Command="{Binding RelativeSource={StaticResource WindowSource}, Path=(bc:HideButtonBehaviour.Command)}"
+                            CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="AdminUsersTemplate">
+        <Grid DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="{DynamicResource AdminUsersLogo}" Style="{DynamicResource H4}" Margin="20, 0, 0, 0" />
+
+            <controls:SearchBox Grid.Row="1" SearchText="{Binding Path=SearchTextUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <ListView Grid.Row="2" Margin="10" Background="{x:Null}" BorderThickness="0" Padding="0" VerticalContentAlignment="Stretch"
+                      ItemsSource="{Binding Path=ViewByUsers}">
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle}">
+                        <GridViewColumn >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding Path=IsDelete, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5, 0" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource AdminUsersUserName}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=UserName, IsAsync=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5, 0" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource AdminUsersFullName}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=FullName, IsAsync=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5, 0" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource AdminUsersRole}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=RuleName, IsAsync=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5, 0" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource AdminUsersSetting}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=SettingName, IsAsync=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5, 0" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource AdminUsersHidden}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding Path=IsHiddenUser, IsAsync=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5, 0" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource AdminUsersControl}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button Content="{DynamicResource AdminUsersEdit}" Padding="5"
+                                                Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.EditUserCommand}"
+                                                bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.UpdateInfoUser}">
+                                            <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Point>
+                                                    <Point.X>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.X>
+                                                    <Point.Y>30</Point.Y>
+                                                </Point>
+                                            </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                            <Button.CommandParameter>
+                                                <MultiBinding Converter="{StaticResource MultuValueConverter1}">
+                                                    <Binding Path="." />
+                                                    <Binding RelativeSource="{StaticResource WindowSource}" />
+                                                </MultiBinding>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                        <Grid bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.DeleteUser}">
+                                            <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Point>
+                                                    <Point.X>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.X>
+                                                    <Point.Y>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.Y>
+                                                </Point>
+                                            </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                            <Button Content="{DynamicResource AdminUsersRemove}" Height="0" Width="0" Padding="5"
+                                                                    Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.RemoveUserCommand}"
+                                                                    bc:VisibilityOnNullBehaviour.NegativeVisibilityOnNull="{Binding Path=IsDelete, UpdateSourceTrigger=PropertyChanged}">
+                                                <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                    <Point>
+                                                        <Point.X>
+                                                            <sys:Double>NaN</sys:Double>
+                                                        </Point.X>
+                                                        <Point.Y>
+                                                            <sys:Double>30</sys:Double>
+                                                        </Point.Y>
+                                                    </Point>
+                                                </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Button.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource MultuValueConverter1}">
+                                                        <Binding Path="." />
+                                                        <Binding RelativeSource="{StaticResource WindowSource}" />
+                                                    </MultiBinding>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </Grid>
+                                        <Grid bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.RestoreUser}">
+                                            <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Point>
+                                                    <Point.X>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.X>
+                                                    <Point.Y>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.Y>
+                                                </Point>
+                                            </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                            <Button Content="{DynamicResource AdminUsersRestored}" Height="0" Width="0" Padding="5"
+                                                                    Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.RestoredUserCommand}"
+                                                                    bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding Path=IsDelete, UpdateSourceTrigger=PropertyChanged}">
+                                                <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                    <Point>
+                                                        <Point.X>
+                                                            <sys:Double>NaN</sys:Double>
+                                                        </Point.X>
+                                                        <Point.Y>
+                                                            <sys:Double>30</sys:Double>
+                                                        </Point.Y>
+                                                    </Point>
+                                                </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Button.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource MultuValueConverter1}">
+                                                        <Binding Path="." />
+                                                        <Binding RelativeSource="{StaticResource WindowSource}" />
+                                                    </MultiBinding>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </Grid>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <WrapPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="{DynamicResource AdminUsersCreateUser}" Padding="10, 0" Command="{Binding Path=CreateNewUserCommand}" 
+                        CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}" 
+                        bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.CreateUser}"
+                        bc:VisibilityOnNullBehaviour.OriginalSize="NaN, 50" />
+                <Button Content="{DynamicResource AdminUsersRemoveAll}" Padding="10, 0" Command="{Binding Path=RemoveAllUsersCommand}" 
+                        CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}" 
+                        bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.DeleteUser}"
+                        bc:VisibilityOnNullBehaviour.OriginalSize="NaN, 50" />
+                <Button Content="{DynamicResource AdminUsersRestoreAll}" Padding="10, 0" Command="{Binding Path=RestoreAllUsersCommand}" 
+                        CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}" 
+                        bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.RestoreUser}"
+                        bc:VisibilityOnNullBehaviour.OriginalSize="NaN, 50" />
+                <Button Content="{DynamicResource AdminUsersCancel}" Padding="10, 0" Height="50"
+                            Command="{Binding RelativeSource={StaticResource WindowSource}, Path=(bc:HideButtonBehaviour.Command)}"
+                            CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}"/>
+            </WrapPanel>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="AdminRolesTemplate">
+        <Grid DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="{DynamicResource AdminRoleLogo}" Style="{DynamicResource H4}" Margin="20, 0, 0, 0" />
+
+            <controls:SearchBox Grid.Row="1" SearchText="{Binding Path=SearchTextRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <ListView Grid.Row="2" Margin="10" Background="{x:Null}" BorderThickness="0" Padding="0" VerticalContentAlignment="Stretch"
+                                          ItemsSource="{Binding Path=ViewByRoles}">
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle}">
+                        <GridViewColumn >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding Path=IsDelete, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5, 0" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource AdminRoleRoleName}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=RoleName, IsAsync=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5, 0" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource AdminRoleControl}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button Content="{DynamicResource AdminRoleEdit}" Padding="5"
+                                                Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.EditRoleCommand}"
+                                                bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.UpdateRole}">
+                                            <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Point>
+                                                    <Point.X>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.X>
+                                                    <Point.Y>
+                                                        <sys:Double>30</sys:Double>
+                                                    </Point.Y>
+                                                </Point>
+                                            </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                            <Button.CommandParameter>
+                                                <MultiBinding Converter="{StaticResource MultuValueConverter1}">
+                                                    <Binding Path="." />
+                                                    <Binding RelativeSource="{StaticResource WindowSource}" />
+                                                </MultiBinding>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                        <Grid bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.DeleteRole}">
+                                            <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Point>
+                                                    <Point.X>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.X>
+                                                    <Point.Y>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.Y>
+                                                </Point>
+                                            </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                            <Button Content="{DynamicResource AdminRoleRemove}" Height="0" Width="0" Padding="5"
+                                                                    Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.RemoveRoleCommand}"
+                                                                    bc:VisibilityOnNullBehaviour.NegativeVisibilityOnNull="{Binding Path=IsDelete, UpdateSourceTrigger=PropertyChanged}">
+                                                <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                    <Point>
+                                                        <Point.X>
+                                                            <sys:Double>NaN</sys:Double>
+                                                        </Point.X>
+                                                        <Point.Y>
+                                                            <sys:Double>30</sys:Double>
+                                                        </Point.Y>
+                                                    </Point>
+                                                </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Button.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource MultuValueConverter1}">
+                                                        <Binding Path="." />
+                                                        <Binding RelativeSource="{StaticResource WindowSource}" />
+                                                    </MultiBinding>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </Grid>
+                                        <Grid bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.RestoreRole}">
+                                            <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Point>
+                                                    <Point.X>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.X>
+                                                    <Point.Y>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.Y>
+                                                </Point>
+                                            </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                            <Button Content="{DynamicResource AdminRoleRestored}" Height="0" Width="0" Padding="5"
+                                                                    Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.RestoreRoleCommand}"
+                                                                    bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding Path=IsDelete, UpdateSourceTrigger=PropertyChanged}">
+                                                <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                    <Point>
+                                                        <Point.X>
+                                                            <sys:Double>NaN</sys:Double>
+                                                        </Point.X>
+                                                        <Point.Y>
+                                                            <sys:Double>30</sys:Double>
+                                                        </Point.Y>
+                                                    </Point>
+                                                </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Button.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource MultuValueConverter1}">
+                                                        <Binding Path="." />
+                                                        <Binding RelativeSource="{StaticResource WindowSource}" />
+                                                    </MultiBinding>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </Grid>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <WrapPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="{DynamicResource AdminRoleCreateRole}" Padding="10, 0" Command="{Binding Path=CreateNewRoleCommand}" 
+                        CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}" MinHeight="30"
+                        bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.CreateNewRole}">
+                    <bc:VisibilityOnNullBehaviour.OriginalSize>
+                        <Point>
+                            <Point.X>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.X>
+                            <Point.Y>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.Y>
+                        </Point>
+                    </bc:VisibilityOnNullBehaviour.OriginalSize>
+                </Button>
+
+                <Button Content="{DynamicResource AdminRoleRemoveAll}" Padding="10, 0" Command="{Binding Path=RemoveAllRolesCommand}" 
+                        CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}" MinHeight="30"
+                        bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.DeleteRole}">
+                    <bc:VisibilityOnNullBehaviour.OriginalSize>
+                        <Point>
+                            <Point.X>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.X>
+                            <Point.Y>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.Y>
+                        </Point>
+                    </bc:VisibilityOnNullBehaviour.OriginalSize>
+                </Button>
+                <Button Content="{DynamicResource AdminRoleRestoreAll}" Padding="10, 0" Command="{Binding Path=RestoreAllRolesCommand}" 
+                        CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}" MinHeight="30"
+                        bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.RestoreRole}">
+                    <bc:VisibilityOnNullBehaviour.OriginalSize>
+                        <Point>
+                            <Point.X>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.X>
+                            <Point.Y>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.Y>
+                        </Point>
+                    </bc:VisibilityOnNullBehaviour.OriginalSize>
+                </Button>
+                <Button Content="{DynamicResource AdminRoleCancel}" Padding="10, 0" MinHeight="30"
+                            Command="{Binding RelativeSource={StaticResource WindowSource}, Path=(bc:HideButtonBehaviour.Command)}"
+                            CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}"/>
+            </WrapPanel>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="AdminSettingsTemplate">
+        <Grid DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="{DynamicResource AdminSettingsLogo}" Style="{DynamicResource H4}" Margin="20, 0, 0, 0" />
+
+            <controls:SearchBox Grid.Row="1" SearchText="{Binding Path=SearchTextSettings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <ListView Grid.Row="2" Margin="10" Background="{x:Null}" BorderThickness="0" Padding="0" VerticalContentAlignment="Stretch"
+                                          ItemsSource="{Binding Path=ViewBySettings}">
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle}">
+                        <GridViewColumn >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding Path=IsDelete, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5, 0" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource AdminSettingsSettingName}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Caption, IsAsync=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5, 0" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource AdminSettingsControl}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button Content="{DynamicResource AdminSettingsEdit}" Height="30" Padding="5"
+                                                Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.EditSettingCommand}"
+                                                bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.UpdateSetting}">
+                                            <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Point>
+                                                    <Point.X>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.X>
+                                                    <Point.Y>
+                                                        <sys:Double>30</sys:Double>
+                                                    </Point.Y>
+                                                </Point>
+                                            </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                            <Button.CommandParameter>
+                                                <MultiBinding Converter="{StaticResource MultuValueConverter1}">
+                                                    <Binding Path="." />
+                                                    <Binding RelativeSource="{StaticResource WindowSource}" />
+                                                </MultiBinding>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                        <Grid bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.DeleteSetting}">
+                                            <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Point>
+                                                    <Point.X>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.X>
+                                                    <Point.Y>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.Y>
+                                                </Point>
+                                            </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                            <Button Content="{DynamicResource AdminSettingsRemove}" Height="0" Width="0" Padding="5"
+                                                                    Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.RemoveSettingCommand}"
+                                                                    bc:VisibilityOnNullBehaviour.NegativeVisibilityOnNull="{Binding Path=IsDelete, UpdateSourceTrigger=PropertyChanged}">
+                                                <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                    <Point>
+                                                        <Point.X>
+                                                            <sys:Double>NaN</sys:Double>
+                                                        </Point.X>
+                                                        <Point.Y>
+                                                            <sys:Double>30</sys:Double>
+                                                        </Point.Y>
+                                                    </Point>
+                                                </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Button.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource MultuValueConverter1}">
+                                                        <Binding Path="." />
+                                                        <Binding RelativeSource="{StaticResource WindowSource}" />
+                                                    </MultiBinding>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </Grid>
+                                        <Grid bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.RestoreSetting}">
+                                            <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Point>
+                                                    <Point.X>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.X>
+                                                    <Point.Y>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.Y>
+                                                </Point>
+                                            </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                            <Button Content="{DynamicResource AdminSettingsRestored}" Height="0" Width="0" Padding="5"
+                                                                    Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.RestoreSettingCommand}"
+                                                                    bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding Path=IsDelete, UpdateSourceTrigger=PropertyChanged}">
+                                                <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                    <Point>
+                                                        <Point.X>
+                                                            <sys:Double>NaN</sys:Double>
+                                                        </Point.X>
+                                                        <Point.Y>
+                                                            <sys:Double>30</sys:Double>
+                                                        </Point.Y>
+                                                    </Point>
+                                                </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Button.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource MultuValueConverter1}">
+                                                        <Binding Path="." />
+                                                        <Binding RelativeSource="{StaticResource WindowSource}" />
+                                                    </MultiBinding>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </Grid>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="{DynamicResource AdminSettingsCreateRole}" Padding="10, 0" Command="{Binding Path=CreateNewSettingCommand}" 
+                        CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}" 
+                        bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.CreateSetting}">
+                    <bc:VisibilityOnNullBehaviour.OriginalSize>
+                        <Point>
+                            <Point.X>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.X>
+                            <Point.Y>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.Y>
+                        </Point>
+                    </bc:VisibilityOnNullBehaviour.OriginalSize>
+                </Button>
+                <Button Content="{DynamicResource AdminSettingsRemoveAll}" Padding="10, 0" Command="{Binding Path=RemoveAllSettingsCommand}" 
+                        CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}" 
+                        bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.DeleteSetting}">
+                    <bc:VisibilityOnNullBehaviour.OriginalSize>
+                        <Point>
+                            <Point.X>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.X>
+                            <Point.Y>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.Y>
+                        </Point>
+                    </bc:VisibilityOnNullBehaviour.OriginalSize>
+                </Button>
+                <Button Content="{DynamicResource AdminSettingsRestoreAll}" Padding="10, 0" Command="{Binding Path=RestoreAllSettingsCommand}" 
+                        CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}" 
+                        bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.RestoreSetting}">
+                    <bc:VisibilityOnNullBehaviour.OriginalSize>
+                        <Point>
+                            <Point.X>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.X>
+                            <Point.Y>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.Y>
+                        </Point>
+                    </bc:VisibilityOnNullBehaviour.OriginalSize>
+                </Button>
+                <Button Content="{DynamicResource AdminSettingsCancel}" Padding="10, 0" 
+                            Command="{Binding RelativeSource={StaticResource WindowSource}, Path=(bc:HideButtonBehaviour.Command)}"
+                            CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}"/>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="AdminProjectsTemplate">
+        <Grid DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="{DynamicResource AdminProjectLogo}" Style="{DynamicResource H4}" Margin="20, 0, 0, 0" />
+
+            <controls:SearchBox Grid.Row="1" SearchText="{Binding Path=SearchTextProjects, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <ListView Grid.Row="2" Margin="10" Background="{x:Null}" BorderThickness="0" Padding="0" VerticalContentAlignment="Stretch"
+                                          ItemsSource="{Binding Path=ViewByProjects}">
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle}">
+                        <GridViewColumn >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding Path=IsDelete, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5, 0" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource AdminProjectProjectName}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Caption, IsAsync=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5, 0" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource AdminProjectControl}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button Content="{DynamicResource AdminProjectEdit}" Padding="5"
+                                                Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.EditProjectCommand}"
+                                                bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.UpdateProject}">
+                                            <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Point>
+                                                    <Point.X>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.X>
+                                                    <Point.Y>
+                                                        <sys:Double>30</sys:Double>
+                                                    </Point.Y>
+                                                </Point>
+                                            </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                            <Button.CommandParameter>
+                                                <MultiBinding Converter="{StaticResource MultuValueConverter1}">
+                                                    <Binding Path="." />
+                                                    <Binding RelativeSource="{StaticResource WindowSource}" />
+                                                </MultiBinding>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                        <Grid bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.DeleteProject}">
+                                            <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Point>
+                                                    <Point.X>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.X>
+                                                    <Point.Y>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.Y>
+                                                </Point>
+                                            </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                            <Button Content="{DynamicResource AdminProjectRemove}" Height="0" Width="0" Padding="5"
+                                                                    Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.RemoveProjectCommand}"
+                                                                    bc:VisibilityOnNullBehaviour.NegativeVisibilityOnNull="{Binding Path=IsDelete, UpdateSourceTrigger=PropertyChanged}">
+                                                <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                    <Point>
+                                                        <Point.X>
+                                                            <sys:Double>NaN</sys:Double>
+                                                        </Point.X>
+                                                        <Point.Y>
+                                                            <sys:Double>30</sys:Double>
+                                                        </Point.Y>
+                                                    </Point>
+                                                </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Button.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource MultuValueConverter1}">
+                                                        <Binding Path="." />
+                                                        <Binding RelativeSource="{StaticResource WindowSource}" />
+                                                    </MultiBinding>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </Grid>
+                                        <Grid bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.RestoreProject}">
+                                            <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Point>
+                                                    <Point.X>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.X>
+                                                    <Point.Y>
+                                                        <sys:Double>NaN</sys:Double>
+                                                    </Point.Y>
+                                                </Point>
+                                            </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                            <Button Content="{DynamicResource AdminProjectRestored}" Height="0" Width="0" Padding="5"
+                                                                    Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.RestoreProjectCommand}"
+                                                                    bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding Path=IsDelete, UpdateSourceTrigger=PropertyChanged}">
+                                                <bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                    <Point>
+                                                        <Point.X>
+                                                            <sys:Double>NaN</sys:Double>
+                                                        </Point.X>
+                                                        <Point.Y>
+                                                            <sys:Double>30</sys:Double>
+                                                        </Point.Y>
+                                                    </Point>
+                                                </bc:VisibilityOnNullBehaviour.OriginalSize>
+                                                <Button.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource MultuValueConverter1}">
+                                                        <Binding Path="." />
+                                                        <Binding RelativeSource="{StaticResource WindowSource}" />
+                                                    </MultiBinding>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </Grid>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                <!--<ListView.Template>
+                    <ControlTemplate TargetType="{x:Type ListView}">
+                        <ControlTemplate.Resources>
+                            <Style TargetType="{x:Type ItemsControl}" />
+                        </ControlTemplate.Resources>
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="True">
+                            <info:ScrollViewInfo VerticalSizeItems="5" Focusable="False" Padding="{TemplateBinding Padding}"
+                                             RowCount="{Binding Path=VerticalProjects.Count}" 
+                                             VerticalMetric="{Binding Path=VerticalProjectMetric}" 
+                                             VerticalDataSource="{Binding Path=VerticalProjects, UpdateSourceTrigger=PropertyChanged}">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </info:ScrollViewInfo>
+                        </Border>
+                    </ControlTemplate>
+                </ListView.Template>-->
+            </ListView>
+
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="{DynamicResource AdminProjectCreateRole}" Padding="10, 0" Command="{Binding Path=CreateNewProjectCommand}" 
+                        CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}" 
+                        bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.CreateProject}">
+                    <bc:VisibilityOnNullBehaviour.OriginalSize>
+                        <Point>
+                            <Point.X>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.X>
+                            <Point.Y>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.Y>
+                        </Point>
+                    </bc:VisibilityOnNullBehaviour.OriginalSize>
+                </Button>
+                <Button Content="{DynamicResource AdminProjectRemoveAll}" Padding="10, 0" Command="{Binding Path=RemoveAllProjectCommand}" 
+                        CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}" 
+                        bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.DeleteProject}">
+                    <bc:VisibilityOnNullBehaviour.OriginalSize>
+                        <Point>
+                            <Point.X>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.X>
+                            <Point.Y>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.Y>
+                        </Point>
+                    </bc:VisibilityOnNullBehaviour.OriginalSize>
+                </Button>
+                <Button Content="{DynamicResource AdminProjectRestoreAll}" Padding="10, 0" Command="{Binding Path=RestoreAllProjectCommand}" 
+                        CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}" 
+                        bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentUser.Role.RestoreProject}">
+                    <bc:VisibilityOnNullBehaviour.OriginalSize>
+                        <Point>
+                            <Point.X>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.X>
+                            <Point.Y>
+                                <sys:Double>NaN</sys:Double>
+                            </Point.Y>
+                        </Point>
+                    </bc:VisibilityOnNullBehaviour.OriginalSize>
+                </Button>
+                <Button Content="{DynamicResource AdminProjectCancel}" Padding="10, 0" 
+                            Command="{Binding RelativeSource={StaticResource WindowSource}, Path=(bc:HideButtonBehaviour.Command)}"
+                            CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}"/>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="AdminJournalTemplate">
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Journal" />
+    </DataTemplate>
+    
+    <!--ControlChild-->
+    <DataTemplate x:Key="AdminControlUserTemplate">
+        <Grid DataContext="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ContentControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{Binding Path=State, UpdateSourceTrigger=PropertyChanged}">
+                <ContentControl.ContentTemplateSelector>
+                    <sel:StateViewModelSelector>
+                        <sel:StateViewModelSelector.CreateTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{DynamicResource AdminUserControlCreateUser}" Style="{DynamicResource H4}" Margin="20, 0, 0, 0" />
+                            </DataTemplate>
+                        </sel:StateViewModelSelector.CreateTemplate>
+                        <sel:StateViewModelSelector.EditTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{DynamicResource AdminUserControlEditUser}" Style="{DynamicResource H4}" Margin="20, 0, 0, 0" />
+                            </DataTemplate>
+                        </sel:StateViewModelSelector.EditTemplate>
+                    </sel:StateViewModelSelector>
+                </ContentControl.ContentTemplateSelector>
+            </ContentControl>
+
+            <StackPanel Grid.Row="1" 
+                        bc:FrameworkElementPositionBehaviour.FrameworkElementPosition="{Binding RelativeSource={StaticResource WindowSource}, Path=(bc:WindowPositionBehaviour.WindowPosition)}">
+                <Grid MinWidth="200">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Border Style="{DynamicResource TreeBorder}">
+                        <TextBlock Text="{DynamicResource AdminUserControlMainInfo}" Margin="10, 5, 5, 5" Style="{DynamicResource H4}" />
+                    </Border>
+
+                    <ScrollViewer DataContext="{Binding Path=SelectedObject}"  Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="{DynamicResource AdminUserControlUserName}" VerticalAlignment="Bottom" Margin="10, 0, 0, 0" />
+                            <TextBox Grid.Row="1" Text="{Binding Path=UserName}" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
+
+                            <TextBlock Grid.Row="2" Text="{DynamicResource AdminUserControlFullUserName}" VerticalAlignment="Bottom" Margin="10, 0, 0, 0" />
+                            <TextBox Grid.Row="3" Text="{Binding Path=FullName}" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+                <Grid MinWidth="200">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Border Style="{DynamicResource TreeBorder}">
+                        <TextBlock Text="{DynamicResource AdminUserControlParametr}" Margin="10, 5, 5, 5" Style="{DynamicResource H4}" />
+                    </Border>
+
+                    <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Text="{DynamicResource AdminUserControlRole}" VerticalAlignment="Bottom" Margin="10, 0, 0, 0" />
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="30" />
+                                </Grid.ColumnDefinitions>
+                                <ComboBox VerticalAlignment="Center" Margin="10, 0, 0, 0" DisplayMemberPath="Caption" SelectedValuePath="ID"
+                                                        SelectedValue="{Binding Path=SelectedObject.IdRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        ItemsSource="{Binding Path=RolesNameList, IsAsync=True}" />
+
+                                <Button Grid.Column="1" Content="+" 
+                                                                Command="{Binding Path=ActiveRoleOnUserCommand}" 
+                                                                CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}" />
+                            </Grid>
+
+                            <TextBlock Grid.Row="2" Text="{DynamicResource AdminUserControlSettings}" VerticalAlignment="Bottom" Margin="10, 0, 0, 0" />
+                            <Grid Grid.Row="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="30" />
+                                </Grid.ColumnDefinitions>
+
+                                <ComboBox VerticalAlignment="Center" Margin="10, 0, 0, 0" DisplayMemberPath="Caption" SelectedValuePath="ID"
+                                                                SelectedValue="{Binding Path=SelectedObject.IdSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                ItemsSource="{Binding Path=SettingsNamesList, IsAsync=True}" />
+
+                                <Button Grid.Column="1" Content="+"
+                                                                Command="{Binding Path=ActiveSettingOnUserCommand}"
+                                                                CommandParameter="{Binding RelativeSource={StaticResource WindowSource}}" />
+                            </Grid>
+
+                            <TextBlock Grid.Row="4" Text="{DynamicResource AdminUserControlHiddenUser}" VerticalAlignment="Bottom" Margin="10, 0, 0, 0" />
+                            <ToggleButton Grid.Row="5" Content="{DynamicResource AdminUserControlActive}" VerticalAlignment="Center" IsChecked="{Binding Path=IsHiddenUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+                <Grid MinWidth="200">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+
+                        <RowDefinition Height="*" MinHeight="30" />
+                    </Grid.RowDefinitions>
+
+                    <Border Style="{DynamicResource TreeBorder}">
+                        <TextBlock Text="{DynamicResource AdminUserControlSecurity}" Margin="10, 5, 5, 5" Style="{DynamicResource H4}" />
+                    </Border>
+                    <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled">
+                        <ContentControl HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="{Binding Path=State, UpdateSourceTrigger=PropertyChanged}">
+                            <ContentControl.ContentTemplateSelector>
+                                <sel:StateViewModelSelector>
+                                    <sel:StateViewModelSelector.CreateTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="30" />
+                                                    <RowDefinition Height="30" />
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Text="{DynamicResource AdminUserControlPassword}" Margin="10, 0, 0, 0" VerticalAlignment="Bottom" />
+                                                <PasswordBox Grid.Row="1" VerticalAlignment="Center" Margin="10, 0"
+                                                    b:PasswordBoxBehaviour.Password="{Binding Path=SelectedObject.HasPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </sel:StateViewModelSelector.CreateTemplate>
+                                    <sel:StateViewModelSelector.EditTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <ToggleButton Name="ControlPopup" Content="{DynamicResource AdminUserControlNewPassword}" />
+                                                <Popup Placement="Bottom" IsOpen="{Binding ElementName=ControlPopup, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" StaysOpen="False" >
+                                                    <Border Width="200"  >
+                                                        <Grid>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="30" />
+                                                                <RowDefinition Height="30" />
+                                                            </Grid.RowDefinitions>
+                                                            <TextBlock Text="{DynamicResource AdminUserControlPassword}" Margin="10, 0, 0, 0" VerticalAlignment="Bottom" />
+                                                            <PasswordBox Grid.Row="1" VerticalAlignment="Center" Margin="10, 0" DataContext="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext}"
+                                                                b:PasswordBoxBehaviour.Password="{Binding Path=SelectedObject.HasPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                        </Grid>
+                                                    </Border>
+                                                </Popup>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </sel:StateViewModelSelector.EditTemplate>
+                                </sel:StateViewModelSelector>
+                            </ContentControl.ContentTemplateSelector>
+                        </ContentControl>
+                    </ScrollViewer>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="AdminControlRoleTemplate">
+        <DataTemplate.Resources>
+            <Style TargetType="{x:Type CheckBox}">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="TextElement.Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </DataTemplate.Resources>
+        <Grid DataContext="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ContentControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{Binding Path=State, UpdateSourceTrigger=PropertyChanged}">
+                <ContentControl.ContentTemplateSelector>
+                    <sel:StateViewModelSelector>
+                        <sel:StateViewModelSelector.CreateTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{DynamicResource AdminRoleControlCreateRole}" Style="{DynamicResource H4}" Margin="20, 0, 0, 0" />
+                            </DataTemplate>
+                        </sel:StateViewModelSelector.CreateTemplate>
+                        <sel:StateViewModelSelector.EditTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{DynamicResource AdminRoleControlEditRole}" Style="{DynamicResource H4}" Margin="20, 0, 0, 0" />
+                            </DataTemplate>
+                        </sel:StateViewModelSelector.EditTemplate>
+                    </sel:StateViewModelSelector>
+                </ContentControl.ContentTemplateSelector>
+            </ContentControl>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <StackPanel Grid.Row="1" 
+                                            bc:FrameworkElementPositionBehaviour.FrameworkElementPosition="{Binding RelativeSource={StaticResource WindowSource}, Path=(bc:WindowPositionBehaviour.WindowPosition)}">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Style="{DynamicResource TreeBorder}">
+                            <TextBlock Text="{DynamicResource AdminRoleControlMainInfo}" Margin="10, 5, 5, 5" Style="{DynamicResource H4}" />
+                        </Border>
+
+                        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Text="{DynamicResource AdminRoleControlRoleName}" VerticalAlignment="Bottom" Margin="10, 0, 0, 0" />
+                                <TextBox Grid.Row="1" Text="{Binding Path=SelectedObject.RoleName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Style="{DynamicResource TreeBorder}">
+                            <TextBlock Text="{DynamicResource AdminRoleControlTaskRole}" Margin="10, 5, 5, 5" Style="{DynamicResource H4}" />
+                        </Border>
+
+                        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+                                <CheckBox IsChecked="{Binding Path=SelectedObject.CreateTask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlCreateTask}" />
+                                <CheckBox Grid.Row="1" IsChecked="{Binding Path=SelectedObject.UpdateInfoTask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlChangeTask}" />
+                                <CheckBox Grid.Row="2" IsChecked="{Binding Path=SelectedObject.ExecutionTask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlExecutionTask}" />
+                                <CheckBox Grid.Row="3" IsChecked="{Binding Path=SelectedObject.DeleteTask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlRemoveTask}" />
+                                <CheckBox Grid.Row="4" IsChecked="{Binding Path=SelectedObject.ViewAllTask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlViewAllTask}" />
+                                <CheckBox Grid.Row="5" IsChecked="{Binding Path=SelectedObject.ReportExecuteTask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlReportTask}" />
+                                <CheckBox Grid.Row="6" IsChecked="{Binding Path=SelectedObject.RestoreTask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlRestoreTask}" />
+                                <CheckBox Grid.Row="7" IsChecked="{Binding Path=SelectedObject.AllowCancellation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlReturnExecution}" />
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Style="{DynamicResource TreeBorder}">
+                            <TextBlock Text="{DynamicResource AdminRoleControlUserRole}" Margin="10, 5, 5, 5" Style="{DynamicResource H4}" />
+                        </Border>
+
+                        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+                                <CheckBox IsChecked="{Binding Path=SelectedObject.CreateUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlCreateUser}" />
+                                <CheckBox Grid.Row="1" IsChecked="{Binding Path=SelectedObject.UpdateInfoUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlUpdateUser}" />
+                                <CheckBox Grid.Row="2" IsChecked="{Binding Path=SelectedObject.DeleteUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlRemovedUser}" />
+                                <CheckBox Grid.Row="3" IsChecked="{Binding Path=SelectedObject.RestoreUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlRestoreUser}" />
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Style="{DynamicResource TreeBorder}">
+                            <TextBlock Text="{DynamicResource AdminRoleControlRoleRole}" Margin="10, 5, 5, 5" Style="{DynamicResource H4}" />
+                        </Border>
+
+                        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+                                <CheckBox IsChecked="{Binding Path=SelectedObject.CreateNewRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlCreateRole}" />
+                                <CheckBox Grid.Row="1" IsChecked="{Binding Path=SelectedObject.UpdateRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlUpdateRole}" />
+                                <CheckBox Grid.Row="2" IsChecked="{Binding Path=SelectedObject.DeleteRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlRemoveRole}" />
+                                <CheckBox Grid.Row="3" IsChecked="{Binding Path=SelectedObject.RestoreRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlRestoreRole}" />
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Style="{DynamicResource TreeBorder}">
+                            <TextBlock Text="{DynamicResource AdminRoleControlSettingRole}" Margin="10, 5, 5, 5" Style="{DynamicResource H4}" />
+                        </Border>
+
+                        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+                                <CheckBox IsChecked="{Binding Path=SelectedObject.CreateSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlCreateSettings}" />
+                                <CheckBox Grid.Row="1" IsChecked="{Binding Path=SelectedObject.UpdateSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlChangeSettings}" />
+                                <CheckBox Grid.Row="2" IsChecked="{Binding Path=SelectedObject.DeleteSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlRemoveSettings}" />
+                                <CheckBox Grid.Row="3" IsChecked="{Binding Path=SelectedObject.RestoreSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlRestoreSettings}" />
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Style="{DynamicResource TreeBorder}">
+                            <TextBlock Text="{DynamicResource AdminRoleControlProjectRole}" Margin="10, 5, 5, 5" Style="{DynamicResource H4}" />
+                        </Border>
+
+                        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+                                <CheckBox IsChecked="{Binding Path=SelectedObject.CreateProject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlCreateProject}" />
+                                <CheckBox Grid.Row="1" IsChecked="{Binding Path=SelectedObject.UpdateProject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlChangeProject}" />
+                                <CheckBox Grid.Row="2" IsChecked="{Binding Path=SelectedObject.DeleteProject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlRemoveProject}" />
+                                <CheckBox Grid.Row="3" IsChecked="{Binding Path=SelectedObject.RestoreProject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminRoleControlRestoreProject}" />
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="AdminControlSettingTemplate">
+        <DataTemplate.Resources>
+            <Style TargetType="{x:Type CheckBox}">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="TextElement.Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </DataTemplate.Resources>
+        <Grid DataContext="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ContentControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{Binding Path=State, UpdateSourceTrigger=PropertyChanged}">
+                <ContentControl.ContentTemplateSelector>
+                    <sel:StateViewModelSelector>
+                        <sel:StateViewModelSelector.CreateTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{DynamicResource AdminSettingControlCreateSettings}" Style="{DynamicResource H4}" Margin="20, 0, 0, 0" />
+                            </DataTemplate>
+                        </sel:StateViewModelSelector.CreateTemplate>
+                        <sel:StateViewModelSelector.EditTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{DynamicResource AdminSettingControlEditSettings}" Style="{DynamicResource H4}" Margin="20, 0, 0, 0" />
+                            </DataTemplate>
+                        </sel:StateViewModelSelector.EditTemplate>
+                    </sel:StateViewModelSelector>
+                </ContentControl.ContentTemplateSelector>
+            </ContentControl>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <StackPanel Grid.Row="1" 
+                            bc:FrameworkElementPositionBehaviour.FrameworkElementPosition="{Binding RelativeSource={StaticResource WindowSource}, Path=(bc:WindowPositionBehaviour.WindowPosition)}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Style="{DynamicResource TreeBorder}">
+                            <TextBlock Text="{DynamicResource AdminSettingControlMainInfo}" Margin="10, 5, 5, 5" Style="{DynamicResource H4}" />
+                        </Border>
+
+                        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Text="{DynamicResource AdminSettingControlSettingsName}" VerticalAlignment="Bottom" Margin="10, 0, 0, 0" />
+                                <TextBox Grid.Row="1" Text="{Binding Path=SelectedObject.Caption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Style="{DynamicResource TreeBorder}">
+                            <TextBlock Text="{DynamicResource AdminSettingControlApplication}" Margin="10, 5, 5, 5" Style="{DynamicResource H4}" />
+                        </Border>
+
+                        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+                                <CheckBox IsChecked="{Binding Path=SelectedObject.AlwaysSpecifyAPlaceToDdownload, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminSettingControlSelectDownloadPath}" />
+                                <CheckBox Grid.Row="1" IsChecked="{Binding Path=SelectedObject.MonitorUserActions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminSettingControlStackUserAction}" />
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Style="{DynamicResource TreeBorder}">
+                            <TextBlock Text="{DynamicResource AdminSettingControlUser}" Margin="10, 5, 5, 5" Style="{DynamicResource H4}" />
+                        </Border>
+
+                        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+                                <CheckBox IsChecked="{Binding Path=SelectedObject.UseAnimation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminSettingControlUseAnimation}" />
+                                <CheckBox Grid.Row="1" IsChecked="{Binding Path=SelectedObject.ExitCheck, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminSettingControlExitChack}" />
+                                <CheckBox Grid.Row="2" IsChecked="{Binding Path=SelectedObject.UseGlobalHookKeys, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource AdminSettingControlUseGlobalHookKeys}" />
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="AdminControlProjectTemplate">
+        <DataTemplate.Resources>
+            <Style TargetType="{x:Type CheckBox}">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="TextElement.Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </DataTemplate.Resources>
+        <Grid DataContext="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ContentControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{Binding Path=State, UpdateSourceTrigger=PropertyChanged}">
+                <ContentControl.ContentTemplateSelector>
+                    <sel:StateViewModelSelector>
+                        <sel:StateViewModelSelector.CreateTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{DynamicResource AdminProjectControlCreateProject}" Style="{DynamicResource H4}" Margin="20, 0, 0, 0" />
+                            </DataTemplate>
+                        </sel:StateViewModelSelector.CreateTemplate>
+                        <sel:StateViewModelSelector.EditTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{DynamicResource AdminProjectControlEditProject}" Style="{DynamicResource H4}" Margin="20, 0, 0, 0" />
+                            </DataTemplate>
+                        </sel:StateViewModelSelector.EditTemplate>
+                    </sel:StateViewModelSelector>
+                </ContentControl.ContentTemplateSelector>
+            </ContentControl>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <StackPanel Grid.Row="1" 
+                                            bc:FrameworkElementPositionBehaviour.FrameworkElementPosition="{Binding RelativeSource={StaticResource WindowSource}, Path=(bc:WindowPositionBehaviour.WindowPosition)}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Style="{DynamicResource TreeBorder}">
+                            <TextBlock Text="{DynamicResource AdminProjectControlMainInfo}" Margin="10, 5, 5, 5" Style="{DynamicResource H4}" />
+                        </Border>
+
+                        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Text="{DynamicResource AdminProjectControlProjectName}" VerticalAlignment="Bottom" Margin="10, 0, 0, 0" />
+                                <TextBox Grid.Row="1" Text="{Binding Path=SelectedObject.Caption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

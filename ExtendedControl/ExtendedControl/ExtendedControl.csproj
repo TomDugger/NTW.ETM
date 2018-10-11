@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{03C7D282-4A77-4309-A134-7A530F6B143B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ExtendedControl</RootNamespace>
+    <AssemblyName>ExtendedControl</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Info, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Info.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity">
+      <HintPath>..\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Virtualization">
+      <HintPath>..\Virtualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Virtualization.Calendar">
+      <HintPath>..\Virtualization.Calendar.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif">
+      <HintPath>..\WpfAnimatedGif.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Behaviour\KeyDefinitionControlBehaviour.cs" />
+    <Compile Include="Behaviour\PasswordBoxBehaviour.cs" />
+    <Compile Include="Behaviour\RectanglePositionBehaviour.cs" />
+    <Compile Include="Behaviour\ViewModelIjection.cs" />
+    <Compile Include="Converters\ErrorsConverter.cs" />
+    <Compile Include="Converters\PositionConverter.cs" />
+    <Compile Include="Converters\ResourceStringFormatConverter.cs" />
+    <Compile Include="Converters\TypePanelToImageUriConverter.cs" />
+    <Compile Include="Core\ViewModelContainer.cs" />
+    <Compile Include="Selectors\ColumnSelector.cs" />
+    <Compile Include="Selectors\EventItemSelector.cs" />
+    <Compile Include="Selectors\TaskCommentSelector.cs" />
+    <Compile Include="ViewModels\AdminViewModel.cs" />
+    <Compile Include="ViewModels\AppSettingsViewModel.cs" />
+    <Compile Include="ViewModels\AuthorizationViewModel.cs" />
+    <Compile Include="ViewModels\ControlPanelViewModel.cs" />
+    <Compile Include="ViewModels\ControlViewModel.cs" />
+    <Compile Include="ViewModels\DBSettingsViewModel.cs" />
+    <Compile Include="ViewModels\EventViewModel.cs" />
+    <Compile Include="ViewModels\FilesViewModel.cs" />
+    <Compile Include="ViewModels\GlobalHookKeyViewModel.cs" />
+    <Compile Include="ViewModels\NotesViewModel.cs" />
+    <Compile Include="ViewModels\ProcessViewModel.cs" />
+    <Compile Include="ViewModels\ReportsViewModel.cs" />
+    <Compile Include="ViewModels\TasksViewModel.cs" />
+    <Compile Include="ViewModels\UserSettingsViewModel.cs" />
+    <Compile Include="ViewModels\ViewModel.cs" />
+    <Compile Include="Views\AuthorizationWindow.xaml.cs">
+      <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ControlPanelsWindow.xaml.cs">
+      <DependentUpon>ControlPanelsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ControlWindow\DefinitionKeysControlWindow.xaml.cs">
+      <DependentUpon>DefinitionKeysControlWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ControlWindow\FilesControlWindow.xaml.cs">
+      <DependentUpon>FilesControlWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ControlWindow\NoteControlWindow.xaml.cs">
+      <DependentUpon>NoteControlWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ControlWindow\ProcessControlWindow.xaml.cs">
+      <DependentUpon>ProcessControlWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ControlWindow\TaskControlWindow.xaml.cs">
+      <DependentUpon>TaskControlWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DBSettingsWindow.xaml.cs">
+      <DependentUpon>DBSettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DragDrop\ItemNoteWindow.xaml.cs">
+      <DependentUpon>ItemNoteWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DragDrop\ItemPanelView.xaml.cs">
+      <DependentUpon>ItemPanelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DragDrop\ItemTaskWindow.xaml.cs">
+      <DependentUpon>ItemTaskWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Panels\AdminControlPanel.xaml.cs">
+      <DependentUpon>AdminControlPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Panels\AppControlPanel.xaml.cs">
+      <DependentUpon>AppControlPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Panels\Child\AdminChildWindow.xaml.cs">
+      <DependentUpon>AdminChildWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Panels\Child\AdminControlChildWindow.xaml.cs">
+      <DependentUpon>AdminControlChildWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Panels\Child\CalendarWindow.xaml.cs">
+      <DependentUpon>CalendarWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Panels\EventsControlPanel.xaml.cs">
+      <DependentUpon>EventsControlPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Panels\HookKeyControlPanel.xaml.cs">
+      <DependentUpon>HookKeyControlPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Panels\NotesControlPanel.xaml.cs">
+      <DependentUpon>NotesControlPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Panels\ProcesControlPanel.xaml.cs">
+      <DependentUpon>ProcesControlPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Panels\ReportControlPanel.xaml.cs">
+      <DependentUpon>ReportControlPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Panels\SettingsControlPanel.xaml.cs">
+      <DependentUpon>SettingsControlPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Panels\TaskControlPanel.xaml.cs">
+      <DependentUpon>TaskControlPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Panels\TrackingStateControlPanel.xaml.cs">
+      <DependentUpon>TrackingStateControlPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StartUpWindow.xaml.cs">
+      <DependentUpon>StartUpWindow.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NTW.Communication\NTW.Communication.csproj">
+      <Project>{3d1523fd-e5b8-4069-b769-f9e0d875e3a6}</Project>
+      <Name>NTW.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NTW.Controls\NTW.Controls.csproj">
+      <Project>{8E69B4D9-B3AF-4665-856E-6D85DEF0A790}</Project>
+      <Name>NTW.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NTW.Data.Context\NTW.Data.Context.csproj">
+      <Project>{be8c6d28-0dee-49fe-a1d1-816785c48081}</Project>
+      <Name>NTW.Data.Context</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NTW.Data\NTW.Data.csproj">
+      <Project>{c416a090-2734-4605-95dd-25cd2b6b0cab}</Project>
+      <Name>NTW.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NTW.Moduls\NTW.Moduls.csproj">
+      <Project>{3e01a879-4ae8-418c-a517-91e93432f61e}</Project>
+      <Name>NTW.Moduls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NTW.Resources\NTW.Resources.csproj">
+      <Project>{df6a039c-f735-4b42-8c82-a522469b1ebd}</Project>
+      <Name>NTW.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NTW\NTW.csproj">
+      <Project>{e8e08e28-5ee6-4ccb-b2d1-4a47bc5be477}</Project>
+      <Name>NTW</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ControlPanel.png" />
+    <Resource Include="Images\EnterUser.png" />
+    <Resource Include="Images\Events.png" />
+    <Resource Include="Images\HookKeys.png" />
+    <Resource Include="Images\Notes.png" />
+    <Resource Include="Images\Report.png" />
+    <Resource Include="Images\Settings.png" />
+    <Resource Include="Images\Shotdown.png" />
+    <Resource Include="Images\Task.png" />
+    <Resource Include="Images\Tracking.png" />
+    <Resource Include="Images\Unfasten.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Resources\AdminTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ItemMenuStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\MainControlWindowTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ProviderControlTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AuthorizationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ControlPanelsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ControlWindow\DefinitionKeysControlWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ControlWindow\FilesControlWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ControlWindow\NoteControlWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ControlWindow\ProcessControlWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ControlWindow\TaskControlWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DBSettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DragDrop\ItemNoteWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DragDrop\ItemPanelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DragDrop\ItemTaskWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Panels\AdminControlPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Panels\AppControlPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Panels\Child\AdminChildWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Panels\Child\AdminControlChildWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Panels\Child\CalendarWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Panels\EventsControlPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Panels\HookKeyControlPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Panels\NotesControlPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Panels\ProcesControlPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Panels\ReportControlPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Panels\SettingsControlPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Panels\TaskControlPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Panels\TrackingStateControlPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StartUpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Сonsolidate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Process.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ControlGroup.png" />
+    <Resource Include="Images\EventGroup.png" />
+    <Resource Include="Images\UserGroup.PNG" />
+    <Resource Include="Images\WorkGroup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Gif\Newload.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PanelsSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Quations.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AddProcess.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AddGroupNote.png" />
+    <Resource Include="Images\AddNote.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Bottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\FullSize.png" />
+    <Resource Include="Images\MinSize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\UserSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\More.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PersonIsCharge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CreateTask.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SendComment.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

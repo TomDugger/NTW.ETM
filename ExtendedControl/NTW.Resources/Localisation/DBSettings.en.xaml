@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:y="clr-namespace:System;assembly=mscorlib">
+
+    <y:String x:Key="DBSettingsLogo">DB settings</y:String>
+    <y:String x:Key="DBSettingsConnectionType">Connection type</y:String>
+
+    <y:String x:Key="DBSettingsTest">Test</y:String>
+    <y:String x:Key="DBSettingsCreate">Create</y:String>
+    <y:String x:Key="DBSettingsDelete">Delete</y:String>
+
+    <y:String x:Key="DBSettingsAccepted">Accepted</y:String>
+    <y:String x:Key="DBSettingsCancel">Cancel</y:String>
+
+    <y:String x:Key="SQLServerConnectionParameters">Connection parameters</y:String>
+    <y:String x:Key="SQLServerDataSource">Data source</y:String>
+    <y:String x:Key="SQLServerConnectionToDataBase">Connection to data base</y:String>
+    <y:String x:Key="SQLServerInitialCatalog">Initial catalog</y:String>
+    <y:String x:Key="SQLServerSecurity">Security</y:String>
+    <y:String x:Key="SQLServerUser">User</y:String>
+    <y:String x:Key="SQLServerPassword">Password</y:String>
+    <y:String x:Key="SQLServerResource">Resource</y:String>
+    <y:String x:Key="SQLServerPathToDataBase">Path to data base</y:String>
+    
+    <!--Errors-->
+    <y:String x:Key="DBSettingsDataBaseNotExists">Error! Data base not exists</y:String>
+    <y:String x:Key="DBSettingsTestComplited">Execution test connection is complited</y:String>
+    <y:String x:Key="DBSettingsCreateDBComplited">Execution create data base is complited</y:String>
+    <y:String x:Key="DBSettingsNotCreateDatabase">Сould not create database.</y:String>
+    <y:String x:Key="DBSettingsDBExists">Data base exists</y:String>
+    <y:String x:Key="DBSettingsDeleteDBComplited">Execution delete data base is complited</y:String>
+</ResourceDictionary>

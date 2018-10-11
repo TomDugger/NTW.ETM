@@ -1,0 +1,17 @@
+﻿<Window x:Class="ExtendedControl.Views.AuthorizationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:b="clr-namespace:ExtendedControl.Behaviour"
+        xmlns:bc="clr-namespace:NTW.Controls.Behaviours;assembly=NTW.Controls"
+        xmlns:vm="clr-namespace:ExtendedControl.ViewModels"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:local="clr-namespace:ExtendedControl.Views"
+        WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="False" AllowsTransparency="True"
+        mc:Ignorable="d"
+        bc:WindowMessageBehaviour.UseMessages="True"
+        b:ViewModelIjection.ViewModel="{x:Type vm:AuthorizationViewModel}"
+        bc:WindowClosingBehaviour.UseAlterClosing="True" Style="{DynamicResource DefaultPanelWindowStyle}"
+        Title="AuthorizationWindow" Height="250" Width="400" ShowInTaskbar="True" Template="{DynamicResource AutorizationTemplate}">
+</Window>

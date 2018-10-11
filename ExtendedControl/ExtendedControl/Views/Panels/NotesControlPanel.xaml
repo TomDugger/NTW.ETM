@@ -1,0 +1,34 @@
+﻿<Window x:Class="ExtendedControl.Views.Panels.NotesControlPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:ExtendedControl.ViewModels"
+        xmlns:controls="clr-namespace:NTW.Controls;assembly=NTW.Controls"
+        xmlns:drag="clr-namespace:ExtendedControl.Views.DragDrop"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        mc:Ignorable="d"
+        Title="NotesControl" Height="450" Width="800"
+        xmlns:b="clr-namespace:ExtendedControl.Behaviour"
+        xmlns:bc="clr-namespace:NTW.Controls.Behaviours;assembly=NTW.Controls"
+        b:ViewModelIjection.ViewModel="{x:Type vm:NotesViewModel}"
+        Style="{DynamicResource DefaultPanelWindowStyle}"
+        MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=MinSize.Width}"
+        MinHeight="{Binding RelativeSource={RelativeSource Mode=Self}, Path=MinSize.Height}"
+        bc:WindowMessageBehaviour.UseMessages="True"
+        bc:WindowMessageBehaviour.SetMessageOnClipBoard="True"
+        bc:WindowPositionBehaviour.WindowThickness="2"
+        bc:HideButtonBehaviour.UseHideButton="True"
+        bc:UntieButtonBehaviour.UseUntieButton="True"
+        bc:WindowVisibilityBehaviour.CloseByHidden="True"
+        bc:SaveParametryPanelBehaviour.IsSaveByClose="True">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Path=LoadedCommand}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding Path=UnloadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <ContentControl Style="{DynamicResource NotesPanelStyle}" Margin="0,-4,0,4" />
+</Window>
