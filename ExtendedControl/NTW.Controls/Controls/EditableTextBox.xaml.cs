@@ -405,8 +405,8 @@ namespace NTW.Controls
         #region Static commands
 
 
-        private Command _SplitCommand;
-        public Command SplitCommand {
+        private static Command _SplitCommand;
+        public static Command SplitCommand {
             get {
                 return _SplitCommand ?? (_SplitCommand = new Command(obj =>
                 {
