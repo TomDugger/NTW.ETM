@@ -398,19 +398,108 @@ namespace NTW.Controls
 
         private void TableCell_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
+            ((FrameworkContentElement)sender).ContextMenu.Tag = sender;
             ((FrameworkContentElement)sender).ContextMenu.IsOpen = true;
         }
 
 
         #region Static commands
+        private static Command _addColumnLeftCommand;
+        public static Command AddColumnLeftCommand {
+            get { return _addColumnLeftCommand ?? (_addColumnLeftCommand = new Command(obj => {
+                var cell = obj as TableCell;
+                var row = cell.Parent as TableRow;
+                int index = row.Cells.IndexOf(cell);
+                var table = row.Parent as TableRowGroup;
+                foreach (var drow in table.Rows) {
+                    drow.Cells.Insert(index, new TableCell(new Paragraph(new Run(""))) { BorderBrush = new SolidColorBrush(Colors.Black), BorderThickness = new Thickness(1), Padding = new Thickness(2) });
+                }
+            })); }
+        }
 
+        private static Command _addColumnRightCommand;
+        public static Command AddColumnRightCommand {
+            get {
+                return _addColumnRightCommand ?? (_addColumnRightCommand = new Command(obj => {
+                    var cell = obj as TableCell;
+                    var row = cell.Parent as TableRow;
+                    int index = row.Cells.IndexOf(cell) + 1;
+                    var table = row.Parent as TableRowGroup;
+                    foreach (var drow in table.Rows)
+                    {
+                        drow.Cells.Insert(index, new TableCell(new Paragraph(new Run(""))) { BorderBrush = new SolidColorBrush(Colors.Black), BorderThickness = new Thickness(1), Padding = new Thickness(2) });
+                    }
+                }));
+            }
+        }
+
+        private static Command _addRowTopCommand;
+        public static Command AddRowTopCommand {
+            get {
+                return _addRowTopCommand ?? (_addRowTopCommand = new Command(obj => {
+                    var cell = obj as TableCell;
+                    var row = cell.Parent as TableRow;
+                    var rowGroup = row.Parent as TableRowGroup;
+                    int index = rowGroup.Rows.IndexOf(row);
+                    var newrow = new TableRow();
+                    for (int j = 0; j < row.Cells.Count; j++)
+                    {
+                        newrow.Cells.Add(new TableCell(new Paragraph(new Run(""))) { BorderBrush = new SolidColorBrush(Colors.Black), BorderThickness = new Thickness(1), Padding = new Thickness(2) });
+                    }
+                    rowGroup.Rows.Insert(index, newrow);
+                }));
+            }
+        }
+
+        private static Command _addRowBottomCommand;
+        public static Command AddRowBottomCommand {
+            get {
+                return _addRowBottomCommand ?? (_addRowBottomCommand = new Command(obj => {
+                    var cell = obj as TableCell;
+                    var row = cell.Parent as TableRow;
+                    var rowGroup = row.Parent as TableRowGroup;
+                    int index = rowGroup.Rows.IndexOf(row) + 1;
+                    var newrow = new TableRow();
+                    for (int j = 0; j < row.Cells.Count; j++)
+                    {
+                        newrow.Cells.Add(new TableCell(new Paragraph(new Run(""))) { BorderBrush = new SolidColorBrush(Colors.Black), BorderThickness = new Thickness(1), Padding = new Thickness(2) });
+                    }
+                    rowGroup.Rows.Insert(index, newrow);
+                }));
+            }
+        }
+
+        private static Command _removeFillRowCommand;
+        public static Command RemoveFillRowCommand {
+            get { return _removeFillRowCommand ?? (_removeFillRowCommand = new Command(obj => {
+                var cell = obj as TableCell;
+                var row = cell.Parent as TableRow;
+                var rowGroup = row.Parent as TableRowGroup;
+                rowGroup.Rows.Remove(row);
+            })); }
+        }
+
+        private static Command _removeFillColumnCommand;
+        public static Command RemoveFillColumnCommand {
+            get { return _removeFillColumnCommand ?? (_removeFillColumnCommand = new Command(obj => {
+                var cell = obj as TableCell;
+                var row = cell.Parent as TableRow;
+                int index = row.Cells.IndexOf(cell);
+                var rowGroup = row.Parent as TableRowGroup;
+                foreach (var item in rowGroup.Rows) {
+                    item.Cells.RemoveAt(index);
+                }
+                var table = rowGroup.Parent as Table;
+                table.Columns.RemoveAt(index);
+            })); }
+        }
 
         private static Command _SplitCommand;
         public static Command SplitCommand {
             get {
                 return _SplitCommand ?? (_SplitCommand = new Command(obj =>
                 {
-                    string h = "";
+                    var g = obj as TableCell;
                 }));
             }
         }

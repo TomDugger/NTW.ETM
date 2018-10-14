@@ -22,23 +22,23 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
         <Style TargetType="{x:Type TableCell}">
             <EventSetter Event="ContextMenuOpening" Handler="TableCell_ContextMenuOpening" />
             <Setter Property="ContextMenu">
                 <Setter.Value>
                     <ContextMenu >
                         <MenuItem Header="Insert" >
-                            <MenuItem Header="Columns left" Name="ColumnLeft" />
-                            <MenuItem Header="Columns right" />
+                            <MenuItem Header="Columns left" Command="{x:Static local:EditableTextBox.AddColumnLeftCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContextMenu}}, Path=Tag}" />
+                            <MenuItem Header="Columns right" Command="{x:Static local:EditableTextBox.AddColumnRightCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContextMenu}}, Path=Tag}" />
                             <Separator />
-                            <MenuItem Header="Row top" />
-                            <MenuItem Header="Row bottom" />
+                            <MenuItem Header="Row top" Command="{x:Static local:EditableTextBox.AddRowTopCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContextMenu}}, Path=Tag}" />
+                            <MenuItem Header="Row bottom" Command="{x:Static local:EditableTextBox.AddRowBottomCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContextMenu}}, Path=Tag}" />
                         </MenuItem>
                         <Separator />
                         <MenuItem Header="Remove" >
-                            <MenuItem Header="Cell" />
-                            <MenuItem Header="All row" />
-                            <MenuItem Header="All column" />
+                            <MenuItem Header="Fill row" Command="{x:Static local:EditableTextBox.RemoveFillRowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContextMenu}}, Path=Tag}" />
+                            <MenuItem Header="Fill column" Command="{x:Static local:EditableTextBox.RemoveFillColumnCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContextMenu}}, Path=Tag}" />
                         </MenuItem>
                         <MenuItem Header="Split" Command="{x:Static local:EditableTextBox.SplitCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}" />
                         <Separator />
