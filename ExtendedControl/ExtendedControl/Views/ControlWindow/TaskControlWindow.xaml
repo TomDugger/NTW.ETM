@@ -91,7 +91,12 @@
                         <CheckBox Grid.Row="1" Grid.Column="1" Content="{DynamicResource TaskControlIsPersonal}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20, 0"
                                 IsChecked="{Binding Path=IsCurrentTaskPerson, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                        <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Text="{DynamicResource TaskControlContent}" VerticalAlignment="Center" Margin="20, 0, 0, 0"/>
+                        <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Text="{DynamicResource TaskControlContent}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20, 0, 0, 0"/>
+
+                        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0, 0, 20, 0" Orientation="Horizontal">
+                            <TextBlock Text="{DynamicResource TaskPanelCreateDate}" Margin="0, 0, 5, 0" />
+                            <TextBlock Text="{Binding Path=CurrentTask.OpenDate, StringFormat='dd.MM.yyyy г. HH:mm:ss'}" />
+                        </StackPanel>
 
                         <ContentControl Grid.Row="3" Grid.ColumnSpan="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                             <ContentControl.Style>

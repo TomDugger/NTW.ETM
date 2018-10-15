@@ -87,7 +87,8 @@
 
         <ToolBar Name="EditPanel">
             <Grid Name="ControlFilePanel">
-                <ToggleButton Content="Files" Name="ActFilesPanel" Height="30" Width="30" Checked="ActFontPanel_Checked" />
+                <ToggleButton Name="ActFilesPanel" Height="30" Width="30" Checked="ActFontPanel_Checked" >
+                </ToggleButton>
                 <Popup IsOpen="{Binding ElementName=ActFilesPanel, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" StaysOpen="True" MinWidth="100">
                     <Border>
                         <Grid >
