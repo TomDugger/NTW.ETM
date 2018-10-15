@@ -70,6 +70,18 @@ namespace ExtendedControl.ViewModels
                 WindowClosingBehaviour.OnCloseWindow((Window)obj);
             }, obj => obj is Window)); }
         }
+        
+        private Command _anyKeyCommand;
+        public Command AnyKeyCommand {
+            get {
+                return _anyKeyCommand ?? (_anyKeyCommand = new Command(obj =>
+                {
+                    this.SendPropertyChanged(nameof(ActiveCapsLock));
+                }));
+            }
+        }
+
+
         #endregion
 
         #region Members
@@ -93,19 +105,23 @@ namespace ExtendedControl.ViewModels
         private string _enterUserName;
         public string EnterUserName {
             get { return _enterUserName; }
-            set { _enterUserName = value; this.SendPropertyChanged("EnterUserName"); }
+            set { _enterUserName = value; this.SendPropertyChanged("EnterUserName"); this.SendPropertyChanged(nameof(ActiveCapsLock)); }
         }
 
         private string _password;
         public string Password {
             get { return _password; }
-            set { _password = value; this.SendPropertyChanged("Password"); }
+            set { _password = value; this.SendPropertyChanged("Password"); this.SendPropertyChanged(nameof(ActiveCapsLock)); }
         }
 
         private bool _autoEnter;
         public bool AutoEnter {
             get { return _autoEnter; }
             set { _autoEnter = value; this.SendPropertyChanged("AutoEnter"); }
+        }
+        
+        public bool ActiveCapsLock {
+            get { return Console.CapsLock; }
         }
         #endregion
 

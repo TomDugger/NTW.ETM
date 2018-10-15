@@ -19,5 +19,7 @@ namespace NTW.Data.Connections
         IEnumerable<string> NamesServers { get; }
 
         IEnumerable<string> NamesDB { get; }
+
+        IConnection Copy();
     }
 }

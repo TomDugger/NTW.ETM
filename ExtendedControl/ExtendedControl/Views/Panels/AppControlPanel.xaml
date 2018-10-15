@@ -99,11 +99,20 @@
                 </TabItem.Header>
                 <ContentControl b:ViewModelIjection.ViewModel="{x:Type vm:AppSettingsViewModel}" Template="{DynamicResource AppSettingsTemplate}" />
             </TabItem>
-            <TabItem>
+            <TabItem >
                 <TabItem.Header>
                     <TextBlock Text="{DynamicResource DBSettingsLogo}" />
                 </TabItem.Header>
-                <ContentControl b:ViewModelIjection.ViewModel="{x:Type vm:DBSettingsViewModel}" Template="{DynamicResource DBSettingsTemplate}" />
+                <ContentControl b:ViewModelIjection.ViewModel="{x:Type vm:DBSettingsViewModel}" Template="{DynamicResource DBSettingsTemplate}" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Loaded">
+                            <i:InvokeCommandAction Command="{Binding Path=LoadCommand}" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="Unloaded">
+                            <i:InvokeCommandAction Command="{Binding Path=UnloadCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ContentControl>
             </TabItem>
             <TabItem>
                 <TabItem.Header>

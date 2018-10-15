@@ -67,6 +67,15 @@ namespace NTW.Data.Context.Connections {
         }
         #endregion
 
+        public IConnection Copy()
+        {
+            var result = new SqlCompactConnection();
+            result.Provider = this.Provider;
+            result.DataSource = this.DataSource;
+            result.PathToResourceDB = this.PathToResourceDB;
+            return result;
+        }
+
         [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 

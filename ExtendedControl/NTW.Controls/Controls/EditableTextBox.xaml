@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:NTW.Controls"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:bc="clr-namespace:NTW.Controls.Behaviours"
              xmlns:c="clr-namespace:NTW.Controls"
              mc:Ignorable="d" 
@@ -40,13 +41,16 @@
                             <MenuItem Header="Fill row" Command="{x:Static local:EditableTextBox.RemoveFillRowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContextMenu}}, Path=Tag}" />
                             <MenuItem Header="Fill column" Command="{x:Static local:EditableTextBox.RemoveFillColumnCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContextMenu}}, Path=Tag}" />
                         </MenuItem>
-                        <MenuItem Header="Split" Command="{x:Static local:EditableTextBox.SplitCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}" />
+                        <MenuItem Header="Split" IsEnabled="False" Command="{x:Static local:EditableTextBox.SplitCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContextMenu}}, Path=Tag}" />
+                        <Separator />
+                        <MenuItem Header="Remove Table" Command="{x:Static local:EditableTextBox.RemoveTableCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContextMenu}}, Path=Tag}" />
                         <Separator />
                         <MenuItem Header="Property cell" />
                     </ContextMenu>
                 </Setter.Value>
             </Setter>
         </Style>
+        
         <Style TargetType="{x:Type Image}">
             <EventSetter Event="ContextMenuOpening" Handler="TableCell_ContextMenuOpening" />
             <Setter Property="ContextMenu" >
@@ -108,6 +112,7 @@
                             <RowDefinition Height="20" />
                             <RowDefinition />
                             <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
                         <TextBlock Text="Font" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" />
 
@@ -137,6 +142,10 @@
                                     </ItemsPanelTemplate>
                                 </ComboBox.ItemsPanel>
                             </ComboBox>
+                        </WrapPanel>
+                        
+                        <WrapPanel Grid.Row="3" Orientation="Horizontal">
+                            
                         </WrapPanel>
                     </Grid>
                 </Popup>
@@ -185,7 +194,7 @@
             </Grid>
             <Grid Name="PrimitivyObjectPanel">
                 <ToggleButton Content="Primitivy" Name="ActPrimitivyPanel" Width="30" Checked="ActFontPanel_Checked" />
-                <Popup IsOpen="{Binding ElementName=ActPrimitivyPanel, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" StaysOpen="True" MinWidth="100">
+                <Popup IsOpen="{Binding ElementName=ActPrimitivyPanel, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" StaysOpen="True" MinWidth="100" MinHeight="100">
                     <Grid >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="20" />
@@ -193,13 +202,87 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Text="Table" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="22" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=Present.X, UpdateSourceTrigger=PropertyChanged}" Foreground="White"  />
+                                <TextBlock Text="x" Foreground="White"  />
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=Present.Y, UpdateSourceTrigger=PropertyChanged}" Foreground="White"  />
+                            </StackPanel>
+                            <ItemsControl Grid.Row="1" ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=TableSample, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ItemsControl.ItemContainerStyle>
+                                    <Style>
+                                        <Setter Property="Grid.Row" Value="{Binding Path=X}" />
+                                        <Setter Property="Grid.Column" Value="{Binding Path=Y}" />
+                                    </Style>
+                                </ItemsControl.ItemContainerStyle>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BorderBrush="DodgerBlue" BorderThickness="1" >
+                                            <Border.InputBindings>
+                                                <MouseBinding Gesture="LeftClick" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=CreateTableCommand, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding Path=.}" />
+                                            </Border.InputBindings>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="MouseEnter" >
+                                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=MouseOverTableCommand, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding Path=.}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                            <Border.Style>
+                                                <Style TargetType="{x:Type Border}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Path=State, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                                            <Setter Property="Background" Value="Red" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0" />
+                                                <RowDefinition Height="16" />
+                                                <RowDefinition Height="16" />
+                                                <RowDefinition Height="16" />
+                                                <RowDefinition Height="16" />
 
-                        <WrapPanel Grid.Row="1">
-                            <TextBlock Text="Columns:" Margin="5, 0" VerticalAlignment="Center" />
+                                                <RowDefinition Height="16" />
+                                                <RowDefinition Height="16" />
+                                                <RowDefinition Height="16" />
+                                                <RowDefinition Height="16" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0" />
+                                                <ColumnDefinition Width="16" />
+                                                <ColumnDefinition Width="16" />
+                                                <ColumnDefinition Width="16" />
+                                                <ColumnDefinition Width="16" />
+
+                                                <ColumnDefinition Width="16" />
+                                                <ColumnDefinition Width="16" />
+                                                <ColumnDefinition Width="16" />
+                                                <ColumnDefinition Width="16" />
+                                            </Grid.ColumnDefinitions>
+                                        </Grid>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeave" >
+                                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=MouseLeaveTableCommand, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding Path=.}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ItemsControl>
+                            <!--<TextBlock Text="Columns:" Margin="5, 0" VerticalAlignment="Center" />
                             <TextBox Focusable="True" VerticalAlignment="Center" Width="30"
                                  Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=CountColumnsTable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            <Button Content="Table" Click="CreateTable" Focusable="False" />
-                        </WrapPanel>
+                            <Button Content="Table" Click="CreateTable" Focusable="False" />-->
+                        </Grid>
                     </Grid>
                 </Popup>
             </Grid>

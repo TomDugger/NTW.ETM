@@ -47,6 +47,12 @@ namespace NTW.Data.Models
 
             return settings;
         }
+
+        public DBSettings Copy() {
+            DBSettings result = new DBSettings();
+            result.Connection = this.Connection;
+            return result;
+        }
         #endregion
     }
 }

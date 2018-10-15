@@ -41,6 +41,15 @@ namespace NTW.Data.Context.Connections {
             get { return null; }
         }
 
+        public IConnection Copy()
+        {
+            var result = new SqlLocalConnection();
+            result.Provider = this.Provider;
+            result.PathToFile = this.PathToFile;
+            result.PathToResourceDB = this.PathToResourceDB;
+            return result;
+        }
+
         [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 

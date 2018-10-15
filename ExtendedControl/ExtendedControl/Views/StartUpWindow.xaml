@@ -12,7 +12,6 @@
         Title="StartUpWindow" Height="250" Width="500">
     <Grid>
         <Image Name="img"
-                       Stretch="None"
                        gif:ImageBehavior.AnimatedSource="pack://application:,,,/images/Gif/Newload.gif"
                        gif:ImageBehavior.RepeatBehavior="Forever"
                        gif:ImageBehavior.AutoStart="True" />

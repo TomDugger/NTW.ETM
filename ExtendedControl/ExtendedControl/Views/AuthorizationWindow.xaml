@@ -13,5 +13,10 @@
         bc:WindowMessageBehaviour.UseMessages="True"
         b:ViewModelIjection.ViewModel="{x:Type vm:AuthorizationViewModel}"
         bc:WindowClosingBehaviour.UseAlterClosing="True" Style="{DynamicResource DefaultPanelWindowStyle}"
-        Title="AuthorizationWindow" Height="250" Width="400" ShowInTaskbar="True" Template="{DynamicResource AutorizationTemplate}">
+        Title="AuthorizationWindow" Height="280" Width="400" ShowInTaskbar="True" Template="{DynamicResource AutorizationTemplate}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="KeyDown">
+            <i:InvokeCommandAction Command="{Binding AnyKeyCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 </Window>

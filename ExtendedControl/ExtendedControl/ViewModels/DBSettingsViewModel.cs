@@ -200,15 +200,52 @@ namespace ExtendedControl.ViewModels
                 }
             })); }
         }
+
+
+
+        private Command _loadCommand;
+        public Command LoadCommand {
+            get {
+                return _loadCommand ?? (_loadCommand = new Command(obj =>
+                {
+                    _settings = DBSettings.Load();
+                    this.SendPropertyChanged(nameof(Connection));
+                }));
+            }
+        }
+
+
+        private Command _unloadCommand;
+        public Command UnloadCommand {
+            get {
+                return _unloadCommand ?? (_unloadCommand = new Command(obj =>
+                {
+                    System.Threading.Tasks.Task.Factory.StartNew(() =>
+                    {
+                        if (DBContext.TestConnection(_settings.Connection))
+                            App.BeginInvoke(() =>
+                            {
+                                App.DBSettings.Connection = _settings.Connection;
+                                _settings.Save();
+                            });
+                    });
+                }));
+            }
+        }
+
+
+
         #endregion
 
         #region Members
+        // проблема с работой для настроек соединени
+        // стоит расмотреть вариант с разделением настроек при работе с блоком данных и работать только с временными настройками на этапе открытой панели
         private DBSettings _settings = App.DBSettings; 
 
         public IEnumerable<string> NamesProvider {
-            get { return new string[] { "Sql server"
-                //, "Sql server compact"
-                , "Sql server (Local)"
+            get { return new string[] {
+                "Sql server",
+                "Sql server (Local)"
             }; }
         }
 

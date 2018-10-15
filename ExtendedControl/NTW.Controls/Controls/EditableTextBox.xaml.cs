@@ -1,6 +1,7 @@
 ﻿using NTW.Core;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace NTW.Controls
     /// <summary>
     /// Логика взаимодействия для EditableTextBox.xaml
     /// </summary>
-    public partial class EditableTextBox : UserControl
+    public partial class EditableTextBox : UserControl, INotifyPropertyChanged
     {
         public EditableTextBox()
         {
@@ -52,6 +53,29 @@ namespace NTW.Controls
         public Array MarkerStyle
         {
             get { return Enum.GetValues(typeof(TextMarkerStyle)); }
+        }
+
+        private TableCellPresent[] _tableSample;
+        public TableCellPresent[] TableSample {
+            get {
+                return _tableSample ?? (_tableSample = new TableCellPresent[] {
+                    new TableCellPresent(1, 1), new TableCellPresent(1, 2), new TableCellPresent(1, 3), new TableCellPresent(1, 4), new TableCellPresent(1, 5), new TableCellPresent(1, 6), new TableCellPresent(1, 7), new TableCellPresent(1, 8) ,
+                    new TableCellPresent(2, 1), new TableCellPresent(2, 2), new TableCellPresent(2, 3), new TableCellPresent(2, 4), new TableCellPresent(2, 5), new TableCellPresent(2, 6), new TableCellPresent(2, 7), new TableCellPresent(2, 8) ,
+                    new TableCellPresent(3, 1), new TableCellPresent(3, 2), new TableCellPresent(3, 3), new TableCellPresent(3, 4), new TableCellPresent(3, 5), new TableCellPresent(3, 6), new TableCellPresent(3, 7), new TableCellPresent(3, 8) ,
+                    new TableCellPresent(4, 1), new TableCellPresent(4, 2), new TableCellPresent(4, 3), new TableCellPresent(4, 4), new TableCellPresent(4, 5), new TableCellPresent(4, 6), new TableCellPresent(4, 7), new TableCellPresent(4, 8) ,
+                    new TableCellPresent(5, 1), new TableCellPresent(5, 2), new TableCellPresent(5, 3), new TableCellPresent(5, 4), new TableCellPresent(5, 5), new TableCellPresent(5, 6), new TableCellPresent(5, 7), new TableCellPresent(5, 8) ,
+                    new TableCellPresent(6, 1), new TableCellPresent(6, 2), new TableCellPresent(6, 3), new TableCellPresent(6, 4), new TableCellPresent(6, 5), new TableCellPresent(6, 6), new TableCellPresent(6, 7), new TableCellPresent(6, 8) ,
+                    new TableCellPresent(7, 1), new TableCellPresent(7, 2), new TableCellPresent(7, 3), new TableCellPresent(7, 4), new TableCellPresent(7, 5), new TableCellPresent(7, 6), new TableCellPresent(7, 7), new TableCellPresent(7, 8) ,
+                    new TableCellPresent(8, 1), new TableCellPresent(8, 2), new TableCellPresent(8, 3), new TableCellPresent(8, 4), new TableCellPresent(8, 5), new TableCellPresent(8, 6), new TableCellPresent(8, 7), new TableCellPresent(8, 8)
+                });
+            }
+        }
+
+        public TableCellPresent Present { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void SendPropertyChanged(string propertyName = "") {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
 
@@ -402,6 +426,79 @@ namespace NTW.Controls
             ((FrameworkContentElement)sender).ContextMenu.IsOpen = true;
         }
 
+        #region Commands
+        private Command _mouseOverTableCommand;
+        public Command MouseOverTableCommand {
+            get {
+                return _mouseOverTableCommand ?? (_mouseOverTableCommand = new Command(obj =>
+                {
+                    TableCellPresent pr = obj as TableCellPresent;
+                    foreach (var item in TableSample)
+                        item.State = false;
+
+                    foreach (var item in TableSample.Where(x => x.X <= pr.X && x.Y <= pr.Y))
+                        item.State = true;
+
+                    Present = pr;
+                    this.SendPropertyChanged(nameof(Present));
+                }, obj => obj != null));
+            }
+        }
+        
+        private Command _mouseLeaveTableCommand;
+        public Command MouseLeaveTableCommand {
+            get {
+                return _mouseLeaveTableCommand ?? (_mouseLeaveTableCommand = new Command(obj =>
+                {
+                    foreach (var item in TableSample)
+                        item.State = false;
+
+                    Present = null;
+                    this.SendPropertyChanged(nameof(Present));
+                }));
+            }
+        }
+
+
+        private Command _createTableCommand;
+        public Command CreateTableCommand {
+            get {
+                return _createTableCommand ?? (_createTableCommand = new Command(obj =>
+                {
+                    TableCellPresent pr = obj as TableCellPresent;
+
+                    EditablePanel.Document.Blocks.Add(new Paragraph());
+                    Table t = new Table();
+                    t.BorderBrush = new SolidColorBrush(Colors.Black);
+                    t.BorderThickness = new Thickness(1);
+                    for (int i = 0; i < pr.Y; i++)
+                    {
+                        t.Columns.Add(new TableColumn());
+                    }
+
+                    var rg = new TableRowGroup();
+                    for (int i = 0; i < pr.X; i++)
+                    {
+                        TableRow row1 = new TableRow();
+                        for (int j = 0; j < pr.Y; j++)
+                        {
+                            row1.Cells.Add(new TableCell(new Paragraph(new Run(""))) { BorderBrush = new SolidColorBrush(Colors.Black), BorderThickness = new Thickness(1), Padding = new Thickness(2) });
+                        }
+
+                        rg.Rows.Add(row1);
+                    }
+
+                    t.RowGroups.Add(rg);
+
+                    EditablePanel.Document.Blocks.Add(t);
+
+                    EditablePanel.Document.Blocks.Add(new Paragraph());
+                }, obj => obj != null));
+            }
+        }
+
+
+        #endregion
 
         #region Static commands
         private static Command _addColumnLeftCommand;
@@ -469,6 +566,7 @@ namespace NTW.Controls
             }
         }
 
+
         private static Command _removeFillRowCommand;
         public static Command RemoveFillRowCommand {
             get { return _removeFillRowCommand ?? (_removeFillRowCommand = new Command(obj => {
@@ -494,6 +592,24 @@ namespace NTW.Controls
             })); }
         }
 
+
+        private static Command _removeTableCommand;
+        public static Command RemoveTableCommand {
+            get {
+                return _removeTableCommand ?? (_removeTableCommand = new Command(obj =>
+                {
+                    var cell = obj as TableCell;
+                    var row = cell.Parent as TableRow;
+                    var rowGroup = row.Parent as TableRowGroup;
+                    var table = rowGroup.Parent as Table;
+                    FlowDocument document = table.Parent as FlowDocument;
+                    document.Blocks.Remove(table);
+                }, obj => obj != null));
+            }
+        }
+
+
+
         private static Command _SplitCommand;
         public static Command SplitCommand {
             get {
@@ -505,6 +621,28 @@ namespace NTW.Controls
         }
 
 
+        #endregion
+
+        #region Models
+        public class TableCellPresent:INotifyPropertyChanged {
+
+            public TableCellPresent(int x, int y) {
+                X = x;
+                Y = y;
+                State = false;
+            }
+            public int X { get; set; }
+            public int Y { get; set; }
+
+            private bool _state;
+            public bool State { get { return _state; } set { _state = value; this.SendPropertyChanged(nameof(State)); } }
+
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            private void SendPropertyChanged(string propertyName = "") {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
         #endregion
     }
 }

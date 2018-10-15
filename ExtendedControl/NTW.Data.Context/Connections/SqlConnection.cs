@@ -56,6 +56,13 @@ namespace NTW.Data.Context.Connections
                 else result = ";Integrated Security=True;MultipleActiveResultSets=True";
                 return result;
             }
+
+            public SqlSecurityInfo Copy() {
+                var result = new SqlSecurityInfo();
+                result.User = this.User;
+                result.Password = this.Password;
+                return result;
+            }
         }
 
         private string _pathToResourceDB = Environment.CurrentDirectory;
@@ -80,6 +87,16 @@ namespace NTW.Data.Context.Connections
                 builder.IntegratedSecurity = true;
                 return SqlLocator.GetBDNames(builder);
             }
+        }
+
+        public IConnection Copy() {
+            var result = new SqlConnection();
+            result.Provider = this.Provider;
+            result.DataSource = this.DataSource;
+            result.InitialCatalog = this.InitialCatalog;
+            result.Security = this.Security.Copy();
+            result.PathToResourceDB = this.PathToResourceDB;
+            return result;
         }
 
         #region Members IDataErrorInfo
