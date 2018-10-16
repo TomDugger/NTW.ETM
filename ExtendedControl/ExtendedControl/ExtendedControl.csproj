@@ -438,6 +438,17 @@
   <ItemGroup>
     <Resource Include="Images\SendComment.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\FileEditPanel.png" />
+    <Resource Include="Images\FontEditPanel.png" />
+    <Resource Include="Images\MarkEditPanel.png" />
+    <Resource Include="Images\ObjectEditPanel.png" />
+    <Resource Include="Images\PageSizeEditPanel.png" />
+    <Resource Include="Images\PrimitiveEditPanel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AlignmentEditPanel.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

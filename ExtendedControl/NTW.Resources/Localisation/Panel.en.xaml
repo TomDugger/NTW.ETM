@@ -45,4 +45,13 @@
     <y:String x:Key="ConteolPanelPositionRightTop">Top right corner</y:String>
     <y:String x:Key="ConteolPanelPositionLeftBottom">Bottom left corner</y:String>
     <y:String x:Key="ConteolPanelPositionRightBottom">Bottom right corner</y:String>
+    
+    <!--Editable panel-->
+    <y:String x:Key="EditablePanelFile">File</y:String>
+    <y:String x:Key="EditablePanelFont">Font</y:String>
+    <y:String x:Key="EditablePanelPage">Page</y:String>
+    <y:String x:Key="EditablePanelAligenment">Aligenment</y:String>
+    <y:String x:Key="EditablePanelPrimitive">Primitive</y:String>
+    <y:String x:Key="EditablePanelObject">Object</y:String>
+    <y:String x:Key="EditablePanelMarker">Marker</y:String>
 </ResourceDictionary>

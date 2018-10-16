@@ -77,6 +77,8 @@
         <Style TargetType="{x:Type Popup}">
             <Setter Property="Placement" Value="Top" />
         </Style>
+
+        <RelativeSource x:Key="ParentSelf" Mode="FindAncestor" AncestorType="{x:Type UserControl}" />
     </UserControl.Resources>
     <Grid >
         <Grid.RowDefinitions>
@@ -87,8 +89,7 @@
 
         <ToolBar Name="EditPanel">
             <Grid Name="ControlFilePanel">
-                <ToggleButton Name="ActFilesPanel" Height="30" Width="30" Checked="ActFontPanel_Checked" >
-                </ToggleButton>
+                <ToggleButton Name="ActFilesPanel" MinHeight="22" MinWidth="22" Checked="ActFontPanel_Checked" Content="{Binding RelativeSource={StaticResource ParentSelf}, Path=FileContent, UpdateSourceTrigger=PropertyChanged}" />
                 <Popup IsOpen="{Binding ElementName=ActFilesPanel, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" StaysOpen="True" MinWidth="100">
                     <Border>
                         <Grid >
@@ -106,7 +107,7 @@
                 </Popup>
             </Grid>
             <Grid Name="FontTextPanel">
-                <ToggleButton Content="Font" Name="ActFontPanel" Width="30" Checked="ActFontPanel_Checked" />
+                <ToggleButton Name="ActFontPanel" MinHeight="22" MinWidth="22" Checked="ActFontPanel_Checked" Content="{Binding RelativeSource={StaticResource ParentSelf}, Path=FontContent, UpdateSourceTrigger=PropertyChanged}" />
                 <Popup IsOpen="{Binding ElementName=ActFontPanel, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" StaysOpen="True" MinWidth="100">
                     <Grid >
                         <Grid.RowDefinitions>
@@ -152,7 +153,7 @@
                 </Popup>
             </Grid>
             <Grid Name="AligenmentTextPanel">
-                <ToggleButton Content="Alignment text" Name="ActAlignmentTextPanel" Width="30" Checked="ActFontPanel_Checked" />
+                <ToggleButton Name="ActAlignmentTextPanel" MinHeight="22" MinWidth="22" Checked="ActFontPanel_Checked" Content="{Binding RelativeSource={StaticResource ParentSelf}, Path=AligenmentContent, UpdateSourceTrigger=PropertyChanged}" />
                 <Popup IsOpen="{Binding ElementName=ActAlignmentTextPanel, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" StaysOpen="True" MinWidth="100">
                     <Grid >
                         <Grid.RowDefinitions>
@@ -172,7 +173,7 @@
                 </Popup>
             </Grid>
             <Grid Name="PageSizePanel">
-                <ToggleButton Content="Page size" Name="ActPageSizePanel" Width="30" Checked="ActFontPanel_Checked" />
+                <ToggleButton Name="ActPageSizePanel" MinHeight="22" MinWidth="22" Checked="ActFontPanel_Checked" Content="{Binding RelativeSource={StaticResource ParentSelf}, Path=PageContent, UpdateSourceTrigger=PropertyChanged}" />
                 <Popup IsOpen="{Binding ElementName=ActPageSizePanel, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" StaysOpen="True" MinWidth="100">
                     <Grid >
                         <Grid.RowDefinitions>
@@ -194,7 +195,7 @@
                 </Popup>
             </Grid>
             <Grid Name="PrimitivyObjectPanel">
-                <ToggleButton Content="Primitivy" Name="ActPrimitivyPanel" Width="30" Checked="ActFontPanel_Checked" />
+                <ToggleButton Name="ActPrimitivyPanel" MinHeight="22" MinWidth="22" Checked="ActFontPanel_Checked" Content="{Binding RelativeSource={StaticResource ParentSelf}, Path=PrimitivyObjectContent, UpdateSourceTrigger=PropertyChanged}" />
                 <Popup IsOpen="{Binding ElementName=ActPrimitivyPanel, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" StaysOpen="True" MinWidth="100" MinHeight="100">
                     <Grid >
                         <Grid.RowDefinitions>
@@ -213,7 +214,7 @@
                                 <TextBlock Text="x" Foreground="White"  />
                                 <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=Present.Y, UpdateSourceTrigger=PropertyChanged}" Foreground="White"  />
                             </StackPanel>
-                            <ItemsControl Grid.Row="1" ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=TableSample, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ItemsControl Grid.Row="1" Style="{x:Null}" ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=TableSample, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
                                 <ItemsControl.ItemContainerStyle>
                                     <Style>
                                         <Setter Property="Grid.Row" Value="{Binding Path=X}" />
@@ -288,7 +289,7 @@
                 </Popup>
             </Grid>
             <Grid Name="ObjectControlPanel">
-                <ToggleButton Content="Object" Name="ActObjectPanel" Width="30" Checked="ActFontPanel_Checked" />
+                <ToggleButton Name="ActObjectPanel" MinHeight="22" MinWidth="22" Checked="ActFontPanel_Checked" Content="{Binding RelativeSource={StaticResource ParentSelf}, Path=ObjectContent, UpdateSourceTrigger=PropertyChanged}" />
                 <Popup IsOpen="{Binding ElementName=ActObjectPanel, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" StaysOpen="True" MinWidth="100">
                     <Grid >
                         <Grid.RowDefinitions>
@@ -306,7 +307,7 @@
                 </Popup>
             </Grid>
             <Grid Name="MarkerPanel">
-                <ToggleButton Content="Marker" Name="ActMarkerPanel" Width="30" Checked="ActFontPanel_Checked" />
+                <ToggleButton Name="ActMarkerPanel" MinHeight="22" MinWidth="22" Checked="ActFontPanel_Checked" Content="{Binding RelativeSource={StaticResource ParentSelf}, Path=MarkerContent, UpdateSourceTrigger=PropertyChanged}" />
                 <Popup IsOpen="{Binding ElementName=ActMarkerPanel, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" StaysOpen="True" MinWidth="100">
                     <Grid >
                         <Grid.RowDefinitions>

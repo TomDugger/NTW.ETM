@@ -46,4 +46,13 @@
     <y:String x:Key="ConteolPanelPositionRightTop">Правый верхний угол</y:String>
     <y:String x:Key="ConteolPanelPositionLeftBottom">Левый нижний угол</y:String>
     <y:String x:Key="ConteolPanelPositionRightBottom">Правый нижний угол</y:String>
+
+    <!--Editable panel-->
+    <y:String x:Key="EditablePanelFile">Файл</y:String>
+    <y:String x:Key="EditablePanelFont">Шрифт</y:String>
+    <y:String x:Key="EditablePanelPage">Страница</y:String>
+    <y:String x:Key="EditablePanelAligenment">Расположение</y:String>
+    <y:String x:Key="EditablePanelPrimitive">Примитивы</y:String>
+    <y:String x:Key="EditablePanelObject">Объект</y:String>
+    <y:String x:Key="EditablePanelMarker">Маркер</y:String>
 </ResourceDictionary>

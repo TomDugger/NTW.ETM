@@ -426,6 +426,72 @@ namespace NTW.Controls
             ((FrameworkContentElement)sender).ContextMenu.IsOpen = true;
         }
 
+        #region Dependency property
+        public object FileContent {
+            get { return (object)GetValue(FileContentProperty); }
+            set { SetValue(FileContentProperty, value); }
+        }
+
+        public static readonly DependencyProperty FileContentProperty =
+            DependencyProperty.Register("FileContent", typeof(object), typeof(EditableTextBox), new PropertyMetadata("File"));
+
+
+        public object FontContent {
+            get { return (object)GetValue(FontContentProperty); }
+            set { SetValue(FontContentProperty, value); }
+        }
+
+        public static readonly DependencyProperty FontContentProperty =
+            DependencyProperty.Register("FontContent", typeof(object), typeof(EditableTextBox), new PropertyMetadata("Font"));
+
+
+        public object AligenmentContent {
+            get { return (object)GetValue(AligenmentContentProperty); }
+            set { SetValue(AligenmentContentProperty, value); }
+        }
+        
+        public static readonly DependencyProperty AligenmentContentProperty =
+            DependencyProperty.Register("AligenmentContent", typeof(object), typeof(EditableTextBox), new PropertyMetadata("Aligenment"));
+
+
+        public object PageContent {
+            get { return (object)GetValue(PageContentProperty); }
+            set { SetValue(PageContentProperty, value); }
+        }
+        
+        public static readonly DependencyProperty PageContentProperty =
+            DependencyProperty.Register("PageContent", typeof(object), typeof(EditableTextBox), new PropertyMetadata("Page"));
+
+
+        public object PrimitivyObjectContent {
+            get { return (object)GetValue(PrimitivyObjectContentProperty); }
+            set { SetValue(PrimitivyObjectContentProperty, value); }
+        }
+        
+        public static readonly DependencyProperty PrimitivyObjectContentProperty =
+            DependencyProperty.Register("PrimitivyObjectContent", typeof(object), typeof(EditableTextBox), new PropertyMetadata("Primitivy"));
+
+
+        public object ObjectContent {
+            get { return (object)GetValue(ObjectContentProperty); }
+            set { SetValue(ObjectContentProperty, value); }
+        }
+        
+        public static readonly DependencyProperty ObjectContentProperty =
+            DependencyProperty.Register("ObjectContent", typeof(object), typeof(EditableTextBox), new PropertyMetadata("Object"));
+
+
+        public object MarkerContent {
+            get { return (object)GetValue(MarkerContentProperty); }
+            set { SetValue(MarkerContentProperty, value); }
+        }
+        
+        public static readonly DependencyProperty MarkerContentProperty =
+            DependencyProperty.Register("MarkerContent", typeof(object), typeof(EditableTextBox), new PropertyMetadata("Marker"));
+
+
+        #endregion
+
         #region Commands
         private Command _mouseOverTableCommand;
         public Command MouseOverTableCommand {

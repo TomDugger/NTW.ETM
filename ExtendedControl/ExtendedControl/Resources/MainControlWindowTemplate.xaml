@@ -12,6 +12,129 @@
                     xmlns:selv="clr-namespace:Virtualization.Calendar.Selectors;assembly=Virtualization.Calendar"
                     xmlns:info="clr-namespace:Info.Controls;assembly=Info"
                     xmlns:sell="clr-namespace:ExtendedControl.Selectors">
+
+    <Style TargetType="{x:Type controls:EditableTextBox}">
+        <Setter Property="FileContent" >
+            <Setter.Value>
+                <Rectangle Width="30" Height="30" Focusable="False" >
+                    <Rectangle.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource EditablePanelFile}" />
+                        </ToolTip>
+                    </Rectangle.ToolTip>
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                    </Rectangle.Fill>
+                    <Rectangle.OpacityMask>
+                        <ImageBrush ImageSource="/ExtendedControl;component/Images/FileEditPanel.png" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontContent">
+            <Setter.Value>
+                <Rectangle Width="30" Height="30" Focusable="False" >
+                    <Rectangle.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource EditablePanelFont}" />
+                        </ToolTip>
+                    </Rectangle.ToolTip>
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                    </Rectangle.Fill>
+                    <Rectangle.OpacityMask>
+                        <ImageBrush ImageSource="/ExtendedControl;component/Images/FontEditPanel.png" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="AligenmentContent">
+            <Setter.Value>
+                <Rectangle Width="30" Height="30" Focusable="False" >
+                    <Rectangle.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource EditablePanelAligenment}" />
+                        </ToolTip>
+                    </Rectangle.ToolTip>
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                    </Rectangle.Fill>
+                    <Rectangle.OpacityMask>
+                        <ImageBrush ImageSource="/ExtendedControl;component/Images/AlignmentEditPanel.png" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="PageContent">
+            <Setter.Value>
+                <Rectangle Width="30" Height="30" Focusable="False" >
+                    <Rectangle.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource EditablePanelPage}" />
+                        </ToolTip>
+                    </Rectangle.ToolTip>
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                    </Rectangle.Fill>
+                    <Rectangle.OpacityMask>
+                        <ImageBrush ImageSource="/ExtendedControl;component/Images/PageSizeEditPanel.png" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="PrimitivyObjectContent">
+            <Setter.Value>
+                <Rectangle Width="30" Height="30" Focusable="False" >
+                    <Rectangle.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource EditablePanelPrimitive}" />
+                        </ToolTip>
+                    </Rectangle.ToolTip>
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                    </Rectangle.Fill>
+                    <Rectangle.OpacityMask>
+                        <ImageBrush ImageSource="/ExtendedControl;component/Images/PrimitiveEditPanel.png" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ObjectContent">
+            <Setter.Value>
+                <Rectangle Width="30" Height="30" Focusable="False" >
+                    <Rectangle.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource EditablePanelObject}" />
+                        </ToolTip>
+                    </Rectangle.ToolTip>
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                    </Rectangle.Fill>
+                    <Rectangle.OpacityMask>
+                        <ImageBrush ImageSource="/ExtendedControl;component/Images/ObjectEditPanel.png" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="MarkerContent">
+            <Setter.Value>
+                <Rectangle Width="30" Height="30" Focusable="False" >
+                    <Rectangle.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="{DynamicResource EditablePanelMarker}" />
+                        </ToolTip>
+                    </Rectangle.ToolTip>
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                    </Rectangle.Fill>
+                    <Rectangle.OpacityMask>
+                        <ImageBrush ImageSource="/ExtendedControl;component/Images/MarkEditPanel.png" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
     <ControlTemplate x:Key="DBSettingsTemplate">
