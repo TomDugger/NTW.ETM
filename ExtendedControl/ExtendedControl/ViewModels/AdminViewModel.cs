@@ -1153,6 +1153,25 @@ namespace ExtendedControl.ViewModels
             }
         }
         #endregion
+
+        #region Journal members
+        private DateTime _journalStartDate = DateTime.Now.Date;
+        public DateTime JournalStartDate {
+            get { return _journalStartDate; }
+            set { _journalStartDate = value; this.SendPropertyChanged(nameof(JournalStartDate)); }
+        }
+
+        private DateTime _journalEndDate = DateTime.Now.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+        public DateTime JournalEndDate {
+            get { return _journalEndDate; }
+            set { _journalEndDate = value; this.SendPropertyChanged(nameof(JournalEndDate)); }
+        }
+
+        private ObservableCollection<Journal> _journalValues;
+        public ObservableCollection<Journal> JournalValues {
+            get { return _journalValues ?? (_journalValues = GetJournalValues()); }
+        }
+        #endregion
         #endregion
 
         #region Helps
@@ -1234,10 +1253,93 @@ namespace ExtendedControl.ViewModels
         }
         #endregion
 
+        #region Journal helps
+        private ObservableCollection<Journal> GetJournalValues() {
+            IEnumerable<Journal> result = null;
+            using (DBContext ccontext = new DBContext(false))
+                result = ccontext.Journals.Where(x => x.CreateDate >= JournalStartDate && x.CreateDate <= JournalEndDate).ToArray();
+            return new ObservableCollection<Journal>(result);
+        }
+        #endregion
+
         protected void CloseWindowsByType<T>() {
             foreach (Window item in App.Current.Windows)
                 if (item is T)
                     WindowVisibilityBehaviour.SetIsVisible(item, false);
+        }
+        #endregion
+
+        #region Statick helps
+        public static void SendDataJournal(TypeMessage type, User user, Task task = null, User sUser = null, UserSettings userSettings = null, Project project = null, DateTime? createDate = null) {
+            using (DBContext context = new DBContext(false)) {
+                var newEntry = new Journal {
+                    CreateDate = createDate != null ? (DateTime)createDate : DateTime.Now,
+                    IdUser = user.ID,
+                    UserName = user.UserName,
+                    ValueMessage = task.ToString(),
+                    SecondMessageValue = ""
+                };
+
+                context.Journals.AddObject(newEntry);
+                context.SaveChanges();
+            }
+
+            SendMessage(type, user, task, user, userSettings, project);
+        }
+
+        protected static void SendMessage(TypeMessage type, User user, Task task = null, User sUser = null, UserSettings userSettings = null, Project project = null) {
+            // отбираем пользоватлей для оповещения
+            IEnumerable<string> ips = null;
+            int[] parametry = new int[0];
+
+            using (DBContext context = new DBContext(false)) {
+                switch (type) {
+                    // для исполнителей и ответственных лиц
+                    case TypeMessage.AddComment:
+                    case TypeMessage.ChangedTask:
+                    case TypeMessage.CreateTask:
+                    case TypeMessage.DeleteTask:
+                        ips = context.Users.Where(x => x.IpAdress != string.Empty).ToArray().Where(x => task.Perfomers.FirstOrDefault(u => u.IDUser == x.ID) != null).Select(x => x.IpAdress).ToArray();
+                        parametry = new int[] { task.ID, user.ID };
+                        break;
+                    // для ответственных лиц
+                    case TypeMessage.CancelingExecution:
+                    case TypeMessage.ComplitedExecution:
+                    case TypeMessage.StartExecution:
+                        ips = context.Users.Where(x => x.IpAdress != string.Empty).ToArray().Where(x => task.Perfomers.FirstOrDefault(u => u.IDUser == x.ID && u.PersonInCharge) != null).Select(x => x.IpAdress).ToArray();
+                        parametry = new int[] { task.ID, sUser.ID };
+                        break;
+                    // для администраторов
+                    case TypeMessage.ChangingProject:
+                    case TypeMessage.ChangingRole:
+                    case TypeMessage.CreateProject:
+                    case TypeMessage.CreateRole:
+                    case TypeMessage.CreateUser:
+                    case TypeMessage.CreateUserSetting:
+                    case TypeMessage.DeleteProject:
+                    case TypeMessage.DeleteRole:
+                    case TypeMessage.DeleteUser:
+                    case TypeMessage.DeleteUserSetting:
+                    case TypeMessage.RestoreProject:
+                    case TypeMessage.RestoreRole:
+                    case TypeMessage.RestoreUser:
+                    case TypeMessage.RestoreUserSetting:
+                        break;
+                    // для пользователя
+                    case TypeMessage.ChangingUser:
+                    case TypeMessage.ChangingUserSetting:
+                        break;
+                    // для всех
+                    case TypeMessage.UserEnter:
+                    case TypeMessage.UserExit:
+                        break;
+                }
+            }
+
+            foreach (string ip in ips)
+            {
+                NTW.Communication.Beginers.ClientBeginer.Send(ip, 8810, "commands", (int)type, user.ID, parametry);
+            }
         }
         #endregion
     }

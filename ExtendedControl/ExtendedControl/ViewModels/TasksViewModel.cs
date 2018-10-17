@@ -43,10 +43,11 @@ namespace ExtendedControl.ViewModels
                 using (DBContext context = new DBContext(false))
                 {
                     CurrentTask = Task.New();
-                    CurrentTask.Creater = App.CurrentUser.ID;
+                    CurrentTask.Creater = CurrentUser.ID;
                     CurrentTask.OpenDate = DateTime.Now;
                     CurrentTask.EndDate = CurrentTask.OpenDate.AddDays(1);
                     CurrentTask.IdProject = context.Projects.FirstOrDefault().ID;
+                    this.SendPropertyChanged(nameof(CurrentTask));
 
                     TaskControlWindow createWindow = new TaskControlWindow();
                     HideButtonBehaviour.SetCommand(createWindow, CanceliWndowCommand);
@@ -61,6 +62,10 @@ namespace ExtendedControl.ViewModels
                         Tasks.Add(CurrentTask);
 
                         ActionCalendar((panel) => panel.Add(CurrentTask));
+
+                        CurrentTask.Perfomers.Load();
+                        // entery data journal
+                        AdminViewModel.SendDataJournal(TypeMessage.CreateTask, this.CurrentUser, CurrentTask);
                     }
                     else
                         CurrentTask.Disposing(App.DBSettings.Connection.PathToResourceDB);
@@ -116,6 +121,9 @@ namespace ExtendedControl.ViewModels
 
                     Tasks.Remove(res);
 
+                    // entery data journal
+                    AdminViewModel.SendDataJournal(TypeMessage.DeleteTask, this.CurrentUser, t);
+
                     ActionCalendar((panel) => {
                         panel.Remove(res);
                     });
@@ -169,6 +177,10 @@ namespace ExtendedControl.ViewModels
                         context.TaskComments.AddObject(CurrentTask.AddSystemComment("edit", CurrentUser.ID));
 
                         context.SaveChanges();
+
+                        // entery data journal
+                        AdminViewModel.SendDataJournal(TypeMessage.ChangedTask, this.CurrentUser, this.CurrentTask);
+
                         int id = Tasks.IndexOf(temp);
                         if (id != -1) {
                             Tasks.Remove(temp);
@@ -218,6 +230,9 @@ namespace ExtendedControl.ViewModels
                             context.Tasks.AddObject(CurrentTask);
                             context.SaveChanges();
 
+                            // entery data journal
+                            AdminViewModel.SendDataJournal(TypeMessage.CreateTask, this.CurrentUser, CurrentTask);
+
                             Tasks.Add(CurrentTask);
                         }
                         else
@@ -251,6 +266,9 @@ namespace ExtendedControl.ViewModels
                             context.TaskComments.AddObject(SelectedTask.AddSystemComment("start", CurrentUser.ID));
 
                             context.SaveChanges();
+
+                            // entery data journal
+                            AdminViewModel.SendDataJournal(TypeMessage.StartExecution, this.CurrentUser, this.SelectedTask);
                         }
                         pf.OnPropertyChangedByExecution();
                     }
@@ -289,6 +307,10 @@ namespace ExtendedControl.ViewModels
                             context.TaskComments.AddObject(SelectedTask.AddSystemComment("fine", CurrentUser.ID));
 
                             context.SaveChanges();
+
+                            // entery data journal
+                            AdminViewModel.SendDataJournal(TypeMessage.ComplitedExecution, this.CurrentUser, this.SelectedTask, this.CurrentUser);
+
                             pf.OnPropertyChangedByExecution();
                         }
 
@@ -318,6 +340,9 @@ namespace ExtendedControl.ViewModels
                             context.TaskComments.AddObject(SelectedTask.AddSystemComment("cancelling|" + pfc.FullNamePerfomer, CurrentUser.ID));
 
                             context.SaveChanges();
+
+                            // entery data journal
+                            AdminViewModel.SendDataJournal(TypeMessage.CancelingExecution, this.CurrentUser, this.SelectedTask, pfc.User);
 
                             pf.OnPropertyChangedByExecution();
                         }

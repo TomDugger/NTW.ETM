@@ -6,6 +6,7 @@
     <y:String x:Key="ProcessAddButton" >Добавить новый процесс</y:String>
     <y:String x:Key="ProcessEditButton">Изменить</y:String>
     <y:String x:Key="ProcessRemoveButton">Удалить</y:String>
+    <y:String x:Key="ProcessCopyButton">Создать копию</y:String>
     
     <!--Control-->
     <y:String x:Key="ProcessControlProcessName">Имя процесса</y:String>

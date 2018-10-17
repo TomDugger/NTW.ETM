@@ -60,8 +60,11 @@ namespace ExtendedControl.ViewModels
                 {
                     //с изменением придется помудрить
                     CurrentStartProcess = context.StartProcesses.FirstOrDefault(x=> x.ID == ((StartProcess)obj).ID);
-                    FileAttributes attr = File.GetAttributes(CurrentStartProcess.PathToApp);
-                    this.IsFolderPath = (attr & FileAttributes.Directory) == FileAttributes.Directory;
+                    if (File.Exists(CurrentStartProcess.PathToApp))
+                    {
+                        FileAttributes attr = File.GetAttributes(CurrentStartProcess.PathToApp);
+                        this.IsFolderPath = (attr & FileAttributes.Directory) == FileAttributes.Directory;
+                    }
                     ProcessControlWindow pcw = new ProcessControlWindow();
                     WindowPositionBehaviour.SetWindowPosition(pcw, WindowPosition.None);
                     WindowVisibilityBehaviour.SetIsDialogVisible(pcw, true);

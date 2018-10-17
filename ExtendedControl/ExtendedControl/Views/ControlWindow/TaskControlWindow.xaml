@@ -376,7 +376,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Button Content="{DynamicResource TaskControlPerfomersAdd}" Width="50" Command="{Binding Path=AddNewPerfomerCommand}" CommandParameter="{Binding ElementName=pcList, Path=SelectedValue, UpdateSourceTrigger=PropertyChanged}" />
+                            <Button Content="{DynamicResource TaskControlPerfomersAdd}" Width="Auto" Padding="5, 0" Command="{Binding Path=AddNewPerfomerCommand}" CommandParameter="{Binding ElementName=pcList, Path=SelectedValue, UpdateSourceTrigger=PropertyChanged}" />
                             <ComboBox Grid.Column="1" Name="pcList" ItemsSource="{Binding Path=UserListByPerfomers}" DisplayMemberPath="Item1" SelectedValuePath="Item2" />
                         </Grid>
                     </Grid>

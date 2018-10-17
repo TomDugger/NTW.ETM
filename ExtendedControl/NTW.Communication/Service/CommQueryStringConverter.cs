@@ -34,7 +34,10 @@ namespace NTW.Communication.Service
         {
             if (parameterType == typeof(int[]))
             {
-                return string.Format("[{0}]", ((int[])parameter).Select(x => x.ToString()).Aggregate((i, j) => i + ", " + j));
+                if (((int[])parameter).Length > 0)
+                    return string.Format("[{0}]", ((int[])parameter).Select(x => x.ToString()).Aggregate((i, j) => i + ", " + j));
+                else
+                    return string.Format("[{0}]", "");
             }
             else return base.ConvertValueToString(parameter, parameterType);
         }

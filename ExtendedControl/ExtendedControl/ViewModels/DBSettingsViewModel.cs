@@ -140,7 +140,7 @@ namespace ExtendedControl.ViewModels
                         {
                             ((Window)obj).IsEnabled = true;
 
-                            WindowMessageBehaviour.SetMessage((Window)obj, App.GetString("DBSettingsDeleteDBComplited"), Colors.Maroon, Colors.White);
+                            WindowMessageBehaviour.SetMessage((Window)obj, App.GetString("DBSettingsDeleteDBComplited"), Colors.DarkGreen, Colors.White);
                         });
                     }
                     else {

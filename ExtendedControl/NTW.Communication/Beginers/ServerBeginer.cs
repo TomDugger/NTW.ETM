@@ -55,6 +55,11 @@ namespace NTW.Communication.Beginers
                 else Failed?.Invoke();
             }, null);
         }
+
+        public override string ToString()
+        {
+            return _host.BaseAddresses[0].OriginalString;
+        }
         #endregion
     }
 }

@@ -54,7 +54,13 @@ namespace NTW.Moduls {
                 Win32.SHGFI_ICON | Win32.SHGFI_LARGEICON);
             }
 
-            System.Drawing.Icon myIcon = (System.Drawing.Icon)System.Drawing.Icon.FromHandle(shinfo.hIcon).Clone();
+            System.Drawing.Icon myIcon = null;
+            try
+            {
+                myIcon = (System.Drawing.Icon)System.Drawing.Icon.FromHandle(shinfo.hIcon).Clone();
+            }
+            catch { }
+
             DestroyIcon(shinfo.hIcon);
             return myIcon;
         }
@@ -63,14 +69,17 @@ namespace NTW.Moduls {
             BitmapImage bitmapimage = new BitmapImage();
             using (MemoryStream memory = new MemoryStream()) {
                 Bitmap bmp = default(Bitmap);
-                bmp = new Bitmap(GetIconDrw(path, isBig).ToBitmap());
-                bmp.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
-                memory.Position = 0;
-                bitmapimage.BeginInit();
-                bitmapimage.StreamSource = memory;
-                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapimage.EndInit();
-
+                var ico = GetIconDrw(path, isBig);
+                if (ico != null)
+                {
+                    bmp = new Bitmap(GetIconDrw(path, isBig).ToBitmap());
+                    bmp.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
+                    memory.Position = 0;
+                    bitmapimage.BeginInit();
+                    bitmapimage.StreamSource = memory;
+                    bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmapimage.EndInit();
+                }
             }
             return bitmapimage;
         }

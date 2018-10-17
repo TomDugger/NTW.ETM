@@ -20,6 +20,7 @@ using System.Configuration;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Windows;
 using System.Windows.Media;
 
@@ -284,9 +285,34 @@ namespace ExtendedControl
                 KeyListner.KeyUp += Global;
 
                 // 5. запуск сервисов прослущивания сообщений
-                Server = new ServerBeginer(typeof(CommandService), typeof(ICommandService));
-                Server.Start();
+                string strHostName = Dns.GetHostName();
+                IPHostEntry ipEntry = Dns.GetHostByName(strHostName);
+                IPAddress[] addr = ipEntry.AddressList;
+                string ip = "localhost";
+                if (addr.Length > 0)
+                    ip = addr[0].ToString();
+
+                Server = new ServerBeginer(typeof(CommandService), typeof(ICommandService), ip);
+                Server.Start(()=> {
+                    using (DBContext context = new DBContext(false)) {
+                        var u = context.Users.FirstOrDefault(x => x.ID == CurrentUser.ID);
+                        u.IpAdress = ip;
+                        context.SaveChanges();
+                    }
+                });
             }
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            using (DBContext context = new DBContext(false))
+            {
+                var u = context.Users.FirstOrDefault(x => x.ID == CurrentUser.ID);
+                u.IpAdress = string.Empty;
+                context.SaveChanges();
+            }
+
+            base.OnExit(e);
         }
 
         private void Global(object sender, RawKeyEventArgs args) {
@@ -503,7 +529,10 @@ namespace ExtendedControl
         #region Static members
         public static User CurrentUser {
             get { return (User)Application.Current.Resources["CurrentUser"]; }
-            set { Application.Current.Resources["CurrentUser"] = value; App.Language = new CultureInfo(value.Language); }
+            set {
+
+                Application.Current.Resources["CurrentUser"] = value;
+                App.Language = new CultureInfo(value.Language); }
         }
 
         public static AppSettings AppSettings {

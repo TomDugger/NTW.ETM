@@ -622,7 +622,7 @@
                                               Command="{Binding Path=DeleteProcessCommand}"
                                               CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContextMenu}}, Path=DataContext}"/>
                                         <MenuItem b:ViewModelIjection.ViewModel="{x:Type vm:ProcessViewModel}"
-                                              Header="Copy" 
+                                              Header="{DynamicResource ProcessCopyButton}" 
                                               Command="{Binding Path=CopyProcessCommand}"
                                               CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContextMenu}}, Path=DataContext}"/>
                                     </ContextMenu>

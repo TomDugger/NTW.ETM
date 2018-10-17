@@ -931,7 +931,36 @@
     </DataTemplate>
 
     <DataTemplate x:Key="AdminJournalTemplate">
-        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Journal" />
+        <Grid DataContext="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Journal" />
+
+            <ScrollViewer Grid.Row="1">
+                <ItemsControl Style="{x:Null}" ItemsSource="{Binding JournalValues}" HorizontalContentAlignment="Center">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="CreateDate" HorizontalAlignment="Left" />
+                                <TextBlock Grid.Row="1" Text="Value" HorizontalAlignment="Stretch" />
+                                <TextBlock Grid.Row="2" Text="User" HorizontalAlignment="Right" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            
+            
+        </Grid>
     </DataTemplate>
     
     <!--ControlChild-->
@@ -981,10 +1010,10 @@
                                 <RowDefinition Height="30" />
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Text="{DynamicResource AdminUserControlUserName}" VerticalAlignment="Bottom" Margin="10, 0, 0, 0" />
-                            <TextBox Grid.Row="1" Text="{Binding Path=UserName}" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
+                            <TextBox Grid.Row="1" Text="{Binding Path=UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
 
                             <TextBlock Grid.Row="2" Text="{DynamicResource AdminUserControlFullUserName}" VerticalAlignment="Bottom" Margin="10, 0, 0, 0" />
-                            <TextBox Grid.Row="3" Text="{Binding Path=FullName}" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
+                            <TextBox Grid.Row="3" Text="{Binding Path=FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
                         </Grid>
                     </ScrollViewer>
                 </Grid>

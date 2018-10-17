@@ -587,6 +587,14 @@
             <End Role="User" EntitySet="Users" />
             <End Role="NoteGroup" EntitySet="NoteGroups" />
           </AssociationSet>
+          <AssociationSet Name="TaskStage" Association="Context.TaskStage">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Stage" EntitySet="Stages" />
+          </AssociationSet>
+          <AssociationSet Name="PerfomerStage" Association="Context.PerfomerStage">
+            <End Role="Perfomer" EntitySet="Perfomers" />
+            <End Role="Stage" EntitySet="Stages" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AppStarter">
           <Key>
@@ -674,6 +682,7 @@
           <Property Name="StartDate" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Task" Relationship="Context.Task_Perfomer" FromRole="Perfomers" ToRole="Tasks" />
           <NavigationProperty Name="User" Relationship="Context.User_Perfomer" FromRole="Perfomers" ToRole="Users" />
+          <NavigationProperty Name="Stages" Relationship="Context.PerfomerStage" FromRole="Perfomer" ToRole="Stage" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -744,6 +753,8 @@
           <Property Name="StateStage" Type="Int32" Nullable="false" />
           <Property Name="DeadLine" Type="DateTime" Nullable="false" />
           <Property Name="InfinityDeadLine" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="Context.TaskStage" FromRole="Stage" ToRole="Task" />
+          <NavigationProperty Name="Perfomer" Relationship="Context.PerfomerStage" FromRole="Stage" ToRole="Perfomer" />
         </EntityType>
         <EntityType Name="StartProcess">
           <Key>
@@ -806,6 +817,7 @@
           <NavigationProperty Name="TaskComments" Relationship="Context.Task_TaskComment" FromRole="Tasks" ToRole="TaskComments" />
           <NavigationProperty Name="TaskFiles" Relationship="Context.Task_TaskFile" FromRole="Tasks" ToRole="TaskFiles" />
           <NavigationProperty Name="User" Relationship="Context.User_Task" FromRole="Tasks" ToRole="Users" />
+          <NavigationProperty Name="Stages" Relationship="Context.TaskStage" FromRole="Task" ToRole="Stage" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1030,6 +1042,30 @@
             </Principal>
             <Dependent Role="NoteGroup">
               <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskStage">
+          <End Type="Context.Task" Role="Task" Multiplicity="1" />
+          <End Type="Context.Stage" Role="Stage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stage">
+              <PropertyRef Name="IdTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PerfomerStage">
+          <End Type="Context.Perfomer" Role="Perfomer" Multiplicity="1" />
+          <End Type="Context.Stage" Role="Stage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfomer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stage">
+              <PropertyRef Name="IdPerfomer" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1301,15 +1337,15 @@
         <EntityTypeShape EntityType="Context.AppStarter" Width="1.5" PointX="11.5" PointY="0.5" Height="1.59568359375" IsExpanded="true" />
         <EntityTypeShape EntityType="Context.Favorite" Width="1.5" PointX="7.75" PointY="7.125" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="Context.GlobalHookKey" Width="1.5" PointX="2.375" PointY="8" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="Context.Journal" Width="1.5" PointX="11.25" PointY="5" Height="2.3648893229166656" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.Journal" Width="1.5" PointX="10.75" PointY="2.625" Height="2.3648893229166656" IsExpanded="true" />
         <EntityTypeShape EntityType="Context.Note" Width="1.5" PointX="5.875" PointY="7" Height="3.9033007812500014" IsExpanded="true" />
         <EntityTypeShape EntityType="Context.NoteGroup" Width="1.5" PointX="3.875" PointY="10.25" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="Context.Perfomer" Width="1.5" PointX="6.375" PointY="3.625" Height="2.7494921874999996" IsExpanded="true" />
         <EntityTypeShape EntityType="Context.Project" Width="1.5" PointX="8.125" PointY="0.5" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="Context.Role" Width="1.5" PointX="0.5" PointY="0.5" Height="6.5955208333333353" IsExpanded="true" />
         <EntityTypeShape EntityType="Context.Setting" Width="1.5" PointX="2.5" PointY="1.5" Height="2.7494921875000049" IsExpanded="true" />
-        <EntityTypeShape EntityType="Context.Stage" Width="1.5" PointX="11.375" PointY="2.25" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="Context.StartProcess" Width="1.5" PointX="9.5" PointY="3.75" Height="2.1725878906250031" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.Stage" Width="1.5" PointX="8.625" PointY="2.875" Height="2.7494921874999987" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.StartProcess" Width="1.5" PointX="12.125" PointY="6.75" Height="2.1725878906250031" IsExpanded="true" />
         <EntityTypeShape EntityType="Context.TaskComment" Width="1.5" PointX="2.375" PointY="5" Height="2.749492187499996" IsExpanded="true" />
         <EntityTypeShape EntityType="Context.TaskFile" Width="1.5" PointX="7.625" PointY="10" Height="2.749492187499996" IsExpanded="true" />
         <EntityTypeShape EntityType="Context.Task" Width="1.5" PointX="9.5" PointY="6.25" Height="4.4802050781250031" IsExpanded="true" />
@@ -1319,8 +1355,8 @@
           <ConnectorPoint PointX="9.25" PointY="8.1151432291666659" />
         </AssociationConnector>
         <AssociationConnector Association="Context.User_Favorite" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.125" PointY="3.0526432291666659" />
-          <ConnectorPoint PointX="8" PointY="3.0526432291666659" />
+          <ConnectorPoint PointX="6.125" PointY="2.6776432291666663" />
+          <ConnectorPoint PointX="8" PointY="2.6776432291666663" />
           <ConnectorPoint PointX="8" PointY="7.125" />
         </AssociationConnector>
         <AssociationConnector Association="Context.User_GlobalHookKey" ManuallyRouted="false">
@@ -1343,24 +1379,19 @@
           <ConnectorPoint PointX="5.875" PointY="8.59375" />
         </AssociationConnector>
         <AssociationConnector Association="Context.Task_Perfomer" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.5" PointY="6.65599659375" />
-          <ConnectorPoint PointX="8.8645813333333336" PointY="6.6559965937499994" />
-          <ConnectorPoint PointX="8.6979146666666658" PointY="6.65599659375" />
-          <ConnectorPoint PointX="8.0833333333333339" PointY="6.6559965937499994" />
-          <ConnectorPoint PointX="7.916666666666667" PointY="6.65599659375" />
-          <ConnectorPoint PointX="7.5625" PointY="6.65599659375" />
-          <ConnectorPoint PointX="7.5625" PointY="6.3744921875" />
+          <ConnectorPoint PointX="9.5" PointY="6.4083968098958328" />
+          <ConnectorPoint PointX="8.0833333333333339" PointY="6.4083968098958319" />
+          <ConnectorPoint PointX="7.916666666666667" PointY="6.4083968098958328" />
+          <ConnectorPoint PointX="7.875" PointY="6.4083968098958328" />
         </AssociationConnector>
         <AssociationConnector Association="Context.User_Perfomer" ManuallyRouted="false">
           <ConnectorPoint PointX="6.125" PointY="4.5574039713541659" />
           <ConnectorPoint PointX="6.375" PointY="4.5574039713541659" />
         </AssociationConnector>
         <AssociationConnector Association="Context.Project_Task" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.781248" PointY="2.4802864583333317" />
-          <ConnectorPoint PointX="8.781248" PointY="7.0625" />
-          <ConnectorPoint PointX="9.3125" PointY="7.0625" />
-          <ConnectorPoint PointX="9.3125" PointY="9.4539261536458277" />
-          <ConnectorPoint PointX="9.5" PointY="9.4539261536458277" />
+          <ConnectorPoint PointX="9.625" PointY="1.4901432291666659" />
+          <ConnectorPoint PointX="10.4375" PointY="1.4901432291666659" />
+          <ConnectorPoint PointX="10.4375" PointY="6.25" />
         </AssociationConnector>
         <AssociationConnector Association="Context.Role_User" ManuallyRouted="false">
           <ConnectorPoint PointX="2" PointY="1.0312500000000007" />
@@ -1371,20 +1402,18 @@
           <ConnectorPoint PointX="4.625" PointY="2.8747460937500025" />
         </AssociationConnector>
         <AssociationConnector Association="Context.Task_TaskComment" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.5" PointY="6.859248296875" />
-          <ConnectorPoint PointX="8.8645813333333336" PointY="6.8592482968749993" />
-          <ConnectorPoint PointX="8.6979146666666658" PointY="6.859248296875" />
-          <ConnectorPoint PointX="8.0833333333333339" PointY="6.8592482968749993" />
-          <ConnectorPoint PointX="7.916666666666667" PointY="6.859248296875" />
-          <ConnectorPoint PointX="5.7864608333333329" PointY="6.8592482968749993" />
-          <ConnectorPoint PointX="5.6197941666666669" PointY="6.859248296875" />
-          <ConnectorPoint PointX="5.614583333333333" PointY="6.8592482968749993" />
-          <ConnectorPoint PointX="5.447916666666667" PointY="6.859248296875" />
-          <ConnectorPoint PointX="5.1145858333333321" PointY="6.8592482968749993" />
-          <ConnectorPoint PointX="4.947919166666666" PointY="6.859248296875" />
-          <ConnectorPoint PointX="4.333333333333333" PointY="6.8592482968749993" />
-          <ConnectorPoint PointX="4.166666666666667" PointY="6.859248296875" />
-          <ConnectorPoint PointX="3.875" PointY="6.859248296875" />
+          <ConnectorPoint PointX="9.5" PointY="6.7833968098958328" />
+          <ConnectorPoint PointX="8.0833333333333339" PointY="6.7833968098958319" />
+          <ConnectorPoint PointX="7.916666666666667" PointY="6.7833968098958328" />
+          <ConnectorPoint PointX="5.638020833333333" PointY="6.7833968098958319" />
+          <ConnectorPoint PointX="5.471354166666667" PointY="6.7833968098958328" />
+          <ConnectorPoint PointX="5.4505233333333321" PointY="6.7833968098958319" />
+          <ConnectorPoint PointX="5.283856666666666" PointY="6.7833968098958328" />
+          <ConnectorPoint PointX="5.0481808333333325" PointY="6.7833968098958319" />
+          <ConnectorPoint PointX="4.8815141666666664" PointY="6.7833968098958328" />
+          <ConnectorPoint PointX="4.333333333333333" PointY="6.7833968098958319" />
+          <ConnectorPoint PointX="4.166666666666667" PointY="6.7833968098958328" />
+          <ConnectorPoint PointX="3.875" PointY="6.7833968098958328" />
         </AssociationConnector>
         <AssociationConnector Association="Context.User_TaskComment" ManuallyRouted="false">
           <ConnectorPoint PointX="4.625" PointY="5.2136514713541722" />
@@ -1400,20 +1429,26 @@
           <ConnectorPoint PointX="7.625" PointY="12.713440755208332" />
         </AssociationConnector>
         <AssociationConnector Association="Context.User_Task" ManuallyRouted="false">
-          <ConnectorPoint PointX="5.73438" PointY="5.4898079427083326" />
-          <ConnectorPoint PointX="5.73438" PointY="6.5152418906250062" />
-          <ConnectorPoint PointX="7.479166666666667" PointY="6.5152418906250054" />
-          <ConnectorPoint PointX="7.645833333333333" PointY="6.5152418906250062" />
-          <ConnectorPoint PointX="7.916666666666667" PointY="6.5152418906250054" />
-          <ConnectorPoint PointX="8.0833333333333339" PointY="6.5152418906250062" />
-          <ConnectorPoint PointX="8.6979146666666658" PointY="6.5152418906250054" />
-          <ConnectorPoint PointX="8.8645813333333336" PointY="6.5152418906250062" />
-          <ConnectorPoint PointX="9.5" PointY="6.5152418906250062" />
+          <ConnectorPoint PointX="5.71484625" PointY="5.4898079427083326" />
+          <ConnectorPoint PointX="5.71484625" PointY="6.6750927148437551" />
+          <ConnectorPoint PointX="7.916666666666667" PointY="6.6750927148437542" />
+          <ConnectorPoint PointX="8.0833333333333339" PointY="6.6750927148437551" />
+          <ConnectorPoint PointX="9.5" PointY="6.6750927148437551" />
         </AssociationConnector>
         <EntityTypeShape EntityType="Context.TrackingState" Width="1.5" PointX="0.75" PointY="10.75" Height="1.7879850260416674" />
         <AssociationConnector Association="Context.User_NoteGroup" >
           <ConnectorPoint PointX="5.031252499999999" PointY="5.4898079427083326" />
           <ConnectorPoint PointX="5.031252499999999" PointY="10.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="Context.TaskStage">
+          <ConnectorPoint PointX="9.8125" PointY="6.25" />
+          <ConnectorPoint PointX="9.8125" PointY="5.6244921874999987" />
+        </AssociationConnector>
+        <AssociationConnector Association="Context.PerfomerStage">
+          <ConnectorPoint PointX="7.875" PointY="4.62474609375" />
+          <ConnectorPoint PointX="7.916666666666667" PointY="4.6247460937499989" />
+          <ConnectorPoint PointX="8.0833333333333339" PointY="4.62474609375" />
+          <ConnectorPoint PointX="8.625" PointY="4.62474609375" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

@@ -20,7 +20,7 @@
         bc:UntieButtonBehaviour.UseUntieButton="False"
         bc:WindowVisibilityBehaviour.CloseByHidden="True"
         bc:SaveParametryPanelBehaviour.IsSaveByClose="True">
-    <Border Style="{x:Null}">
+    <Border Style="{x:Null}" VerticalAlignment="Bottom">
         <ItemsControl Style="{x:Null}" ItemsSource="{Binding Events}" HorizontalContentAlignment="Stretch">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>

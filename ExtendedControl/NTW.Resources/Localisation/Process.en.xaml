@@ -6,6 +6,7 @@
     <y:String x:Key="ProcessAddButton" >Add new app</y:String>
     <y:String x:Key="ProcessEditButton">Edit</y:String>
     <y:String x:Key="ProcessRemoveButton">Remove</y:String>
+    <y:String x:Key="ProcessCopyButton">Create copy</y:String>
     
     <!--Control-->
     <y:String x:Key="ProcessControlProcessName">Process name</y:String>

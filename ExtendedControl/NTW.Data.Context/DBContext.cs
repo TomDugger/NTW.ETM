@@ -174,12 +174,22 @@ namespace NTW.Data.Context
 
                 NoteGroup ng = new NoteGroup
                 {
-                    Caption = string.Empty,
+                    Caption = "Group",
+                    IDUser = Admin.ID,
                     IDColor = 0,
                     PositionInList = 0
                 };
 
                 this.NoteGroups.AddObject(ng);
+
+                NoteGroup nga = new NoteGroup {
+                    Caption = "Group",
+                    IDUser = u.ID,
+                    IDColor = 0,
+                    PositionInList = 0
+                };
+                this.NoteGroups.AddObject(nga);
+
                 this.SaveChanges();
 
                 result = true;
