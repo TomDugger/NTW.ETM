@@ -1158,18 +1158,47 @@ namespace ExtendedControl.ViewModels
         private DateTime _journalStartDate = DateTime.Now.Date;
         public DateTime JournalStartDate {
             get { return _journalStartDate; }
-            set { _journalStartDate = value; this.SendPropertyChanged(nameof(JournalStartDate)); }
+            set {
+                _journalStartDate = value.Date;
+                this.SendPropertyChanged(nameof(JournalStartDate));
+
+                if (_journalEndDate < _journalStartDate) {
+                    _journalEndDate = _journalStartDate;
+                    this.SendPropertyChanged(nameof(JournalEndDate));
+                }
+
+                _journalValues = null;
+                _journalCollectionView = null;
+                this.SendPropertyChanged(nameof(JournalCollectionView));
+            }
         }
 
         private DateTime _journalEndDate = DateTime.Now.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
         public DateTime JournalEndDate {
             get { return _journalEndDate; }
-            set { _journalEndDate = value; this.SendPropertyChanged(nameof(JournalEndDate)); }
+            set {
+                _journalEndDate = value.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+                this.SendPropertyChanged(nameof(JournalEndDate));
+
+                if (_journalEndDate < _journalStartDate) {
+                    _journalStartDate = _journalEndDate;
+                    this.SendPropertyChanged(nameof(JournalValues));
+                }
+
+                _journalValues = null;
+                _journalCollectionView = null;
+                this.SendPropertyChanged(nameof(JournalCollectionView));
+            }
         }
 
         private ObservableCollection<Journal> _journalValues;
         public ObservableCollection<Journal> JournalValues {
             get { return _journalValues ?? (_journalValues = GetJournalValues()); }
+        }
+
+        private ICollectionView _journalCollectionView;
+        public ICollectionView JournalCollectionView {
+            get { return _journalCollectionView ?? (_journalCollectionView = GetJournalCollection()); }
         }
         #endregion
         #endregion
@@ -1257,8 +1286,15 @@ namespace ExtendedControl.ViewModels
         private ObservableCollection<Journal> GetJournalValues() {
             IEnumerable<Journal> result = null;
             using (DBContext ccontext = new DBContext(false))
-                result = ccontext.Journals.Where(x => x.CreateDate >= JournalStartDate && x.CreateDate <= JournalEndDate).ToArray();
+                result = ccontext.Journals.Where(x => x.CreateDate >= JournalStartDate && x.CreateDate <= JournalEndDate && x.TypeMessage != 0).ToArray();
             return new ObservableCollection<Journal>(result);
+        }
+
+        private ICollectionView GetJournalCollection() {
+            ICollectionView view = CollectionViewSource.GetDefaultView(JournalValues);
+            view.GroupDescriptions.Add(new PropertyGroupDescription("UserName"));
+            //view.GroupDescriptions.Add(new PropertyGroupDescription("CreateDate.Date"));
+            return view;
         }
         #endregion
 
@@ -1270,24 +1306,25 @@ namespace ExtendedControl.ViewModels
         #endregion
 
         #region Statick helps
-        public static void SendDataJournal(TypeMessage type, User user, Task task = null, User sUser = null, UserSettings userSettings = null, Project project = null, DateTime? createDate = null) {
+        public static void SendDataJournal(TypeMessage type, User user, Task task = null, User sUser = null, Setting userSettings = null, Project project = null, DateTime? createDate = null) {
+            var parameter = SendMessage(type, user, task, user, userSettings, project);
+
             using (DBContext context = new DBContext(false)) {
                 var newEntry = new Journal {
+                    TypeMessage = (int)type,
                     CreateDate = createDate != null ? (DateTime)createDate : DateTime.Now,
                     IdUser = user.ID,
                     UserName = user.UserName,
-                    ValueMessage = task.ToString(),
-                    SecondMessageValue = ""
+                    ValueMessage = user.ID.ToString(),
+                    SecondMessageValue = string.Format("[{0}]", ((int[])parameter).Select(x => x.ToString()).Aggregate((i, j) => i + ", " + j))
                 };
 
                 context.Journals.AddObject(newEntry);
                 context.SaveChanges();
             }
-
-            SendMessage(type, user, task, user, userSettings, project);
         }
 
-        protected static void SendMessage(TypeMessage type, User user, Task task = null, User sUser = null, UserSettings userSettings = null, Project project = null) {
+        protected static int[] SendMessage(TypeMessage type, User user, Task task = null, User sUser = null, Setting userSettings = null, Project project = null, Role role = null) {
             // отбираем пользоватлей для оповещения
             IEnumerable<string> ips = null;
             int[] parametry = new int[0];
@@ -1299,41 +1336,72 @@ namespace ExtendedControl.ViewModels
                     case TypeMessage.ChangedTask:
                     case TypeMessage.CreateTask:
                     case TypeMessage.DeleteTask:
-                        ips = context.Users.Where(x => x.IpAdress != string.Empty).ToArray().Where(x => task.Perfomers.FirstOrDefault(u => u.IDUser == x.ID) != null).Select(x => x.IpAdress).ToArray();
+                        ips = context.Users.Where(x => x.IpAdress != string.Empty).ToArray().Where(x => task.Perfomers.FirstOrDefault(u => u.IDUser == x.ID) != null || task.Creater == x.ID).Select(x => x.IpAdress).ToArray();
                         parametry = new int[] { task.ID, user.ID };
                         break;
                     // для ответственных лиц
                     case TypeMessage.CancelingExecution:
                     case TypeMessage.ComplitedExecution:
                     case TypeMessage.StartExecution:
-                        ips = context.Users.Where(x => x.IpAdress != string.Empty).ToArray().Where(x => task.Perfomers.FirstOrDefault(u => u.IDUser == x.ID && u.PersonInCharge) != null).Select(x => x.IpAdress).ToArray();
+                        ips = context.Users.Where(x => x.IpAdress != string.Empty).ToArray().Where(x => task.Perfomers.FirstOrDefault(u => u.IDUser == x.ID && u.PersonInCharge) != null || task.Creater == x.ID).Select(x => x.IpAdress).ToArray();
                         parametry = new int[] { task.ID, sUser.ID };
                         break;
                     // для администраторов
-                    case TypeMessage.ChangingProject:
-                    case TypeMessage.ChangingRole:
-                    case TypeMessage.CreateProject:
-                    case TypeMessage.CreateRole:
-                    case TypeMessage.CreateUser:
-                    case TypeMessage.CreateUserSetting:
-                    case TypeMessage.DeleteProject:
-                    case TypeMessage.DeleteRole:
-                    case TypeMessage.DeleteUser:
-                    case TypeMessage.DeleteUserSetting:
                     case TypeMessage.RestoreProject:
+                    case TypeMessage.DeleteProject:
+                    case TypeMessage.CreateProject:
+                    case TypeMessage.ChangingProject:
+                        ips = context.Users.Where(x => x.IpAdress != string.Empty 
+                        && (x.Role.RestoreProject 
+                        || x.Role.DeleteRole
+                        || x.Role.CreateProject
+                        || x.Role.UpdateRole)).Select(x => x.IpAdress).ToArray();
+                        parametry = new int[] { project.ID};
+                        break;
                     case TypeMessage.RestoreRole:
+                    case TypeMessage.DeleteRole:
+                    case TypeMessage.CreateRole:
+                    case TypeMessage.ChangingRole:
+                        ips = context.Users.Where(x => x.IpAdress != string.Empty
+                        && (x.Role.RestoreRole 
+                        || x.Role.DeleteRole 
+                        || x.Role.CreateNewRole
+                        || x.Role.UpdateRole)).Select(x => x.IpAdress).ToArray();
+                        parametry = new int[] { role.ID};
+                        break;
                     case TypeMessage.RestoreUser:
+                    case TypeMessage.DeleteUser:
+                    case TypeMessage.CreateUser:
+                        ips = context.Users.Where(x => x.IpAdress != string.Empty
+                        && (x.Role.RestoreUser
+                        || x.Role.DeleteUser
+                        || x.Role.CreateUser)).Select(x => x.IpAdress).ToArray();
+                        parametry = new int[] { user.ID};
+                        break;
                     case TypeMessage.RestoreUserSetting:
+                    case TypeMessage.DeleteUserSetting:
+                    case TypeMessage.CreateUserSetting:
+                        ips = context.Users.Where(x => x.IpAdress != string.Empty
+                        && (x.Role.RestoreSetting
+                        || x.Role.DeleteSetting
+                        || x.Role.CreateSetting)).Select(x => x.IpAdress).ToArray();
+                        parametry = new int[] { userSettings.ID };
                         break;
                     // для пользователя
                     case TypeMessage.ChangingUser:
                     case TypeMessage.ChangingUserSetting:
+                        ips = context.Users.Where(x => x.IpAdress != string.Empty).Select(x => x.IpAdress).ToArray();
+                        parametry = new int[] { user.ID };
                         break;
                     // для всех
                     case TypeMessage.UserEnter:
                     case TypeMessage.UserExit:
+                        ips = context.Users.Where(x => x.IpAdress != string.Empty).Select(x => x.IpAdress).ToArray();
+                        parametry = new int[] { user.ID };
                         break;
                 }
+
+                return parametry;
             }
 
             foreach (string ip in ips)

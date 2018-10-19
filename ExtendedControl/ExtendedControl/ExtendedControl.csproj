@@ -84,6 +84,7 @@
     <Compile Include="Behaviour\RectanglePositionBehaviour.cs" />
     <Compile Include="Behaviour\ViewModelIjection.cs" />
     <Compile Include="Converters\ErrorsConverter.cs" />
+    <Compile Include="Converters\GroupTypeConverter.cs" />
     <Compile Include="Converters\PositionConverter.cs" />
     <Compile Include="Converters\ResourceStringFormatConverter.cs" />
     <Compile Include="Converters\TypePanelToImageUriConverter.cs" />

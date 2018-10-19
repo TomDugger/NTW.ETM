@@ -2,10 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:NTW.Controls;assembly=NTW.Controls"
                     xmlns:b="clr-namespace:ExtendedControl.Behaviour"
+                    xmlns:con="clr-namespace:ExtendedControl.Converters"
                     xmlns:bc="clr-namespace:NTW.Controls.Behaviours;assembly=NTW.Controls"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:sel="clr-namespace:NTW.Controls.Selectors;assembly=NTW.Controls"
                     xmlns:info="clr-namespace:Info.Controls;assembly=Info">
+    <con:GroupTypeConverter x:Key="GroupTypeConverter1" />
+
     <Style x:Key="GridViewColumnHeaderGripper" TargetType="Thumb">
         <Setter Property="Width" Value="18"/>
         <Setter Property="Background" Value="White"/>
@@ -934,32 +937,835 @@
         <Grid DataContext="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Journal" />
+            <TextBlock Text="Journal" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource H4}" />
 
-            <ScrollViewer Grid.Row="1">
-                <ItemsControl Style="{x:Null}" ItemsSource="{Binding JournalValues}" HorizontalContentAlignment="Center">
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10, 3" HorizontalAlignment="Center">
+                <DatePicker SelectedDate="{Binding Path=JournalStartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="-" />
+                <DatePicker SelectedDate="{Binding Path=JournalEndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            
+            <ScrollViewer Grid.Row="2">
+                <ItemsControl Style="{x:Null}" ItemsSource="{Binding JournalCollectionView}" HorizontalAlignment="Center">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock Text="CreateDate" HorizontalAlignment="Left" />
-                                <TextBlock Grid.Row="1" Text="Value" HorizontalAlignment="Stretch" />
-                                <TextBlock Grid.Row="2" Text="User" HorizontalAlignment="Right" />
-                            </Grid>
+                            <ContentControl Name="ContentSource" Width="100" Height="100" Content="{Binding Path=.}" />
+                            <DataTemplate.Triggers>
+                                <!--No message-->
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="0">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <!--Task-->
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="1">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DarkOrange" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/CreateTask.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="2">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="3">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="4">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <!--Execution-->
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="5">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Green" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="6">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Green" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="7">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Green" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="8">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Green" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <!--User enter/exit-->
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="9">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Bottom" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="50"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DarkGreen" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/EnterUser.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="10">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Top" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="50"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Maroon" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/EnterUser.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="11">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="12">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="13">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="14">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <!--Role-->
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="15">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="16">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="17">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="18">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                                
+                                <!--Settings-->
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="19">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="20">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="21">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="22">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                                
+                                <!--Project-->
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="23">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="24">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="25">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=TypeMessage}" Value="26">
+                                    <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid Width="100" Height="100">
+                                                    <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="{Binding CreateDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" HorizontalAlignment="Left" />
+                                                                    <TextBlock Grid.Row="1" Text="{Binding Path=PresentValue}" HorizontalAlignment="Stretch" />
+                                                                    <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
+                                                                </Grid>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
+                    <ItemsControl.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                            <GroupStyle.Panel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <StackPanel.Style>
+                                            <Style TargetType="{x:Type StackPanel}">
+                                                <!--<Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=., Converter={StaticResource GroupTypeConverter1}}" Value="True">
+                                                        <Setter Property="Orientation" Value="Vertical" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>-->
+                                            </Style>
+                                        </StackPanel.Style>
+                                    </StackPanel>
+                                </ItemsPanelTemplate>
+                            </GroupStyle.Panel>
+                        </GroupStyle>
+                    </ItemsControl.GroupStyle>
                 </ItemsControl>
             </ScrollViewer>
-            
-            
         </Grid>
     </DataTemplate>
     

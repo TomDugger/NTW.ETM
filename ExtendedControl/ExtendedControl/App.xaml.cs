@@ -245,6 +245,8 @@ namespace ExtendedControl
                             App.CurrentUser = user;
                             App.Language = new CultureInfo(user.Language);
                             active = true;
+                            // set data journal
+                            AdminViewModel.SendDataJournal(TypeMessage.UserEnter, user);
                         }
                         else if (!(bool)new AuthorizationWindow().ShowDialog()) //0. проверка авторизации пользователя
                             Application.Current.Shutdown();
@@ -310,6 +312,9 @@ namespace ExtendedControl
                 var u = context.Users.FirstOrDefault(x => x.ID == CurrentUser.ID);
                 u.IpAdress = string.Empty;
                 context.SaveChanges();
+
+                // set data journal
+                AdminViewModel.SendDataJournal(TypeMessage.UserExit, u);
             }
 
             base.OnExit(e);

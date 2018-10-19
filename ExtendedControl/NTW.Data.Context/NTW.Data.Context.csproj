@@ -64,6 +64,7 @@
     <Compile Include="Manipulation\Task.cs" />
     <Compile Include="Manipulation\User.cs" />
     <Compile Include="Presentation\GlobalHookKey.cs" />
+    <Compile Include="Presentation\Journal.cs" />
     <Compile Include="Presentation\Note.cs" />
     <Compile Include="Presentation\NoteGroup.cs" />
     <Compile Include="Presentation\Perfomer.cs" />
