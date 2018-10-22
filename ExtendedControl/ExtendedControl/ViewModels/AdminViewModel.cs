@@ -94,6 +94,10 @@ namespace ExtendedControl.ViewModels
                     result.IsDelete = false;
                     context.SaveChanges();
                     Tasks.Remove(t);
+
+                    // entery data journal
+                    AdminViewModel.SendDataJournal(TypeMessage.RestoreTask, this.CurrentUser, t, this.CurrentUser);
+
                     WindowMessageBehaviour.SetMessage((Window)((Tuple<object, object>)obj).Item2, string.Format(App.GetString("AdminTaskMessageRestore"), t.Caption), backColor: Colors.Green, foreColor: Colors.White);
                 }, obj => obj != null));
             }
@@ -115,8 +119,11 @@ namespace ExtendedControl.ViewModels
                             temp.Add(item);
                         }
 
-                        foreach (var item in temp)
+                        foreach (var item in temp) {
                             Tasks.Remove(item);
+
+                            AdminViewModel.SendDataJournal(TypeMessage.RestoreTask, this.CurrentUser, item, this.CurrentUser);
+                        }
 
                         WindowMessageBehaviour.SetMessage(w, string.Format(App.GetString("AdminTaskMessageAll"), count), backColor: Colors.Green, foreColor: Colors.White);
                     }
@@ -151,6 +158,7 @@ namespace ExtendedControl.ViewModels
                         context.Users.AddObject((User)SelectedObject);
                         Users.Add((User)SelectedObject);
                         context.SaveChanges();
+                        AdminViewModel.SendDataJournal(TypeMessage.CreateUser, this.CurrentUser, null, (User)SelectedObject);
                         SelectedObject = null;
                         WindowVisibilityBehaviour.SetIsVisible((Window)wn, false);
                         this.State = TypeControl.Normal;
@@ -193,6 +201,7 @@ namespace ExtendedControl.ViewModels
                         int idPos = Users.IndexOf((User)select.Item1);
                         Users.RemoveAt(idPos);
                         Users.Insert(idPos, (User)SelectedObject);
+                        AdminViewModel.SendDataJournal(TypeMessage.ChangingUser, this.CurrentUser, null, (User)SelectedObject);
                         SelectedObject = null;
                         WindowVisibilityBehaviour.SetIsVisible((Window)wn, false);
                         EditObject = null;
@@ -232,6 +241,9 @@ namespace ExtendedControl.ViewModels
                     ((User)select.Item1).IsDelete = true;
 
                     context.SaveChanges();
+
+                    AdminViewModel.SendDataJournal(TypeMessage.DeleteUser, this.CurrentUser, null, user);
+
                     WindowMessageBehaviour.SetMessage(((Window)select.Item2), string.Format(App.GetString("AdminUserMessageRemove"), ((User)select.Item1).FullName), backColor: Colors.Green, foreColor: Colors.White);
                 }, obj => obj != null));
             }
@@ -249,6 +261,9 @@ namespace ExtendedControl.ViewModels
                     ((User)select.Item1).IsDelete = false;
 
                     context.SaveChanges();
+
+                    AdminViewModel.SendDataJournal(TypeMessage.RestoreUser, this.CurrentUser, null, user);
+
                     WindowMessageBehaviour.SetMessage(((Window)select.Item2), string.Format(App.GetString("AdminUserMessageRestore"), ((User)select.Item1).FullName), backColor: Colors.Green, foreColor: Colors.White);
                 }, obj => obj != null));
             }
@@ -271,6 +286,11 @@ namespace ExtendedControl.ViewModels
                             }
                         }
                         context.SaveChanges();
+
+                        foreach (User item in f) {
+                            AdminViewModel.SendDataJournal(TypeMessage.DeleteUser, this.CurrentUser, null, item);
+                        }
+
                         WindowMessageBehaviour.SetMessage(w, string.Format(App.GetString("AdminUserMessageRemoveAll"), countOnExecution), backColor: Colors.Green, foreColor: Colors.White);
                     }
                 }, obj => obj is Window));
@@ -294,6 +314,11 @@ namespace ExtendedControl.ViewModels
                             }
                         }
                         context.SaveChanges();
+
+                        foreach (User item in f) {
+                            AdminViewModel.SendDataJournal(TypeMessage.RestoreUser, this.CurrentUser, null, item);
+                        }
+
                         WindowMessageBehaviour.SetMessage(w, string.Format(App.GetString("AdminUserMessageRestoredAll"), countOnExecution), backColor: Colors.Green, foreColor: Colors.White);
                     }
                 }, obj => obj is Window));
@@ -327,6 +352,10 @@ namespace ExtendedControl.ViewModels
                         context.Roles.AddObject((Role)SelectedObject);
                         Roles.Add((Role)SelectedObject);
                         context.SaveChanges();
+
+                        AdminViewModel.SendDataJournal(TypeMessage.CreateRole, this.CurrentUser, null, null, (Role)SelectedObject);
+
+                        SelectedObject = null;
                         this.SendPropertyChanged(nameof(RolesNameList));
                         ((User)tempObject).IdRole = ((Role)SelectedObject).ID;
                     }
@@ -364,6 +393,10 @@ namespace ExtendedControl.ViewModels
                         context.Settings.AddObject((Setting)SelectedObject);
                         Settings.Add((Setting)SelectedObject);
                         context.SaveChanges();
+
+                        AdminViewModel.SendDataJournal(TypeMessage.CreateUserSetting, this.CurrentUser, null, null, null, (Setting)SelectedObject);
+
+                        SelectedObject = null;
                         this.SendPropertyChanged(nameof(SettingsNamesList));
                         ((User)tempObject).IdSetting = ((Setting)SelectedObject).ID;
                     }
@@ -395,6 +428,9 @@ namespace ExtendedControl.ViewModels
                         context.Roles.AddObject((Role)SelectedObject);
                         Roles.Add((Role)SelectedObject);
                         context.SaveChanges();
+
+                        AdminViewModel.SendDataJournal(TypeMessage.CreateRole, this.CurrentUser, null, null, (Role)SelectedObject);
+
                         SelectedObject = null;
                         WindowVisibilityBehaviour.SetIsVisible((Window)wn, false);
                         this.State = TypeControl.Normal;
@@ -439,6 +475,9 @@ namespace ExtendedControl.ViewModels
                         Roles.RemoveAt(idPos);
                         Roles.Insert(idPos, (Role)SelectedObject);
                         WindowVisibilityBehaviour.SetIsVisible((Window)wn, false);
+
+                        AdminViewModel.SendDataJournal(TypeMessage.ChangingRole, this.CurrentUser, null, null, (Role)SelectedObject);
+
                         SelectedObject = null;
                         EditObject = null;
                         this.State = TypeControl.Normal;
@@ -477,6 +516,9 @@ namespace ExtendedControl.ViewModels
                     ((Role)select.Item1).IsDelete = true;
 
                     context.SaveChanges();
+
+                    AdminViewModel.SendDataJournal(TypeMessage.DeleteRole, this.CurrentUser, null, null, role);
+
                     WindowMessageBehaviour.SetMessage(((Window)select.Item2), string.Format(App.GetString("AdminRoleMessageRemove"), ((Role)select.Item1).RoleName), backColor: Colors.Green, foreColor: Colors.White);
                 }, obj => obj != null));
             }
@@ -494,6 +536,9 @@ namespace ExtendedControl.ViewModels
                     ((Role)select.Item1).IsDelete = false;
 
                     context.SaveChanges();
+
+                    AdminViewModel.SendDataJournal(TypeMessage.RestoreRole, this.CurrentUser, null, null, role);
+
                     WindowMessageBehaviour.SetMessage(((Window)select.Item2), string.Format(App.GetString("AdminRoleMessageRestore"), ((Role)select.Item1).RoleName), backColor: Colors.Green, foreColor: Colors.White);
                 }, obj => obj != null));
             }
@@ -515,6 +560,11 @@ namespace ExtendedControl.ViewModels
                                 countOnExecution++;
                             }
                             context.SaveChanges();
+
+                            foreach (Role role in f) {
+                                AdminViewModel.SendDataJournal(TypeMessage.DeleteRole, this.CurrentUser, null, null, role);
+                            }
+
                             WindowMessageBehaviour.SetMessage(w, string.Format(App.GetString("AdminRoleMessageRemoveAll"), countOnExecution), backColor: Colors.Green, foreColor: Colors.White);
                         }
                     }
@@ -538,6 +588,11 @@ namespace ExtendedControl.ViewModels
                                 countOnExecution++;
                             }
                             context.SaveChanges();
+
+                            foreach (Role role in f) {
+                                AdminViewModel.SendDataJournal(TypeMessage.RestoreRole, this.CurrentUser, null, null, role);
+                            }
+
                             WindowMessageBehaviour.SetMessage(w, string.Format(App.GetString("AdminRoleMessageRestoreAll"), countOnExecution), backColor: Colors.Green, foreColor: Colors.White);
                         }
                     }
@@ -566,6 +621,9 @@ namespace ExtendedControl.ViewModels
                         context.Settings.AddObject((Setting)SelectedObject);
                         Settings.Add((Setting)SelectedObject);
                         context.SaveChanges();
+
+                        AdminViewModel.SendDataJournal(TypeMessage.CreateUserSetting, this.CurrentUser, null, null, null, (Setting)SelectedObject);
+
                         SelectedObject = null;
                         WindowVisibilityBehaviour.SetIsVisible((Window)wn, false);
                         this.State = TypeControl.Normal;
@@ -609,6 +667,9 @@ namespace ExtendedControl.ViewModels
                         int idPos = Settings.IndexOf((Setting)select.Item1);
                         Settings.RemoveAt(idPos);
                         Settings.Insert(idPos, (Setting)SelectedObject);
+
+                        AdminViewModel.SendDataJournal(TypeMessage.ChangingUserSetting, this.CurrentUser, null, null, null, (Setting)SelectedObject);
+
                         SelectedObject = null;
                         WindowVisibilityBehaviour.SetIsVisible((Window)wn, false);
                         EditObject = null;
@@ -649,6 +710,9 @@ namespace ExtendedControl.ViewModels
                     ((Setting)select.Item1).IsDelete = true;
 
                     context.SaveChanges();
+
+                    AdminViewModel.SendDataJournal(TypeMessage.DeleteUserSetting, this.CurrentUser, null, null, null, setting);
+
                     WindowMessageBehaviour.SetMessage(((Window)select.Item2), string.Format(App.GetString("AdminSettingsMessageRemove"), ((Setting)select.Item1).Caption), backColor: Colors.Green, foreColor: Colors.White);
                 }, obj => obj != null));
             }
@@ -666,6 +730,9 @@ namespace ExtendedControl.ViewModels
                     ((Setting)select.Item1).IsDelete = false;
 
                     context.SaveChanges();
+
+                    AdminViewModel.SendDataJournal(TypeMessage.RestoreUserSetting, this.CurrentUser, null, null, null, setting);
+
                     WindowMessageBehaviour.SetMessage(((Window)select.Item2), string.Format(App.GetString("AdminSettingsMessageRestore"), ((Setting)select.Item1).Caption), backColor: Colors.Green, foreColor: Colors.White);
                 }, obj => obj != null));
             }
@@ -689,6 +756,10 @@ namespace ExtendedControl.ViewModels
                             context.SaveChanges();
                             WindowMessageBehaviour.SetMessage(w, string.Format(App.GetString("AdminSettingsMessageRemoveAll"), countOnExecution), backColor: Colors.Green, foreColor: Colors.White);
                         }
+
+                        foreach (Setting setting in f) {
+                            AdminViewModel.SendDataJournal(TypeMessage.DeleteUserSetting, this.CurrentUser, null, null, null, setting);
+                        }
                     }
                 }, obj => obj != null));
             }
@@ -710,6 +781,12 @@ namespace ExtendedControl.ViewModels
                                 countOnExecution++;
                             }
                             context.SaveChanges();
+
+                            foreach (Setting setting in f)
+                            {
+                                AdminViewModel.SendDataJournal(TypeMessage.RestoreUserSetting, this.CurrentUser, null, null, null, setting);
+                            }
+
                             WindowMessageBehaviour.SetMessage(w, string.Format(App.GetString("AdminSettingsMessageRestoreAll"), countOnExecution), backColor: Colors.Green, foreColor: Colors.White);
                         }
                     }
@@ -739,6 +816,9 @@ namespace ExtendedControl.ViewModels
                         context.Projects.AddObject((Project)SelectedObject);
                         Projects.Add((Project)SelectedObject);
                         context.SaveChanges();
+                        
+                        AdminViewModel.SendDataJournal(TypeMessage.CreateProject, this.CurrentUser, null, null, null, null, (Project)SelectedObject);
+
                         SelectedObject = null;
                         WindowVisibilityBehaviour.SetIsVisible((Window)wn, false);
                         this.State = TypeControl.Normal;
@@ -783,6 +863,7 @@ namespace ExtendedControl.ViewModels
                         int idPos = Projects.IndexOf((Project)select.Item1);
                         Projects.RemoveAt(idPos);
                         Projects.Insert(idPos, (Project)SelectedObject);
+                        AdminViewModel.SendDataJournal(TypeMessage.ChangingProject, this.CurrentUser, null, null, null, null, (Project)SelectedObject);
                         SelectedObject = null;
                         WindowVisibilityBehaviour.SetIsVisible((Window)wn, false);
                         EditObject = null;
@@ -824,6 +905,8 @@ namespace ExtendedControl.ViewModels
 
                     context.SaveChanges();
 
+                    AdminViewModel.SendDataJournal(TypeMessage.DeleteProject, this.CurrentUser, null, null, null, null, (Project)SelectedObject);
+
                     VerticalProjects = null;
                     VerticalProjects = Projects;
 
@@ -844,6 +927,8 @@ namespace ExtendedControl.ViewModels
                     ((Project)select.Item1).IsDelete = false;
 
                     context.SaveChanges();
+
+                    AdminViewModel.SendDataJournal(TypeMessage.RestoreProject, this.CurrentUser, null, null, null, null, project);
 
                     VerticalProjects = null;
                     VerticalProjects = Projects;
@@ -869,6 +954,10 @@ namespace ExtendedControl.ViewModels
                                     countOnExecution++;
                                 }
                             context.SaveChanges();
+
+                            foreach (Project project in f) {
+                                AdminViewModel.SendDataJournal(TypeMessage.DeleteProject, this.CurrentUser, null, null, null, null, project);
+                            }
 
                             VerticalProjects = null;
                             VerticalProjects = Projects;
@@ -898,6 +987,11 @@ namespace ExtendedControl.ViewModels
                         }
                         context.SaveChanges();
 
+                        foreach (Project project in f)
+                        {
+                            AdminViewModel.SendDataJournal(TypeMessage.RestoreProject, this.CurrentUser, null, null, null, null, project);
+                        }
+
                         VerticalProjects = null;
                         VerticalProjects = Projects;
 
@@ -923,6 +1017,8 @@ namespace ExtendedControl.ViewModels
                     _viewBySettings = null;
                     _projects = null;
                     _viewByProjects = null;
+                    _journalValues = null;
+                    _journalCollectionView = null;
                 }));
             }
         }
@@ -1306,8 +1402,8 @@ namespace ExtendedControl.ViewModels
         #endregion
 
         #region Statick helps
-        public static void SendDataJournal(TypeMessage type, User user, Task task = null, User sUser = null, Setting userSettings = null, Project project = null, DateTime? createDate = null) {
-            var parameter = SendMessage(type, user, task, user, userSettings, project);
+        public static void SendDataJournal(TypeMessage type, User user, Task task = null, User sUser = null, Role role = null, Setting userSettings = null, Project project = null, DateTime? createDate = null) {
+            var parameter = SendMessage(type, user, task, user, role, userSettings, project);
 
             using (DBContext context = new DBContext(false)) {
                 var newEntry = new Journal {
@@ -1324,7 +1420,7 @@ namespace ExtendedControl.ViewModels
             }
         }
 
-        protected static int[] SendMessage(TypeMessage type, User user, Task task = null, User sUser = null, Setting userSettings = null, Project project = null, Role role = null) {
+        protected static int[] SendMessage(TypeMessage type, User user, Task task = null, User sUser = null, Role role = null, Setting userSettings = null, Project project = null) {
             // отбираем пользоватлей для оповещения
             IEnumerable<string> ips = null;
             int[] parametry = new int[0];
@@ -1336,6 +1432,7 @@ namespace ExtendedControl.ViewModels
                     case TypeMessage.ChangedTask:
                     case TypeMessage.CreateTask:
                     case TypeMessage.DeleteTask:
+                    case TypeMessage.RestoreTask:
                         ips = context.Users.Where(x => x.IpAdress != string.Empty).ToArray().Where(x => task.Perfomers.FirstOrDefault(u => u.IDUser == x.ID) != null || task.Creater == x.ID).Select(x => x.IpAdress).ToArray();
                         parametry = new int[] { task.ID, user.ID };
                         break;

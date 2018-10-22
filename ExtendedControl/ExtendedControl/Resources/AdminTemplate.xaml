@@ -1013,6 +1013,16 @@
                                                             </ToolTip>
                                                         </Rectangle.ToolTip>
                                                     </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Add.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1025,8 +1035,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/CreateTask.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1039,8 +1056,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Edit.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1053,8 +1080,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/CreateTask.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1067,8 +1101,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Delete.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1081,8 +1125,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/CreateTask.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1095,8 +1146,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Restore.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1110,8 +1171,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Green" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/CreateTask.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1124,8 +1192,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Execution/StartExecution.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1138,8 +1216,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Green" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/CreateTask.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1152,8 +1237,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Execution/FineExecution.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1166,8 +1261,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Green" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/CreateTask.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1180,8 +1282,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Orange" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Execution/CancelExecution.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1287,14 +1399,22 @@
                                     </Setter>
                                 </DataTrigger>
 
+                                <!--User-->
                                 <DataTrigger Binding="{Binding Path=TypeMessage}" Value="11">
                                     <Setter TargetName="ContentSource" Property="ContentControl.ContentTemplate">
                                         <Setter.Value>
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/User.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1307,8 +1427,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Add.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1321,8 +1451,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/User.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1335,8 +1472,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Edit.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1349,8 +1496,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/User.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1363,8 +1517,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Delete.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1377,8 +1541,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/User.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1391,8 +1562,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Restore.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1406,8 +1587,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Role.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1420,8 +1608,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Add.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1434,8 +1632,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Role.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1448,8 +1653,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Edit.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1462,8 +1677,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Role.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1476,8 +1698,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Delete.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1490,8 +1722,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Role.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1504,8 +1743,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Restore.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1519,8 +1768,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/UserSetting.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1533,8 +1789,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Add.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1547,8 +1813,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/UserSetting.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1561,8 +1834,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Edit/Add.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1575,8 +1858,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/UserSetting.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1589,8 +1879,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Delete.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1603,8 +1903,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/UserSetting.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1617,8 +1924,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Restore.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1632,8 +1949,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Project.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1646,8 +1970,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Add.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1660,8 +1994,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Project.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1674,8 +2015,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Edit.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1688,8 +2039,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Project.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1702,8 +2060,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Delete.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>
@@ -1716,8 +2084,15 @@
                                             <DataTemplate>
                                                 <Grid Width="100" Height="100">
                                                     <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="White" StrokeThickness="3"  X1="0" X2="0" Y1="0" Y2="100"/>
-                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DodgerBlue" StrokeThickness="3" Stroke="White">
-                                                        <Ellipse.ToolTip>
+                                                    <Ellipse Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Project.png" />
+                                                        </Rectangle.OpacityMask>
+                                                        <Rectangle.ToolTip>
                                                             <ToolTip>
                                                                 <Grid >
                                                                     <Grid.RowDefinitions>
@@ -1730,8 +2105,18 @@
                                                                     <TextBlock Grid.Row="2" Text="{Binding Path=UserName}" HorizontalAlignment="Right" />
                                                                 </Grid>
                                                             </ToolTip>
-                                                        </Ellipse.ToolTip>
-                                                    </Ellipse>
+                                                        </Rectangle.ToolTip>
+                                                    </Rectangle>
+
+                                                    <Ellipse Margin="50, 0, 0, 0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DimGray" StrokeThickness="3" Stroke="White" />
+                                                    <Rectangle Margin="50, 0, 0, 0" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                        </Rectangle.Fill>
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Tool/Restore.png" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
                                                 </Grid>
                                             </DataTemplate>
                                         </Setter.Value>

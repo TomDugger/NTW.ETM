@@ -450,6 +450,31 @@
   <ItemGroup>
     <Resource Include="Images\AlignmentEditPanel.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tool\Delete.png" />
+    <Resource Include="Images\Tool\Edit.png" />
+    <Resource Include="Images\Tool\Restore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tool\Add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Execution\CancelExecution.png" />
+    <Resource Include="Images\Execution\FineExecution.png" />
+    <Resource Include="Images\Execution\StartExecution.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\User.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Role.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\UserSetting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Project.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
