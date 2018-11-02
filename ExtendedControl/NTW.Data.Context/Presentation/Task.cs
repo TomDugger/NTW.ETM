@@ -134,6 +134,33 @@ namespace NTW.Data.Context
             }
         }
 
+        public bool IsFavorite {
+            get {
+                bool result = false;
+                int idCUser = ((User)Application.Current.Resources["CurrentUser"]).ID;
+                using (DBContext context = new DBContext(false)) {
+                    result = context.Favorites.Count(x => x.IDTask == this.ID && x.IDUser == idCUser) > 0;
+                }
+                return result;
+            }
+
+            set {
+                bool state = value;
+                int idCUser = ((User)Application.Current.Resources["CurrentUser"]).ID;
+                using (DBContext context = new DBContext(false)) {
+                    if (value)
+                    {
+                        context.Favorites.AddObject(new Favorite { IDTask = this.ID, IDUser = idCUser });
+                        context.SaveChanges();
+                    }
+                    else {
+                        context.Favorites.DeleteObject(context.Favorites.FirstOrDefault(x => x.IDTask == this.ID && x.IDUser == idCUser));
+                        context.SaveChanges();
+                    }
+                }
+            }
+        }
+
         #region Helps
         protected string GetProjectName() {
             string result = null;

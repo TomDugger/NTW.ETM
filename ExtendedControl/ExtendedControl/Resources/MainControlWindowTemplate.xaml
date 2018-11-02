@@ -1394,7 +1394,7 @@
                                                                     <Grid>
                                                                         <Grid Height="60" >
                                                                             <Border Name="BackTask" Style="{x:Null}" Margin="3" MinWidth="200" Tag="{Binding RelativeSource={StaticResource WindowSource}}"
-                                                        bc:FrameworkElementPositionBehaviour.FrameworkElementPosition="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(bc:WindowPositionBehaviour.WindowPosition)}">
+                                                                                    bc:FrameworkElementPositionBehaviour.FrameworkElementPosition="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(bc:WindowPositionBehaviour.WindowPosition)}">
                                                                                 <Border.ContextMenu>
                                                                                     <ContextMenu >
                                                                                         <MenuItem b:ViewModelIjection.ViewModel="{x:Type vm:TasksViewModel}" Header="{DynamicResource TaskPanelRemoveTask}" Command="{Binding Path=RemoveTaskCommand}" 
@@ -1458,17 +1458,10 @@
                                                                                             </ToolTip>
                                                                                         </Polygon.ToolTip>
                                                                                     </Polygon>
-                                                                                    <ToggleButton Height="30" Grid.Row="1"  >
-                                                                                        <ToggleButton.Content>
-                                                                                            <Rectangle Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                                                                <Rectangle.Fill>
-                                                                                                    <SolidColorBrush Color="{DynamicResource FForeColor}" />
-                                                                                                </Rectangle.Fill>
-                                                                                                <Rectangle.OpacityMask>
-                                                                                                    <ImageBrush ImageSource="/ExtendedControl;component/Images/Fovarite.png" />
-                                                                                                </Rectangle.OpacityMask>
-                                                                                            </Rectangle>
-                                                                                        </ToggleButton.Content>
+                                                                                    <ToggleButton Height="20" Width="20" Grid.Row="1" IsChecked="{Binding Path=IsFavorite, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                                                        <ToggleButton.OpacityMask>
+                                                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Fovarite.png" />
+                                                                                        </ToggleButton.OpacityMask>
                                                                                     </ToggleButton>
                                                                                     <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="{Binding Path=DateOnLine, IsAsync=True}" bc:ItemsControlExtantionalBehaviour.OnActiveUnselection="True" />
                                                                                 </Grid>

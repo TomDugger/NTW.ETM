@@ -686,7 +686,7 @@ namespace ExtendedControl.ViewModels
 
 
         #endregion
-
+        
         #region Unload
         private Command _unloadedCommand;
         public Command UnloadedCommand {
