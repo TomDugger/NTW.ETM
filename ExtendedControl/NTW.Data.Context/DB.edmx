@@ -284,6 +284,7 @@
           <Property Name="IsPersonal" Type="bit" Nullable="false" />
           <Property Name="IdProject" Type="int" Nullable="false" />
           <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="TypeExecution" Type="int" />
         </EntityType>
         <EntityType Name="TrackingState">
           <Key>
@@ -818,6 +819,7 @@
           <NavigationProperty Name="TaskFiles" Relationship="Context.Task_TaskFile" FromRole="Tasks" ToRole="TaskFiles" />
           <NavigationProperty Name="User" Relationship="Context.User_Task" FromRole="Tasks" ToRole="Users" />
           <NavigationProperty Name="Stages" Relationship="Context.TaskStage" FromRole="Task" ToRole="Stage" />
+          <Property Type="Int32" Name="TypeExecution" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1272,6 +1274,7 @@
           <EntitySetMapping Name="Tasks">
             <EntityTypeMapping TypeName="Context.Task">
               <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="TypeExecution" ColumnName="TypeExecution" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="OpenDate" ColumnName="OpenDate" />

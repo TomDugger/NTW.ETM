@@ -47,6 +47,7 @@ namespace ExtendedControl.ViewModels
                     CurrentTask.OpenDate = DateTime.Now;
                     CurrentTask.EndDate = CurrentTask.OpenDate.AddDays(1);
                     CurrentTask.IdProject = context.Projects.FirstOrDefault().ID;
+                    CurrentTask.TypeExecution = 0;
                     this.SendPropertyChanged(nameof(CurrentTask));
 
                     TaskControlWindow createWindow = new TaskControlWindow();

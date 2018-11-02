@@ -24,6 +24,11 @@
         <data:DoubleStruct Value="4" Name="Избранные" />
     </x:Array>
 
+    <x:Array Type="{x:Type data:DoubleStruct}" x:Key="ArrayTypeExecution">
+        <data:DoubleStruct Value="0" Name="Все исполнители" />
+        <data:DoubleStruct Value="1" Name="Любой исполнитель" />
+    </x:Array>
+
     <!--Panel-->
     <y:String x:Key="TaskPanelCreateTask">Создать задачу</y:String>
     <y:String x:Key="TaskPanelRemoveTask">Удалить</y:String>
@@ -86,6 +91,8 @@
     <y:String x:Key="TaskControlPerfomersIsPersonInCharge">Ответственное лицо</y:String>
     <y:String x:Key="TaskControlPerfomersAdd">Добавить</y:String>
 
+    <y:String x:Key="TaskControlTypeExecution">Тип выполнения</y:String>
+    
     <y:String x:Key="TaskControlAccepted">Принять</y:String>
     <y:String x:Key="TaskControlCancel">Отменить</y:String>
 

@@ -654,7 +654,7 @@ namespace NTW.Controls
                     item.Cells.RemoveAt(index);
                 }
                 var table = rowGroup.Parent as Table;
-                table.Columns.RemoveAt(index);
+                table.Columns.RemoveAt(index - 1);
             })); }
         }
 

@@ -279,12 +279,21 @@
                         </Grid>
                     </Grid>
                 </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock Width="120" Text="Parts" Margin="20" Style="{DynamicResource H5}" HorizontalAlignment="Center" TextWrapping="Wrap" />
+                    </TabItem.Header>
+                    <Grid TextElement.Foreground="{DynamicResource FForeBrush}">
+                        
+                    </Grid>
+                </TabItem>
                 <TabItem >
                     <TabItem.Header>
                         <TextBlock Width="120" Text="{Binding CurrentTask.Perfomers.Count, Converter={StaticResource ResourceStringFormatConverter1}, ConverterParameter=TaskControlPerfomers}" Margin="20" Style="{DynamicResource H5}" HorizontalAlignment="Center" TextWrapping="Wrap" />
                     </TabItem.Header>
                     <Grid TextElement.Foreground="{DynamicResource FForeBrush}">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
@@ -298,7 +307,11 @@
                                                                 bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding Path=ShowSetAllButton, UpdateSourceTrigger=PropertyChanged}" 
                                                                 bc:VisibilityOnNullBehaviour.OriginalSize="120, 30" />
                         </StackPanel>
-                        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock Text="{DynamicResource TaskControlTypeExecution}" VerticalAlignment="Center" Margin="10, 0" />
+                            <ComboBox ItemsSource="{DynamicResource ArrayTypeExecution}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding Path=CurrentTask.TypeExecution, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                        <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                             <ItemsControl Grid.Row="8" Grid.ColumnSpan="2" Style="{x:Null}"
                                       HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                                       MaxHeight="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=ActualHeight, UpdateSourceTrigger=PropertyChanged}" 
@@ -316,7 +329,7 @@
                                             <Grid Height="30">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="30" />
-                                                    <ColumnDefinition />
+                                                    <ColumnDefinition SharedSizeGroup="PerfomerGroup" />
                                                     <ColumnDefinition Width="30" />
                                                 </Grid.ColumnDefinitions>
                                                 <ToggleButton Grid.Column="2" Command="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.UpdatePerfomerCountCommand}"
@@ -345,7 +358,7 @@
                                                         bc:VisibilityOnNullBehaviour.OriginalSize="NaN, NaN" 
                                                         bc:VisibilityOnNullBehaviour.NegativeVisibilityOnNull="{Binding RelativeSource={StaticResource WindowSource}, Path=DataContext.CurrentTask.IsPersonal, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </Grid>
-                                                <TextBlock Grid.Column="1" VerticalAlignment="Center" Foreground="{DynamicResource SForeBrush}" HorizontalAlignment="Center" Margin="20, 0" Text="{Binding Path=FullNamePerfomer}" FontWeight="Bold" />
+                                                <TextBlock Grid.Column="1" VerticalAlignment="Center" Foreground="{DynamicResource SForeBrush}" HorizontalAlignment="Stretch" Margin="20, 0" Text="{Binding Path=FullNamePerfomer}" FontWeight="Bold" />
                                             </Grid>
                                         </Border>
                                     </DataTemplate>
@@ -357,14 +370,14 @@
                                 </ItemsControl.ItemsPanel>
                             </ItemsControl>
                         </ScrollViewer>
-                        <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <StackPanel Grid.Row="3" Orientation="Horizontal">
                             <TextBlock Margin="3, 0" Text="{DynamicResource TaskControlResponsiblePersonsCount}"/>
                             <TextBlock Text="{Binding Path=CurrentTask.PersonOfChargeCount, UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBlock Text="/" Margin="3, 0" />
                             <TextBlock Margin="5, 0, 0, 0" Text="{DynamicResource TaskControlPerfomersCount}" />
                             <TextBlock Margin="3, 0" Text="{Binding Path=CurrentTask.OtherPerfomerCount, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
-                        <Grid Grid.Row="3" Height="30" bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding Path=ShowAddPanel, UpdateSourceTrigger=PropertyChanged}">
+                        <Grid Grid.Row="4" Height="30" bc:VisibilityOnNullBehaviour.VisibilityOnNull="{Binding Path=ShowAddPanel, UpdateSourceTrigger=PropertyChanged}">
                             <bc:VisibilityOnNullBehaviour.OriginalSize>
                                 <Point Y="30">
                                     <Point.X>

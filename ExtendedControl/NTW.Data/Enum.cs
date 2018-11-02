@@ -46,9 +46,14 @@ namespace NTW.Data
         NotExists
     }
 
-    public enum TypeControl {
+    public enum TypeControl : int {
         Normal = 0,
         Edit = 1,
         Create = 2
+    }
+
+    public enum TypesExecution : int {
+        AllExecution = 0,
+        AnyExecution = 1
     }
 }

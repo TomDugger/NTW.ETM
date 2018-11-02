@@ -23,6 +23,11 @@
         <data:DoubleStruct Value="3" Name="Personal" />
         <data:DoubleStruct Value="4" Name="Favorites" />
     </x:Array>
+
+    <x:Array Type="{x:Type data:DoubleStruct}" x:Key="ArrayTypeExecution">
+        <data:DoubleStruct Value="0" Name="All performers" />
+        <data:DoubleStruct Value="1" Name="Any performer" />
+    </x:Array>
     
     <!--Panel-->
     <y:String x:Key="TaskPanelCreateTask">Create task</y:String>
@@ -85,6 +90,8 @@
     <y:String x:Key="TaskControlPerfomersSelectAll">Select all</y:String>
     <y:String x:Key="TaskControlPerfomersIsPersonInCharge">Person in charge</y:String>
     <y:String x:Key="TaskControlPerfomersAdd">Add</y:String>
+
+    <y:String x:Key="TaskControlTypeExecution">Type execution</y:String>
 
     <y:String x:Key="TaskControlAccepted">Accepted</y:String>
     <y:String x:Key="TaskControlCancel">Cancel</y:String>

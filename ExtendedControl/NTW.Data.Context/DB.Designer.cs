@@ -4237,6 +4237,30 @@ namespace NTW.Data.Context
         private global::System.DateTime _EndDate;
         partial void OnEndDateChanging(global::System.DateTime value);
         partial void OnEndDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> TypeExecution
+        {
+            get
+            {
+                return _TypeExecution;
+            }
+            set
+            {
+                OnTypeExecutionChanging(value);
+                ReportPropertyChanging("TypeExecution");
+                _TypeExecution = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TypeExecution");
+                OnTypeExecutionChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _TypeExecution;
+        partial void OnTypeExecutionChanging(Nullable<global::System.Int32> value);
+        partial void OnTypeExecutionChanged();
 
         #endregion
 
