@@ -85,7 +85,7 @@
     <y:String x:Key="TaskControlClearAll">Clear all</y:String>
     <y:String x:Key="TaskControlDragFilesHere">Drag files here...</y:String>
 
-    <y:String x:Key="TaskControlPerfomers">Perfomer(s) {0:D}</y:String>
+    <y:String x:Key="TaskControlPerfomers">Perfomermance ({0:D})</y:String>
     <y:String x:Key="TaskControlPerfomersClearAll">Clear all</y:String>
     <y:String x:Key="TaskControlPerfomersSelectAll">Select all</y:String>
     <y:String x:Key="TaskControlPerfomersIsPersonInCharge">Person in charge</y:String>
@@ -93,6 +93,15 @@
 
     <y:String x:Key="TaskControlTypeExecution">Type execution</y:String>
 
+    <y:String x:Key="TaskControlStages">Stage(s) {0:D}</y:String>
+    <y:String x:Key="TaskControlAddStage">Add stage</y:String>
+    <y:String x:Key="TaskControlAutoFill">Auto fill stages</y:String>
+    
+    <y:String x:Key="TaskControlStagesContentConcept">Concept</y:String>
+    <y:String x:Key="TaskControlStagesContentDevelopment">Development</y:String>
+    <y:String x:Key="TaskControlStagesContentImplementation">Implementation</y:String>
+    <y:String x:Key="TaskControlStagesContentTesting">Testing</y:String>
+    
     <y:String x:Key="TaskControlAccepted">Accepted</y:String>
     <y:String x:Key="TaskControlCancel">Cancel</y:String>
 

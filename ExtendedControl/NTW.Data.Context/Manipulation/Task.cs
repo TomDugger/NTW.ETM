@@ -266,6 +266,10 @@ namespace NTW.Data.Context
             this.OnPropertyChanged(nameof(PersonOfChargeCount));
             this.OnPropertyChanged(nameof(OtherPerfomerCount));
         }
+
+        public void OnChangeStagesCount() {
+            this.OnPropertyChanged(nameof(Stages));
+        }
         #endregion
 
         #region IDataErrorInfo

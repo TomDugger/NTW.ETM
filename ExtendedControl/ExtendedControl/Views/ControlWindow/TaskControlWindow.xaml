@@ -279,12 +279,55 @@
                         </Grid>
                     </Grid>
                 </TabItem>
-                <TabItem>
+                <TabItem >
                     <TabItem.Header>
-                        <TextBlock Width="120" Text="Parts" Margin="20" Style="{DynamicResource H5}" HorizontalAlignment="Center" TextWrapping="Wrap" />
+                        <TextBlock Width="120" Text="{Binding CurrentTask.Stages.Count, Converter={StaticResource ResourceStringFormatConverter1}, ConverterParameter=TaskControlStages}" Margin="20" Style="{DynamicResource H5}" HorizontalAlignment="Center" TextWrapping="Wrap" />
                     </TabItem.Header>
                     <Grid TextElement.Foreground="{DynamicResource FForeBrush}">
-                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="{DynamicResource TaskControlAddStage}" Height="30" Padding="5, 0" Command="{Binding Path=AddStageCommand}" />
+                            <Button Content="{DynamicResource TaskControlAutoFill}" Height="30" Padding="5, 0" Command="{Binding Path=AutoCrateStagesCommand}" />
+                        </StackPanel>
+                        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <ItemsControl ItemsSource="{Binding Path=CurrentTask.Stages}" Style="{x:Null}" HorizontalContentAlignment="Stretch">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border MinHeight="30" Height="Auto" Style="{DynamicResource SecondBorder}" >
+                                            <Grid >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="30" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBox Text="{Binding Path=Caption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                <ComboBox Grid.Column="1" ItemsSource="{Binding RelativeSource={StaticResource ItemsControlSource}, Path=DataContext.CurrentTask.Perfomers, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="ID" SelectedValue="{Binding Path=IdPerfomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Border >
+                                                                <TextBlock Text="{Binding Path=FullNamePerfomer}" />
+                                                            </Border>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                                <DatePicker Grid.Column="2" DisplayDateStart="{Binding RelativeSource={StaticResource ItemsControlSource}, Path=DataContext.CurrentTask.OpenDate}" DisplayDateEnd="{Binding RelativeSource={StaticResource ItemsControlSource}, Path=DataContext.CurrentTask.EndDate}" SelectedDate="{Binding Path=DeadLine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                <controls:TimeControl Grid.Column="3" VerticalAlignment="Center" Margin="10, 0, 0, 0" Value="{Binding EndTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                <Button Grid.Column="4" b:ViewModelIjection.ViewModel="{x:Type vm:TasksViewModel}" Content="X" 
+                                                        Command="{Binding Path=RemoveStageCommand}" 
+                                                        CommandParameter="{Binding RelativeSource={StaticResource GridSource}, Path=DataContext}"/>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
                     </Grid>
                 </TabItem>
                 <TabItem >

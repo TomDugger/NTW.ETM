@@ -4,4 +4,5 @@
     
     <RelativeSource x:Key="WindowSource" Mode="FindAncestor" AncestorType="{x:Type Window}" />
     <RelativeSource x:Key="GridSource" Mode="FindAncestor" AncestorType="{x:Type Grid}" />
+    <RelativeSource x:Key="ItemsControlSource" Mode="FindAncestor" AncestorType="{x:Type ItemsControl}" />
 </ResourceDictionary>

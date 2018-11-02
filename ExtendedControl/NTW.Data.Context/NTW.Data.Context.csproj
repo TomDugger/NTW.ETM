@@ -68,6 +68,7 @@
     <Compile Include="Presentation\Note.cs" />
     <Compile Include="Presentation\NoteGroup.cs" />
     <Compile Include="Presentation\Perfomer.cs" />
+    <Compile Include="Presentation\Stage.cs" />
     <Compile Include="Presentation\StartProcess.cs" />
     <Compile Include="Presentation\Task.cs" />
     <Compile Include="Presentation\TaskComment.cs" />

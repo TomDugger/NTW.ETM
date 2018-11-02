@@ -1458,7 +1458,18 @@
                                                                                             </ToolTip>
                                                                                         </Polygon.ToolTip>
                                                                                     </Polygon>
-                                                                                    <ToggleButton Content="А" Height="30" Grid.Row="1"  />
+                                                                                    <ToggleButton Height="30" Grid.Row="1"  >
+                                                                                        <ToggleButton.Content>
+                                                                                            <Rectangle Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                                                                <Rectangle.Fill>
+                                                                                                    <SolidColorBrush Color="{DynamicResource FForeColor}" />
+                                                                                                </Rectangle.Fill>
+                                                                                                <Rectangle.OpacityMask>
+                                                                                                    <ImageBrush ImageSource="/ExtendedControl;component/Images/Fovarite.png" />
+                                                                                                </Rectangle.OpacityMask>
+                                                                                            </Rectangle>
+                                                                                        </ToggleButton.Content>
+                                                                                    </ToggleButton>
                                                                                     <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="{Binding Path=DateOnLine, IsAsync=True}" bc:ItemsControlExtantionalBehaviour.OnActiveUnselection="True" />
                                                                                 </Grid>
                                                                             </Border>

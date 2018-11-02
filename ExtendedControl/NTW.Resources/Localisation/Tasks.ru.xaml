@@ -85,14 +85,23 @@
     <y:String x:Key="TaskControlClearAll">Очистить</y:String>
     <y:String x:Key="TaskControlDragFilesHere">Перетащите файлы сюда...</y:String>
 
-    <y:String x:Key="TaskControlPerfomers">Исполнитель(и) {0:D}</y:String>
+    <y:String x:Key="TaskControlPerfomers">Исполнение ({0:D})</y:String>
     <y:String x:Key="TaskControlPerfomersClearAll">Очистить</y:String>
     <y:String x:Key="TaskControlPerfomersSelectAll">Выбрать всех</y:String>
     <y:String x:Key="TaskControlPerfomersIsPersonInCharge">Ответственное лицо</y:String>
     <y:String x:Key="TaskControlPerfomersAdd">Добавить</y:String>
 
     <y:String x:Key="TaskControlTypeExecution">Тип выполнения</y:String>
-    
+
+    <y:String x:Key="TaskControlStages">Этап(ы) {0:D}</y:String>
+    <y:String x:Key="TaskControlAddStage">Добавить этап</y:String>
+    <y:String x:Key="TaskControlAutoFill">Автоматическое заполнение этапов</y:String>
+
+    <y:String x:Key="TaskControlStagesContentConcept">Концепция</y:String>
+    <y:String x:Key="TaskControlStagesContentDevelopment">Разработка</y:String>
+    <y:String x:Key="TaskControlStagesContentImplementation">Реализация</y:String>
+    <y:String x:Key="TaskControlStagesContentTesting">Тестирование</y:String>
+
     <y:String x:Key="TaskControlAccepted">Принять</y:String>
     <y:String x:Key="TaskControlCancel">Отменить</y:String>
 

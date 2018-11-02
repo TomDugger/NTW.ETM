@@ -360,6 +360,72 @@ namespace ExtendedControl.ViewModels
             }
         }
 
+        #region Command by stage
+        private Command _addStageCommand;
+        public Command AddStageCommand {
+            get {
+                return _addStageCommand ?? (_addStageCommand = new Command(obj =>
+                {
+                    CurrentTask.Stages.Add(new Stage {
+                        Caption = "stage",
+                        StateStage = 0,
+                        DeadLine = CurrentTask.EndDate
+                    });
+
+                    CurrentTask.OnChangeStagesCount();
+                }));
+            }
+        }
+
+        private Command _removeStageCommand;
+        public Command RemoveStageCommand {
+            get {
+                return _removeStageCommand ?? (_removeStageCommand = new Command(obj =>
+                {
+                    CurrentTask.Stages.Remove((Stage)obj);
+                    CurrentTask.OnChangeStagesCount();
+                }, obj => obj != null));
+            }
+        }
+
+        private Command _autoCrateStagesCommand;
+        public Command AutoCrateStagesCommand {
+            get {
+                return _autoCrateStagesCommand ?? (_autoCrateStagesCommand = new Command(obj =>
+                {
+                    CurrentTask.Stages.Clear();
+                    CurrentTask.Stages.Add(new Stage
+                    {
+                        Caption = App.GetString("TaskControlStagesContentConcept"),
+                        StateStage = 0,
+                        DeadLine = CurrentTask.OpenDate
+                    });
+                    CurrentTask.Stages.Add(new Stage
+                    {
+                        Caption = App.GetString("TaskControlStagesContentDevelopment"),
+                        StateStage = 0,
+                        DeadLine = CurrentTask.EndDate
+                    });
+                    CurrentTask.Stages.Add(new Stage
+                    {
+                        Caption = App.GetString("TaskControlStagesContentImplementation"),
+                        StateStage = 0,
+                        DeadLine = CurrentTask.EndDate
+                    });
+                    CurrentTask.Stages.Add(new Stage
+                    {
+                        Caption = App.GetString("TaskControlStagesContentTesting"),
+                        StateStage = 0,
+                        DeadLine = CurrentTask.EndDate
+                    });
+
+                    CurrentTask.OnChangeStagesCount();
+                }));
+            }
+        }
+
+
+        #endregion
 
         #region Commands by perfomers type
         private Command _addNewPerfomerCommand;
