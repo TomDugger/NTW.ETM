@@ -65,6 +65,8 @@
 
     <y:String x:Key="TaskPanelNonExecution">Can not complete task execution</y:String>
 
+    <y:String x:Key="TaskPanelItemFavorites">Favorite</y:String>
+
     <!--Control-->
     <y:String x:Key="TaskControlCreateTasklogo">Create task</y:String>
     <y:String x:Key="TaskControlEditTaskLogo">Edit task</y:String>

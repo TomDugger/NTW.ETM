@@ -165,6 +165,11 @@ namespace ExtendedControl.ViewModels
                                 context.Perfomers.DeleteObject(context.Perfomers.FirstOrDefault(x => x.ID == item.ID));
                         }
 
+                        foreach (var item in temp.Stages) {
+                            if (CurrentTask.Stages.Count(x => x.ID == item.ID) == 0)
+                                context.Stages.DeleteObject(context.Stages.FirstOrDefault(x => x.ID == item.ID));
+                        }
+
                         foreach (var item in temp.TaskFiles) {
                             if (CurrentTask.TaskFiles.Count(x => x.ID == item.ID) == 0)
                                 context.TaskFiles.DeleteObject(context.TaskFiles.FirstOrDefault(x => x.ID == item.ID));

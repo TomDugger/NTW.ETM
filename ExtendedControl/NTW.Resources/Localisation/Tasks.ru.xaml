@@ -65,6 +65,8 @@
 
     <y:String x:Key="TaskPanelNonExecution">Невозможно завершить выполнение задачи</y:String>
 
+    <y:String x:Key="TaskPanelItemFavorites">В избранные</y:String>
+    
     <!--Control-->
     <y:String x:Key="TaskControlCreateTasklogo">Создание задачи</y:String>
     <y:String x:Key="TaskControlEditTaskLogo">Изменить задачу</y:String>

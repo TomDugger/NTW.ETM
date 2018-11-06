@@ -1458,10 +1458,26 @@
                                                                                             </ToolTip>
                                                                                         </Polygon.ToolTip>
                                                                                     </Polygon>
-                                                                                    <ToggleButton Height="20" Width="20" Grid.Row="1" IsChecked="{Binding Path=IsFavorite, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                                                    <Border Width="30" Height="30" Grid.Row="1" >
+                                                                                        <Border.OpacityMask>
+                                                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/FavoritesBack.png" />
+                                                                                        </Border.OpacityMask>
+                                                                                        <Border.RenderTransform>
+                                                                                            <TranslateTransform X="-13" Y="10" />
+                                                                                        </Border.RenderTransform>
+                                                                                    </Border>
+                                                                                    <ToggleButton Height="30" Width="30" Grid.Row="1" IsChecked="{Binding Path=IsFavorite, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                                                                         <ToggleButton.OpacityMask>
-                                                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Fovarite.png" />
+                                                                                            <ImageBrush ImageSource="/ExtendedControl;component/Images/Favorites.png" />
                                                                                         </ToggleButton.OpacityMask>
+                                                                                        <ToggleButton.RenderTransform>
+                                                                                            <TranslateTransform X="-13" Y="10" />
+                                                                                        </ToggleButton.RenderTransform>
+                                                                                        <ToggleButton.ToolTip>
+                                                                                            <ToolTip>
+                                                                                                <TextBlock Text="{DynamicResource TaskPanelItemFavorites}" />
+                                                                                            </ToolTip>
+                                                                                        </ToggleButton.ToolTip>
                                                                                     </ToggleButton>
                                                                                     <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="{Binding Path=DateOnLine, IsAsync=True}" bc:ItemsControlExtantionalBehaviour.OnActiveUnselection="True" />
                                                                                 </Grid>

@@ -308,7 +308,7 @@
                                                 </Grid.ColumnDefinitions>
 
                                                 <TextBox Text="{Binding Path=Caption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                                <ComboBox Grid.Column="1" ItemsSource="{Binding RelativeSource={StaticResource ItemsControlSource}, Path=DataContext.CurrentTask.Perfomers, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="ID" SelectedValue="{Binding Path=IdPerfomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <ComboBox Grid.Column="1" ItemsSource="{Binding RelativeSource={StaticResource ItemsControlSource}, Path=DataContext.CurrentTask.Perfomers, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding Path=Perfomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                                     <ComboBox.ItemTemplate>
                                                         <DataTemplate>
                                                             <Border >
