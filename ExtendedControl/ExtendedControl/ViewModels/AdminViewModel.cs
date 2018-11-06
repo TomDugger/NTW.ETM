@@ -1389,7 +1389,7 @@ namespace ExtendedControl.ViewModels
         private ICollectionView GetJournalCollection() {
             ICollectionView view = CollectionViewSource.GetDefaultView(JournalValues);
             view.GroupDescriptions.Add(new PropertyGroupDescription("UserName"));
-            //view.GroupDescriptions.Add(new PropertyGroupDescription("CreateDate.Date"));
+            view.GroupDescriptions.Add(new PropertyGroupDescription("CreateDate.Date"));
             return view;
         }
         #endregion
