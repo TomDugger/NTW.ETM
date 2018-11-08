@@ -723,6 +723,9 @@ namespace ExtendedControl
                     typeof(ProcesControlPanel)
                 };
 
+                var usabilityElements = typesElement = GetTypeByUserRole(typesElement);
+
+
                 foreach (var item in PanelSettings.Load().Panels)
                 {
                     //исходя из параметров общего представления формируем область обработки панелей и вложенных элементов
@@ -790,10 +793,11 @@ namespace ExtendedControl
                     {
                         foreach (var itemPanel in item.Items)
                         {
-                            mw.AddItem((ControlMenuItem)GetPresentItem(itemPanel.Element, ControlGroup, UserGroup, EventGroup, WorkGroup, this.ActivePanel, this.UnactiveCommand));
+                            if (usabilityElements.Contains(itemPanel.Element))
+                                mw.AddItem((ControlMenuItem)GetPresentItem(itemPanel.Element, ControlGroup, UserGroup, EventGroup, WorkGroup, this.ActivePanel, this.UnactiveCommand));
                         }
 
-                        typesElement = typesElement.Except(item.Items.Select(x => x.Element));
+                        typesElement = typesElement.Except(item.Items.Select(x => x.Element)).ToArray();
                     }
 
                     mw.Show();
@@ -821,6 +825,40 @@ namespace ExtendedControl
                 return res.ToString();
             else
                 return Name;
+        }
+
+        private IEnumerable<Type> GetTypeByUserRole(IEnumerable<Type> types) {
+            IEnumerable<Type> result = null;
+            Role currentRole = CurrentUser.Role;
+            result = types.Where(x => IsUsabilityType(x, currentRole)).ToArray();
+            return result;
+        }
+
+        private bool IsUsabilityType(Type type, Role role) {
+
+            if (type == typeof(AdminControlPanel) && (role.RestoreTask || role.CreateUser || role.UpdateInfoUser || role.UpdateInfoUser || role.RestoreUser || role.CreateNewRole
+                || role.UpdateRole || role.DeleteRole || role.RestoreRole || role.CreateSetting || role.UpdateSetting || role.DeleteSetting || role.RestoreSetting
+                || role.CreateProject || role.UpdateProject || role.DeleteProject || role.RestoreProject || role.VisibleJournal))
+                return true;
+            else if (type == typeof(AppControlPanel))
+                return true;
+            else if (type == typeof(HookKeyControlPanel))
+                return true;
+            else if (type == typeof(ReportControlPanel))
+                return true;
+            else if (type == typeof(SettingsControlPanel))
+                return true;
+            else if (type == typeof(EventsControlPanel))
+                return true;
+            else if (type == typeof(TrackingStateControlPanel))
+                return true;
+            else if (type == typeof(NotesControlPanel))
+                return true;
+            else if (type == typeof(TaskControlPanel))
+                return true;
+            else if (type == typeof(ProcesControlPanel))
+                return true;
+            else return false;
         }
         #endregion
     }
