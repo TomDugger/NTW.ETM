@@ -6,6 +6,7 @@
                     xmlns:bc="clr-namespace:NTW.Controls.Behaviours;assembly=NTW.Controls"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:sel="clr-namespace:NTW.Controls.Selectors;assembly=NTW.Controls"
+                    xmlns:ec="clr-namespace:ExtendedControl.Controls"
                     xmlns:info="clr-namespace:Info.Controls;assembly=Info">
     <con:GroupTypeConverter x:Key="GroupTypeConverter1" />
 
@@ -2134,17 +2135,7 @@
                             </GroupStyle.HeaderTemplate>
                             <GroupStyle.Panel>
                                 <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" >
-                                        <StackPanel.Style>
-                                            <Style TargetType="{x:Type StackPanel}">
-                                                <!--<Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Path=., Converter={StaticResource GroupTypeConverter1}}" Value="True">
-                                                        <Setter Property="Orientation" Value="Vertical" />
-                                                    </DataTrigger>
-                                                </Style.Triggers>-->
-                                            </Style>
-                                        </StackPanel.Style>
-                                    </StackPanel>
+                                    <ec:GroupStackPanel Orientation="Horizontal" />
                                 </ItemsPanelTemplate>
                             </GroupStyle.Panel>
                         </GroupStyle>
