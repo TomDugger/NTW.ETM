@@ -35,6 +35,8 @@
     <y:String x:Key="TaskPanelEditTask">Edit</y:String>
     <y:String x:Key="TaskPanelCopyTask">Copy</y:String>
     <y:String x:Key="TaskPanelStateTask">State task</y:String>
+    <y:String x:Key="TaskPanelIsStartExecution">Execution started</y:String>
+    <y:String x:Key="TaskPanelIsFinalyExecution">Execution completed</y:String>
     <y:String x:Key="TaskPanelCalendar">Dynamics of tasks</y:String>
     
     <y:String x:Key="TaskPanelMainInfo">Main info</y:String>

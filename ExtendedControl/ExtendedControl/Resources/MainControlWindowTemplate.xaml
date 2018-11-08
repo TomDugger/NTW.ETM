@@ -1387,7 +1387,7 @@
                                                     <Setter Property="Template">
                                                         <Setter.Value >
                                                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                                                <Border Name="Back" Margin="5, 5, 2, 5" Style="{x:Null}">
+                                                                <Border Name="Back" Margin="5, 5, 2, 5" Style="{x:Null}" VerticalAlignment="Center">
                                                                     <Border.BorderBrush>
                                                                         <SolidColorBrush Color="{DynamicResource SBackColor}" />
                                                                     </Border.BorderBrush>
@@ -1447,14 +1447,14 @@
                                                                                     <Polygon Name="IsStartExecutionTaskPolygon" Grid.ColumnSpan="3" HorizontalAlignment="Right" Points="0,0 30,0 30,30" Fill="Yellow" Opacity="0" >
                                                                                         <Polygon.ToolTip>
                                                                                             <ToolTip >
-                                                                                                <TextBlock Text="{DynamicResource TaskPanelStateTask}" />
+                                                                                                <TextBlock Text="{DynamicResource TaskPanelIsStartExecution}" />
                                                                                             </ToolTip>
                                                                                         </Polygon.ToolTip>
                                                                                     </Polygon>
                                                                                     <Polygon Name="IsExecutionTaskPolygon" Grid.ColumnSpan="3" HorizontalAlignment="Right" Points="0,0 30,0 30,30" Fill="Green" Opacity="0" bc:ItemsControlExtantionalBehaviour.OnActiveUnselection="True" >
                                                                                         <Polygon.ToolTip>
                                                                                             <ToolTip >
-                                                                                                <TextBlock Text="{DynamicResource TaskPanelStateTask}" />
+                                                                                                <TextBlock Text="{DynamicResource TaskPanelIsFinalyExecution}" />
                                                                                             </ToolTip>
                                                                                         </Polygon.ToolTip>
                                                                                     </Polygon>
@@ -1685,7 +1685,6 @@
 
                 <Popup Grid.Column="1" Grid.Row="1" StaysOpen="True"
                    IsOpen="{Binding Path=IsSelectedTask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                   
                    bc:FrameworkElementPositionBehaviour.FrameworkElementPosition="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(bc:WindowPositionBehaviour.WindowPosition)}" >
                     <Border Width="Auto" MinWidth="200" MinHeight="200"
                         bc:MenuActivationBehaviour.Position="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=(bc:WindowPositionBehaviour.WindowPosition)}"

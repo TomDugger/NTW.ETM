@@ -35,6 +35,8 @@
     <y:String x:Key="TaskPanelEditTask">Изменить</y:String>
     <y:String x:Key="TaskPanelCopyTask">Создать копию</y:String>
     <y:String x:Key="TaskPanelStateTask">Состояние задачи</y:String>
+    <y:String x:Key="TaskPanelIsStartExecution">Начато выполнение</y:String>
+    <y:String x:Key="TaskPanelIsFinalyExecution">Выполнение завершено</y:String>
     <y:String x:Key="TaskPanelCalendar">Динамика задач</y:String>
 
     <y:String x:Key="TaskPanelMainInfo">Основная информация</y:String>
