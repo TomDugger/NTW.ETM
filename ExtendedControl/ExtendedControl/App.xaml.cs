@@ -187,6 +187,8 @@ namespace ExtendedControl
             Languages.Clear();
             Languages.Add(new CultureInfo("en"));
             Languages.Add(new CultureInfo("ru"));
+
+            System.Threading.Thread.CurrentThread.CurrentUICulture = Languages[0];
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -310,11 +312,14 @@ namespace ExtendedControl
             using (DBContext context = new DBContext(false))
             {
                 var u = context.Users.FirstOrDefault(x => x.ID == CurrentUser.ID);
-                u.IpAdress = string.Empty;
-                context.SaveChanges();
+                if (u != null)
+                {
+                    u.IpAdress = string.Empty;
+                    context.SaveChanges();
 
-                // set data journal
-                AdminViewModel.SendDataJournal(TypeMessage.UserExit, u);
+                    // set data journal
+                    AdminViewModel.SendDataJournal(TypeMessage.UserExit, u);
+                }
             }
 
             base.OnExit(e);
@@ -725,10 +730,24 @@ namespace ExtendedControl
 
                 var usabilityElements = typesElement = GetTypeByUserRole(typesElement);
 
+                IEnumerable<PanelParametry> panelsParametry = OrderUsabilitypanels(PanelSettings.Load().Panels);
 
-                foreach (var item in PanelSettings.Load().Panels)
+                while (panelsParametry.Count() == 0)
                 {
-                    //исходя из параметров общего представления формируем область обработки панелей и вложенных элементов
+                    ControlPanelsWindow cpw = new ControlPanelsWindow();
+                    WindowVisibilityBehaviour.SetIsDialogVisible(cpw, true);
+                    if (!(bool)cpw.DialogResult)
+                    {
+                        Application.Current.Shutdown();
+                        return;
+                    }
+
+                    panelsParametry = OrderUsabilitypanels(PanelSettings.Load().Panels);
+                }
+
+                foreach (var item in panelsParametry)
+                {
+                    // исходя из параметров общего представления формируем область обработки панелей и вложенных элементов
                     MenuWindow mw = new MenuWindow();
 
                     switch (item.Position)
@@ -751,7 +770,7 @@ namespace ExtendedControl
                     mw.SetDragDropElement(typeof(ItemPanelView));
                     mw.SetUseAnimation(true);
 
-                    //первичное представление
+                    // первичное представление
                     if (item.IsPrimary)
                     {
 
@@ -786,8 +805,7 @@ namespace ExtendedControl
                     }
 
                     mw.SetAddItems(addItems);
-
-                    //элементы
+                    // элементы
 
                     if (item.Items != null)
                     {
@@ -859,6 +877,19 @@ namespace ExtendedControl
             else if (type == typeof(ProcesControlPanel))
                 return true;
             else return false;
+        }
+
+        private IEnumerable<PanelParametry> OrderUsabilitypanels(IEnumerable<PanelParametry> parametry) {
+            List<PanelParametry> result = new List<PanelParametry>(parametry);
+            int countScreens = System.Windows.Forms.Screen.AllScreens.Length;
+            foreach (var par in parametry) {
+                if (par.IndexScreen >= countScreens) {
+                    result.Remove(par);
+                    if (par.IsPrimary && result.Count > 0)
+                        result.First().IsPrimary = true;
+                }
+            }
+            return result;
         }
         #endregion
     }

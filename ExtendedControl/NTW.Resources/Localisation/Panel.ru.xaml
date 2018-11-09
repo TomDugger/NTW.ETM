@@ -55,4 +55,15 @@
     <y:String x:Key="EditablePanelPrimitive">Примитивы</y:String>
     <y:String x:Key="EditablePanelObject">Объект</y:String>
     <y:String x:Key="EditablePanelMarker">Маркер</y:String>
+
+    <!--Caption of position-->
+    <y:String x:Key="WindowPositionLeft">Слева</y:String>
+    <y:String x:Key="WindowPositionRight">Справа</y:String>
+    <y:String x:Key="WindowPositionTop">Сверху</y:String>
+    <y:String x:Key="WindowPositionBottom">Снизу</y:String>
+
+    <y:String x:Key="WindowPositionLeftTop">Слева и сверху</y:String>
+    <y:String x:Key="WindowPositionRightTop">Справа и сверху</y:String>
+    <y:String x:Key="WindowPositionLeftBottom">Слева и снизу</y:String>
+    <y:String x:Key="WindowPositionRightBottom">Справа и снизу</y:String>
 </ResourceDictionary>

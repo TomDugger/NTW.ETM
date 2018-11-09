@@ -26,10 +26,11 @@ namespace ExtendedControl.ViewModels
         private Command _addNewPanelCommand;
         public Command AddNewPanelCommand {
             get { return _addNewPanelCommand ?? (_addNewPanelCommand = new Command(obj => {
+                int lastIndexScreen = IndexScreen;
                 if (SelectedPosition != null)
                     Panels.Panels.Add(new PanelParametry { Position = (WindowPosition)SelectedPosition, IsPrimary = Panels.Panels.Count == 0, IndexScreen = IndexScreen });
-                this.SendPropertyChanged(nameof(AffordableAccommodation));
                 this.SendPropertyChanged(nameof(Screens));
+                IndexScreen = lastIndexScreen;
             })); }
         }
 
@@ -37,11 +38,11 @@ namespace ExtendedControl.ViewModels
         public Command RemovePanelCommand {
             get {
                 return _removePanelCommand ?? (_removePanelCommand = new Command(obj => {
+                    
+                    Panels.Panels.Remove((PanelParametry)obj);
 
                     if (((PanelParametry)obj).IsPrimary && Panels.Panels.Count > 0)
                         Panels.Panels[0].IsPrimary = true;
-                    
-                    Panels.Panels.Remove((PanelParametry)obj);
 
                     _panelsList = null;
                     this.SendPropertyChanged(nameof(PanelsList));
@@ -111,7 +112,7 @@ namespace ExtendedControl.ViewModels
         private int _indexScreen;
         public int IndexScreen {
             get { return _indexScreen; }
-            set { _indexScreen = value; this.SendPropertyChanged(nameof(IndexScreen)); this.SendPropertyChanged(nameof(AffordableAccommodation)); }
+            set { _indexScreen = value; this.SendPropertyChanged(nameof(IndexScreen)); this.SendPropertyChanged(nameof(AffordableAccommodation)); SelectedPosition = AffordableAccommodation.First()?.Item2; }
         }
 
         private double _maxWidth;
@@ -179,13 +180,13 @@ namespace ExtendedControl.ViewModels
             set { _selectedPosition = value; this.SendPropertyChanged(nameof(SelectedPosition)); }
         }
 
-        public IEnumerable<WindowPosition> AffordableAccommodation {
+        public IEnumerable<Tuple<string, WindowPosition>> AffordableAccommodation {
             get {
-                IEnumerable<WindowPosition> result = null;
+                IEnumerable<Tuple<string, WindowPosition>> result = null;
                 result = ((WindowPosition[])Enum.GetValues(typeof(WindowPosition))).Where(x => x != WindowPosition.Non && 
                 x != WindowPosition.None && 
-                Panels.Panels.Count(y => y.Position == x && y.IndexScreen == IndexScreen) == 0);
-                SelectedPosition = result.FirstOrDefault();
+                Panels.Panels.Count(y => y.Position == x && y.IndexScreen == IndexScreen) == 0).Select(x => new Tuple<string, WindowPosition>(App.GetString(string.Format("WindowPosition{0}", x.ToString())), x));
+                SelectedPosition = (WindowPosition)result.FirstOrDefault().Item2;
                 return result;
             }
         }

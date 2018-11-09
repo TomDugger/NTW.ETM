@@ -14,15 +14,18 @@
         b:ViewModelIjection.ViewModel="{x:Type vm:DBSettingsViewModel}"
         bc:WindowMessageBehaviour.UseMessages="True"
         Title="DBSettingsWindow" Height="500" Width="500" >
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="30" />
-        </Grid.RowDefinitions>
-        <ContentControl Template="{DynamicResource DBSettingsTemplate}" />
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="{DynamicResource DBSettingsAccepted}" MinWidth="140" Command="{Binding Path=AcceptedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
-            <Button Content="{DynamicResource DBSettingsCancel}" MinWidth="140" Command="{Binding Path=CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
-        </StackPanel>
-    </Grid>
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <ContentControl Template="{DynamicResource DBSettingsTemplate}" />
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <ComboBox MinWidth="140" b:ViewModelIjection.ViewModel="{x:Type vm:AppSettingsViewModel}" ItemsSource="{Binding Path=Languages}" SelectedValue="{Binding Path=Language}" />
+                <Button Content="{DynamicResource DBSettingsAccepted}" MinWidth="140" Command="{Binding Path=AcceptedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Height="30" VerticalAlignment="Bottom" />
+                <Button Content="{DynamicResource DBSettingsCancel}" MinWidth="140" Command="{Binding Path=CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>

@@ -246,6 +246,8 @@
                     
                     <CheckBox Grid.ColumnSpan="2" Grid.Row="6" Content="{DynamicResource AutorizationRememberMe}" VerticalAlignment="Center" IsChecked="{Binding Path=AutoEnter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20, 0" />
 
+                    <ComboBox Grid.Row="6" Grid.Column="1" MinWidth="70" HorizontalAlignment="Right" Margin="20, 3" b:ViewModelIjection.ViewModel="{x:Type vm:AppSettingsViewModel}" ItemsSource="{Binding Path=Languages}" SelectedValue="{Binding Path=Language}" />
+                    
                     <Button Grid.Row="7" Content="{DynamicResource AutorizationEnter}" Command="{Binding Path=EnterUserCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
                     <Button Grid.Row="7" Grid.Column="1" Content="{DynamicResource AutorizationExitOnApplication}" Command="{Binding Path=ExitToApplicationCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
 
