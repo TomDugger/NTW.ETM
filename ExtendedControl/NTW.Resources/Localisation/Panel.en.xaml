@@ -54,4 +54,15 @@
     <y:String x:Key="EditablePanelPrimitive">Primitive</y:String>
     <y:String x:Key="EditablePanelObject">Object</y:String>
     <y:String x:Key="EditablePanelMarker">Marker</y:String>
+    
+    <!--Caption of position-->
+    <y:String x:Key="WindowPositionLeft">Left</y:String>
+    <y:String x:Key="WindowPositionRight">Right</y:String>
+    <y:String x:Key="WindowPositionTop">Top</y:String>
+    <y:String x:Key="WindowPositionBottom">Bottom</y:String>
+    
+    <y:String x:Key="WindowPositionLeftTop">Left and top</y:String>
+    <y:String x:Key="WindowPositionRightTop">Right and top</y:String>
+    <y:String x:Key="WindowPositionLeftBottom">Left and bottom</y:String>
+    <y:String x:Key="WindowPositionRightBottom">Right and bottom</y:String>
 </ResourceDictionary>

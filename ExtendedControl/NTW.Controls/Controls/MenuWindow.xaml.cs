@@ -201,6 +201,28 @@ namespace NTW.Controls
             this.Items.Add(item);
         }
 
+        public void InsertItem(int index, ControlMenuItem item) {
+            WindowPosition wp = WindowPositionBehaviour.GetWindowPosition(this);
+
+            if (item.Element != null)
+            {
+                switch (wp)
+                {
+                    case WindowPosition.LeftTop:
+                    case WindowPosition.LeftBottom:
+                        wp = WindowPosition.Left;
+                        break;
+                    case WindowPosition.RightTop:
+                    case WindowPosition.RightBottom:
+                        wp = WindowPosition.Right;
+                        break;
+                }
+                WindowPositionBehaviour.SetWindowPosition(item.Element, wp);
+            }
+
+            this.Items.Insert(index, item);
+        }
+
         public void EntryAddItem(ControlMenuItem item)
         {
             int screen = WindowPositionBehaviour.GetWindowScreen(this);
